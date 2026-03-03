@@ -1,11 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>GHS Operations</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GHS Energy – Operations Platform</title>
+<style>
+:root{--blue:#4ab8e8;--blue-dark:#2a8ec0;--black:#0d0d0d;--dark:#1a1a1a;--panel:#232323;--border:#333;--gray:#888;--light-gray:#bbb;--white:#fff;--green:#3ecf8e;--red:#e85c5c;--yellow:#f0b429;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--black);color:var(--white);min-height:100vh;display:flex;flex-direction:column;}
+#topnav{background:var(--dark);border-bottom:2px solid var(--blue);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;position:sticky;top:0;z-index:100;}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.logo-circle{width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:var(--blue);background:var(--black);}
+.logo-text{font-size:18px;font-weight:800;color:var(--white);letter-spacing:1px;}
+.logo-text span{color:var(--blue);}
+.nav-links{display:flex;gap:4px;}
+.nav-btn{background:none;border:none;color:var(--light-gray);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.5px;transition:all .2s;}
+.nav-btn:hover,.nav-btn.active{background:var(--blue);color:var(--black);}
+.nav-right{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--gray);}
+#app{display:flex;flex:1;}
+#sidebar{width:210px;min-height:calc(100vh - 60px);background:var(--dark);border-right:1px solid var(--border);padding:20px 0;flex-shrink:0;}
+.sidebar-section{margin-bottom:8px;}
+.sidebar-label{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--gray);padding:8px 20px 4px;text-transform:uppercase;}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;font-size:13px;color:var(--light-gray);border-left:3px solid transparent;transition:all .2s;}
+.sidebar-item:hover{background:rgba(74,184,232,.08);color:var(--white);}
+.sidebar-item.active{background:rgba(74,184,232,.12);color:var(--blue);border-left-color:var(--blue);}
+.sidebar-item .icon{font-size:15px;width:20px;text-align:center;}
+#content{flex:1;padding:28px 32px;overflow-y:auto;}
+.page{display:none;}.page.active{display:block;}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.page-title{font-size:22px;font-weight:800;color:var(--white);}
+.page-title span{color:var(--blue);}
+.btn{padding:9px 18px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;border:none;transition:all .2s;}
+.btn-primary{background:var(--blue);color:var(--black);}
+.btn-primary:hover{background:var(--blue-dark);color:var(--white);}
+.btn-outline{background:none;border:1.5px solid var(--border);color:var(--light-gray);}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-danger{background:var(--red);color:var(--white);}
+.btn-sm{padding:5px 11px;font-size:12px;}
+.btn-green{background:var(--green);color:var(--black);}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px;}
+.stat-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
+.stat-card .stat-label{font-size:11px;color:var(--gray);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.stat-card .stat-value{font-size:26px;font-weight:800;color:var(--white);}
+.stat-card .stat-sub{font-size:12px;color:var(--gray);margin-top:4px;}
+.stat-card.blue{border-top:3px solid var(--blue);}
+.stat-card.green{border-top:3px solid var(--green);}
+.stat-card.yellow{border-top:3px solid var(--yellow);}
+.stat-card.red{border-top:3px solid var(--red);}
+.table-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;}
+.table-toolbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap;}
+.search-input{background:var(--dark);border:1px solid var(--border);color:var(--white);padding:7px 12px;border-radius:6px;font-size:13px;width:220px;}
+.search-input:focus{outline:none;border-color:var(--blue);}
+table{width:100%;border-collapse:collapse;}
+th{background:var(--dark);padding:11px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:11px 16px;font-size:13px;color:var(--light-gray);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(74,184,232,.04);}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-green{background:rgba(62,207,142,.15);color:var(--green);}
+.badge-red{background:rgba(232,92,92,.15);color:var(--red);}
+.badge-blue{background:rgba(74,184,232,.15);color:var(--blue);}
+.badge-yellow{background:rgba(240,180,41,.15);color:var(--yellow);}
+.badge-gray{background:rgba(136,136,136,.15);color:var(--gray);}
+.toggle{position:relative;display:inline-block;width:40px;height:22px;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:var(--border);border-radius:22px;transition:.3s;}
+.toggle-slider::before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:var(--white);border-radius:50%;transition:.3s;}
+.toggle input:checked+.toggle-slider{background:var(--green);}
+.toggle input:checked+.toggle-slider::before{transform:translateX(18px);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:28px 32px;width:540px;max-width:95vw;max-height:90vh;overflow-y:auto;}
+.modal h3{font-size:17px;font-weight:800;margin-bottom:20px;color:var(--white);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-row.full{grid-template-columns:1fr;}
+.form-group{display:flex;flex-direction:column;gap:5px;}
+.form-group label{font-size:11px;font-weight:700;color:var(--gray);letter-spacing:.5px;text-transform:uppercase;}
+.form-group input,.form-group select,.form-group textarea{background:var(--dark);border:1px solid var(--border);color:var(--white);padding:9px 12px;border-radius:6px;font-size:13px;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--blue);}
+.form-group select option{background:var(--dark);}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;}
+.filter-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
+.filter-select{background:var(--panel);border:1px solid var(--border);color:var(--white);padding:7px 12px;border-radius:6px;font-size:13px;cursor:pointer;}
+.filter-select:focus{outline:none;border-color:var(--blue);}
+.report-section{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px 22px;margin-bottom:20px;}
+.report-section h4{font-size:14px;font-weight:800;margin-bottom:16px;color:var(--blue);border-bottom:1px solid var(--border);padding-bottom:10px;}
+.empty-state{text-align:center;padding:48px 24px;color:var(--gray);}
+.empty-state .icon{font-size:40px;margin-bottom:12px;opacity:.4;}
+.empty-state p{font-size:14px;}
+@media(max-width:768px){#sidebar{display:none;}#content{padding:16px;}.stats-row{grid-template-columns:1fr 1fr;}.form-row{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
-<div id="root">Loading GHS Operations...</div>
+<nav id="topnav">
+  <div class="logo-area">
+    <div class="logo-circle">GHS</div>
+    <div><div class="logo-text">GHS <span>ENERGY</span></div><div style="font-size:10px;color:var(--gray);letter-spacing:1px;">OPERATIONS PLATFORM</div></div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('dashboard')">Dashboard</button>
+    <button class="nav-btn" onclick="showPage('billing')">Billing</button>
+    <button class="nav-btn" onclick="showPage('personnel')">Personnel</button>
+    <button class="nav-btn" onclick="showPage('reports')">Reports</button>
+  </div>
+  <div class="nav-right"><span id="clock"></span><span style="color:var(--blue);font-weight:700;">GHS Energy LLC</span></div>
+</nav>
+<div id="app">
+<aside id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Operations</div>
+    <div class="sidebar-item active" onclick="showPage('dashboard')"><span class="icon">&#9632;</span>Dashboard</div>
+    <div class="sidebar-item" onclick="showPage('jobs')"><span class="icon">&#128295;</span>Jobs / Projects</div>
+    <div class="sidebar-item" onclick="showPage('weekly')"><span class="icon">&#128203;</span>Weekly Activity</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Finance</div>
+    <div class="sidebar-item" onclick="showPage('billing')"><span class="icon">&#128181;</span>Billing &amp; Invoices</div>
+    <div class="sidebar-item" onclick="showPage('vendors')"><span class="icon">&#127959;</span>Vendors &amp; Costs</div>
+    <div class="sidebar-item" onclick="showPage('customers')"><span class="icon">&#127970;</span>Customers</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">People</div>
+    <div class="sidebar-item" onclick="showPage('personnel')"><span class="icon">&#128119;</span>Personnel</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Reports</div>
+    <div class="sidebar-item" onclick="showPage('reports')"><span class="icon">&#128202;</span>AR Reports</div>
+    <div class="sidebar-item" onclick="showPage('personnel-reports')"><span class="icon">&#128200;</span>Personnel Reports</div>
+  </div>
+</aside>
+<main id="content">
+
+<!-- DASHBOARD -->
+<div id="page-dashboard" class="page active">
+  <div class="page-header"><div class="page-title">Operations <span>Dashboard</span></div><span style="font-size:13px;color:var(--gray);" id="dash-date"></span></div>
+  <div class="stats-row" id="dash-stats"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div class="table-wrap">
+      <div class="table-toolbar"><span style="font-weight:700;font-size:14px;">Active Jobs</span></div>
+      <table><thead><tr><th>Job</th><th>Customer</th><th>Location</th><th>Status</th></tr></thead><tbody id="dash-jobs-body"></tbody></table>
+    </div>
+    <div class="table-wrap">
+      <div class="table-toolbar"><span style="font-weight:700;font-size:14px;">Open Invoices</span></div>
+      <table><thead><tr><th>Invoice</th><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody id="dash-inv-body"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- JOBS -->
+<div id="page-jobs" class="page">
+  <div class="page-header"><div class="page-title">Jobs &amp; <span>Projects</span></div><button class="btn btn-primary" onclick="openModal('modal-job')">+ New Job</button></div>
+  <div class="filter-bar">
+    <input class="search-input" id="jobs-search" placeholder="Search jobs..." oninput="renderJobs()">
+    <select class="filter-select" id="jobs-status-filter" onchange="renderJobs()"><option value="">All Status</option><option>Active</option><option>Completed</option><option>On Hold</option></select>
+    <select class="filter-select" id="jobs-cust-filter" onchange="renderJobs()"><option value="">All Customers</option></select>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>Job #</th><th>Job Name</th><th>Customer</th><th>Location</th><th>Status</th><th>Start Date</th><th>Bill Rate</th><th>Actions</th></tr></thead><tbody id="jobs-body"></tbody></table></div>
+</div>
+
+<!-- WEEKLY ACTIVITY -->
+<div id="page-weekly" class="page">
+  <div class="page-header"><div class="page-title">Weekly <span>Activity</span></div><button class="btn btn-primary" onclick="openModal('modal-activity')">+ Log Activity</button></div>
+  <div class="filter-bar">
+    <input type="week" class="filter-select" id="week-filter" onchange="renderWeekly()">
+    <select class="filter-select" id="weekly-job-filter" onchange="renderWeekly()"><option value="">All Jobs</option></select>
+    <select class="filter-select" id="weekly-cust-filter" onchange="renderWeekly()"><option value="">All Customers</option></select>
+  </div>
+  <div class="table-wrap">
+    <div class="table-toolbar"><span style="font-weight:700;font-size:14px;">Activity Log</span><button class="btn btn-outline btn-sm" onclick="exportWeeklyToBill()">Generate Invoice from Week</button></div>
+    <table><thead><tr><th>Date</th><th>Job</th><th>Customer</th><th>Personnel</th><th>Service Type</th><th>Hours</th><th>Rate</th><th>Line Total</th><th>Notes</th><th>Del</th></tr></thead><tbody id="weekly-body"></tbody></table>
+  </div>
+  <div class="stats-row" id="weekly-totals"></div>
+</div>
+
+<!-- BILLING -->
+<div id="page-billing" class="page">
+  <div class="page-header"><div class="page-title">Billing &amp; <span>Invoices</span></div><button class="btn btn-primary" onclick="openModal('modal-invoice')">+ New Invoice</button></div>
+  <div class="filter-bar">
+    <input class="search-input" id="billing-search" placeholder="Search invoices..." oninput="renderBilling()">
+    <select class="filter-select" id="billing-status-filter" onchange="renderBilling()"><option value="">All Status</option><option>Draft</option><option>Sent</option><option>Paid</option><option>Overdue</option></select>
+    <select class="filter-select" id="billing-cust-filter" onchange="renderBilling()"><option value="">All Customers</option></select>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>Invoice #</th><th>Customer</th><th>Job</th><th>Week Ending</th><th>Amount</th><th>Status</th><th>Due Date</th><th>Actions</th></tr></thead><tbody id="billing-body"></tbody></table></div>
+</div>
+
+<!-- VENDORS -->
+<div id="page-vendors" class="page">
+  <div class="page-header"><div class="page-title">Vendors &amp; <span>Costs</span></div><button class="btn btn-primary" onclick="openModal('modal-vendor')">+ Add Vendor</button></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div class="table-wrap">
+      <div class="table-toolbar"><span style="font-weight:700;font-size:14px;">Vendor Directory</span></div>
+      <table><thead><tr><th>Vendor</th><th>Category</th><th>Contact</th><th>Status</th><th>Act</th></tr></thead><tbody id="vendors-body"></tbody></table>
+    </div>
+    <div class="table-wrap">
+      <div class="table-toolbar"><span style="font-weight:700;font-size:14px;">Vendor Costs</span><button class="btn btn-primary btn-sm" onclick="openModal('modal-vendor-cost')">+ Log Cost</button></div>
+      <table><thead><tr><th>Date</th><th>Vendor</th><th>Job</th><th>Amount</th><th>Notes</th><th>Del</th></tr></thead><tbody id="vendor-costs-body"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMERS -->
+<div id="page-customers" class="page">
+  <div class="page-header"><div class="page-title">Customers</div><button class="btn btn-primary" onclick="openModal('modal-customer')">+ Add Customer</button></div>
+  <div class="table-wrap">
+    <div class="table-toolbar"><input class="search-input" id="cust-search" placeholder="Search customers..." oninput="renderCustomers()"></div>
+    <table><thead><tr><th>Company</th><th>Contact</th><th>Email</th><th>Phone</th><th>Open Invoices</th><th>Total AR</th><th>Actions</th></tr></thead><tbody id="customers-body"></tbody></table>
+  </div>
+</div>
+
+<!-- PERSONNEL -->
+<div id="page-personnel" class="page">
+  <div class="page-header"><div class="page-title">Personnel</div><button class="btn btn-primary" onclick="openModal('modal-person')">+ Add Personnel</button></div>
+  <div class="filter-bar">
+    <input class="search-input" id="p-search" placeholder="Search personnel..." oninput="renderPersonnel()">
+    <select class="filter-select" id="p-type-filter" onchange="renderPersonnel()"><option value="">All Types</option><option value="W-2">W-2 Employee</option><option value="Contract">Contract</option></select>
+    <select class="filter-select" id="p-status-filter" onchange="renderPersonnel()"><option value="">Active &amp; Inactive</option><option value="active">Active Only</option><option value="inactive">Inactive Only</option></select>
+    <select class="filter-select" id="p-location-filter" onchange="renderPersonnel()"><option value="">All Locations</option></select>
+    <select class="filter-select" id="p-role-filter" onchange="renderPersonnel()"><option value="">All Roles</option></select>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>Name</th><th>Type</th><th>Role</th><th>Current Job / Location</th><th>Rate</th><th>Phone</th><th>Active</th><th>Actions</th></tr></thead><tbody id="personnel-body"></tbody></table></div>
+</div>
+
+<!-- AR REPORTS -->
+<div id="page-reports" class="page">
+  <div class="page-header"><div class="page-title">AR <span>Reports</span></div><button class="btn btn-outline" onclick="window.print()">Print / Export</button></div>
+  <div class="filter-bar">
+    <select class="filter-select" id="ar-view" onchange="toggleARCustomer()"><option value="company">Company-Wide AR</option><option value="customer">By Customer</option></select>
+    <select class="filter-select" id="ar-customer-pick" style="display:none"><option value="">-- Select Customer --</option></select>
+    <select class="filter-select" id="ar-period"><option value="all">All Time</option><option value="month">This Month</option><option value="quarter">This Quarter</option><option value="year">This Year</option></select>
+    <button class="btn btn-primary btn-sm" onclick="renderARReport()">Run Report</button>
+  </div>
+  <div id="ar-report-output"></div>
+</div>
+
+<!-- PERSONNEL REPORTS -->
+<div id="page-personnel-reports" class="page">
+  <div class="page-header"><div class="page-title">Personnel <span>Reports</span></div><button class="btn btn-outline" onclick="window.print()">Print / Export</button></div>
+  <div class="filter-bar">
+    <select class="filter-select" id="pr-type"><option value="all">All Personnel</option><option value="W-2">W-2 Only</option><option value="Contract">Contract Only</option></select>
+    <select class="filter-select" id="pr-status"><option value="all">Active &amp; Inactive</option><option value="active">Active Only</option><option value="inactive">Inactive Only</option></select>
+    <select class="filter-select" id="pr-location"><option value="">All Locations</option></select>
+    <button class="btn btn-primary btn-sm" onclick="renderPersonnelReport()">Run Report</button>
+  </div>
+  <div id="personnel-report-output"></div>
+</div>
+
+</main>
+</div>
+<!-- MODALS -->
+<div id="modal-job" class="modal-overlay">
+<div class="modal"><h3>New Job / Project</h3>
+<div class="form-row"><div class="form-group"><label>Job Number</label><input id="j-num" placeholder="GHS-001"></div><div class="form-group"><label>Job Name</label><input id="j-name" placeholder="Well / Project name"></div></div>
+<div class="form-row"><div class="form-group"><label>Customer</label><select id="j-cust"></select></div><div class="form-group"><label>Location</label><input id="j-loc" placeholder="Field / County / Basin"></div></div>
+<div class="form-row"><div class="form-group"><label>Start Date</label><input type="date" id="j-start"></div><div class="form-group"><label>Status</label><select id="j-status"><option>Active</option><option>On Hold</option><option>Completed</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Bill Rate</label><input id="j-rate" type="number" placeholder="0.00"></div><div class="form-group"><label>Rate Type</label><select id="j-rate-type"><option>Daily</option><option>Hourly</option><option>Fixed</option></select></div></div>
+<div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="j-notes" rows="2"></textarea></div></div>
+<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-job')">Cancel</button><button class="btn btn-primary" onclick="saveJob()">Save Job</button></div>
+</div></div>
+
+<div id="modal-activity" class="modal-overlay">
+<div class="modal"><h3>Log Weekly Activity</h3>
+<div class="form-row"><div class="form-group"><label>Date</label><input type="date" id="a-date"></div><div class="form-group"><label>Job</label><select id="a-job" onchange="autoFillActivityCust()"></select></div></div>
+<div class="form-row"><div class="form-group"><label>Customer (auto)</label><input id="a-cust" readonly style="background:#111;color:var(--gray)"></div><div class="form-group"><label>Personnel</label><select id="a-person"></select></div></div>
+<div class="form-row"><div class="form-group"><label>Service Type</label><select id="a-service"><option>Flowback Supervision</option><option>Flowback Operations</option><option>Well Testing</option><option>Sand Management</option><option>Equipment Rental</option><option>Standby</option><option>Other</option></select></div><div class="form-group"><label>Hours / Days</label><input type="number" id="a-hours" placeholder="1" min="0"></div></div>
+<div class="form-row"><div class="form-group"><label>Bill Rate</label><input type="number" id="a-rate" placeholder="auto from job"></div><div class="form-group"><label>Rate Type</label><select id="a-rate-type"><option>Daily</option><option>Hourly</option></select></div></div>
+<div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="a-notes" rows="2"></textarea></div></div>
+<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-activity')">Cancel</button><button class="btn btn-primary" onclick="saveActivity()">Save Activity</button></div>
+</div></div>
+
+<div id="modal-invoice" class="modal-overlay">
+<div class="modal"><h3>New Invoice</h3>
+<div class="form-row"><div class="form-group"><label>Invoice #</label><input id="inv-num" placeholder="INV-001"></div><div class="form-group"><label>Customer</label><select id="inv-cust"></select></div></div>
+<div class="form-row"><div class="form-group"><label>Job</label><select id="inv-job"></select></div><div class="form-group"><label>Week Ending</label><input type="date" id="inv-week"></div></div>
+<div class="form-row"><div class="form-group"><label>Amount ($)</label><input type="number" id="inv-amount" placeholder="0.00"></div><div class="form-group"><label>Due Date</label><input type="date" id="inv-due"></div></div>
+<div class="form-row"><div class="form-group"><label>Status</label><select id="inv-status"><option>Draft</option><option>Sent</option><option>Paid</option><option>Overdue</option></select></div><div class="form-group"><label>PO Number</label><input id="inv-po" placeholder="Optional"></div></div>
+<div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="inv-notes" rows="2"></textarea></div></div>
+<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-invoice')">Cancel</button><button class="btn btn-primary" onclick="saveInvoice()">Save Invoice</button></div>
+</div></div>
+
+<div id="modal-vendor" class="modal-overlay">
+<div class="modal"><h3>Add Vendor</h3>
+<div class="form-row"><div class="form-group"><label>Company Name</label><input id="v-name"></div><div class="form-group"><label>Category</label><select id="v-cat"><option>Equipment Rental</option><option>Fuel</option><option>Transportation</option><option>Chemicals</option><option>Safety Supplies</option><option>Maintenance</option><option>Subcontractor</option><option>Other</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Contact Name</label><input id="v-contact"></div><div class="form-group"><label>Phone</label><input id="v-phone"></div></div>
+<div class="form-row"><div class="form-group"><label>Email</label><input id="v-email"></div><div class="form-group"><label>Status</label><select id="v-status"><option>Active</option><option>Inactive</option></select></div></div>
+<div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="v-notes" rows="2"></textarea></div></div>
+<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-vendor')">Cancel</button><button class="btn btn-primary" onclick="saveVendor()">Save Vendor</button></div>
+</div></div>
+
+<div id="modal-vendor-cost" class="modal-overlay">
+<div class="modal"><h3>Log Vendor Cost</h3>
+<div class="form-row"><div class="form-group"><label>Date</label><input type="date" id="vc-date"></div><div class="form-group"><label>Vendor</label><select id="vc-vendor"></select></div></div>
+<div class="form-row"><div class="form-group"><label>Job</label><select id="vc-job"></select></div><div class="form-group"><label>Amount ($)</label><input type="number" id="vc-amount" placeholder="0.00"></div></div>
+<div class="form-row full"><div class="form-group"><label>Description / Notes</label><textarea id="vc-notes" rows="2"></textarea></div></div>
+<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-vendor-cost')">Cancel</button><button class="btn btn-primary" onclick="saveVendorCost()">Save Cost</button></div>
+</div></div>
+
+<div id="modal-customer" class="modal-overlay">
+<div class="modal"><h3>Add Customer</h3>
+<div class="form-row"><div class="form-group"><label>Company Name</label><input id="c-name"></div><div class="form-group"><label>Contact Name</label><input id="c-contact"></div></div>
+<div class="form-row"><div class="form-group"><label>Email</label><input id="c-email"></div><div class="form-group"><label>Phone</label><input id="c-phone"></div></div>
+<div class="form-row"><div class="form-group"><label>Address</label><input id="c-addr"></div><div class="form-group"><label>Net Terms (days)</label><input id="c-terms" type="number" placeholder="30"></div></div>
+<div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="c-notes" rows="2"></textarea></div></div>
+<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-customer')">Cancel</button><button class="btn btn-primary" onclick="saveCustomer()">Save Customer</button></div>
+</div></div>
+
+<div id="modal-person" class="modal-overlay">
+<div class="modal"><h3>Add Personnel</h3>
+<div class="form-row"><div class="form-group"><label>Full Name</label><input id="p-name"></div><div class="form-group"><label>Type</label><select id="p-type"><option>W-2</option><option>Contract</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Role / Title</label><input id="p-role" placeholder="Flowback Operator, Supervisor..."></div><div class="form-group"><label>Phone</label><input id="p-phone"></div></div>
+<div class="form-row"><div class="form-group"><label>Email</label><input id="p-email"></div><div class="form-group"><label>Daily / Hourly Rate ($)</label><input id="p-rate" type="number"></div></div>
+<div class="form-row"><div class="form-group"><label>Current Job / Location</label><select id="p-job"></select></div><div class="form-group"><label>Start Date</label><input type="date" id="p-start"></div></div>
+<div class="form-row"><div class="form-group"><label>Emergency Contact</label><input id="p-emerg"></div><div class="form-group"><label>Status</label><select id="p-active"><option value="active">Active</option><option value="inactive">Inactive</option></select></div></div>
+<div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="p-notes" rows="2"></textarea></div></div>
+<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-person')">Cancel</button><button class="btn btn-primary" onclick="savePerson()">Save Personnel</button></div>
+</div></div>
+
+<script>
+// ── DATA STORE ──
+function load(k){try{return JSON.parse(localStorage.getItem('ghs_'+k))||[];}catch(e){return[];}}
+function save(k,v){localStorage.setItem('ghs_'+k,JSON.stringify(v));}
+
+let jobs=load('jobs'),activities=load('activities'),invoices=load('invoices'),
+    vendors=load('vendors'),vendorCosts=load('vendorCosts'),customers=load('customers'),
+    personnel=load('personnel');
+
+// ── CLOCK ──
+function updateClock(){
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+}
+setInterval(updateClock,60000);updateClock();
+const dd=document.getElementById('dash-date');
+if(dd)dd.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+
+// ── NAVIGATION ──
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);
+  if(pg)pg.classList.add('active');
+  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const si=document.querySelector('.sidebar-item[onclick*="'+id+'"]');
+  if(si)si.classList.add('active');
+  renderPage(id);
+}
+
+function renderPage(id){
+  if(id==='dashboard')renderDashboard();
+  else if(id==='jobs'){populateJobFilters();renderJobs();}
+  else if(id==='weekly'){populateWeeklyFilters();renderWeekly();}
+  else if(id==='billing'){populateBillingFilters();renderBilling();}
+  else if(id==='vendors'){renderVendors();renderVendorCosts();}
+  else if(id==='customers')renderCustomers();
+  else if(id==='personnel'){populatePersonnelFilters();renderPersonnel();}
+  else if(id==='reports'){populateARFilters();renderARReport();}
+  else if(id==='personnel-reports'){populatePRFilters();renderPersonnelReport();}
+}
+
+// ── MODAL ──
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  if(id==='modal-job')populateSelect('j-cust',customers,'name');
+  if(id==='modal-activity'){populateSelect('a-job',jobs,'num','name');populateSelect('a-person',personnel,'name');}
+  if(id==='modal-invoice'){populateSelect('inv-cust',customers,'name');populateSelect('inv-job',jobs,'num','name');}
+  if(id==='modal-vendor-cost'){populateSelect('vc-vendor',vendors,'name');populateSelect('vc-job',jobs,'num','name');}
+  if(id==='modal-person')populateSelect('p-job',jobs,'num','name','-- Unassigned --');
+}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');}));
+
+function populateSelect(id,arr,valKey,labelKey,placeholder){
+  const s=document.getElementById(id);if(!s)return;
+  s.innerHTML='';
+  if(placeholder){const o=document.createElement('option');o.value='';o.textContent=placeholder;s.appendChild(o);}
+  arr.forEach(item=>{const o=document.createElement('option');o.value=item[valKey];o.textContent=labelKey?item[valKey]+' - '+item[labelKey]:item[valKey];s.appendChild(o);});
+}
+
+// ── DASHBOARD ──
+function renderDashboard(){
+  const openInv=invoices.filter(i=>i.status!=='Paid');
+  const totalAR=openInv.reduce((s,i)=>s+parseFloat(i.amount||0),0);
+  const activeJobs=jobs.filter(j=>j.status==='Active');
+  const activePeople=personnel.filter(p=>p.active==='active');
+  document.getElementById('dash-stats').innerHTML=
+    statCard('Total Open AR','$'+fmt(totalAR),'invoices outstanding','blue')+
+    statCard('Active Jobs',activeJobs.length,'currently running','green')+
+    statCard('Active Personnel',activePeople.length,'in the field','yellow')+
+    statCard('Open Invoices',openInv.length,'awaiting payment','red');
+  const jb=document.getElementById('dash-jobs-body');
+  jb.innerHTML=activeJobs.length?activeJobs.map(j=>`<tr><td>${j.num}</td><td>${j.name}</td><td>${j.location||''}</td><td><span class="badge badge-green">${j.status}</span></td></tr>`).join(''):emptyRow(4,'No active jobs');
+  const ib=document.getElementById('dash-inv-body');
+  const recentInv=openInv.slice(0,8);
+  ib.innerHTML=recentInv.length?recentInv.map(i=>`<tr><td>${i.num}</td><td>${i.customer}</td><td>$${fmt(i.amount)}</td><td>${statusBadge(i.status)}</td></tr>`).join(''):emptyRow(4,'No open invoices');
+}
+
+function statCard(label,value,sub,color){
+  return `<div class="stat-card ${color}"><div class="stat-label">${label}</div><div class="stat-value">${value}</div><div class="stat-sub">${sub}</div></div>`;
+}
+function fmt(n){return parseFloat(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function emptyRow(cols,msg){return `<tr><td colspan="${cols}" style="text-align:center;color:var(--gray);padding:20px;">${msg}</td></tr>`;}
+function statusBadge(s){
+  const m={Paid:'green',Draft:'gray',Sent:'blue',Overdue:'red','Active':'green','Inactive':'red','On Hold':'yellow','Completed':'gray','Contract':'blue','W-2':'yellow'};
+  return `<span class="badge badge-${m[s]||'gray'}">${s}</span>`;
+}
+
+// ── JOBS ──
+function saveJob(){
+  const num=document.getElementById('j-num').value.trim();
+  const name=document.getElementById('j-name').value.trim();
+  if(!num||!name){alert('Job number and name required.');return;}
+  const job={id:Date.now(),num,name,customer:document.getElementById('j-cust').value,location:document.getElementById('j-loc').value,start:document.getElementById('j-start').value,status:document.getElementById('j-status').value,rate:document.getElementById('j-rate').value,rateType:document.getElementById('j-rate-type').value,notes:document.getElementById('j-notes').value};
+  jobs.push(job);save('jobs',jobs);closeModal('modal-job');renderJobs();renderDashboard();
+}
+function deleteJob(id){if(confirm('Delete this job?')){jobs=jobs.filter(j=>j.id!==id);save('jobs',jobs);renderJobs();renderDashboard();}}
+function populateJobFilters(){
+  const s=document.getElementById('jobs-cust-filter');
+  if(s){s.innerHTML='<option value="">All Customers</option>';[...new Set(jobs.map(j=>j.customer).filter(Boolean))].forEach(c=>{s.innerHTML+=`<option>${c}</option>`;});}
+}
+function renderJobs(){
+  const search=(document.getElementById('jobs-search')||{}).value||'';
+  const sf=(document.getElementById('jobs-status-filter')||{}).value||'';
+  const cf=(document.getElementById('jobs-cust-filter')||{}).value||'';
+  let list=jobs.filter(j=>
+    (!search||j.num.toLowerCase().includes(search.toLowerCase())||j.name.toLowerCase().includes(search.toLowerCase())||j.customer.toLowerCase().includes(search.toLowerCase()))&&
+    (!sf||j.status===sf)&&(!cf||j.customer===cf));
+  const b=document.getElementById('jobs-body');
+  if(!b)return;
+  b.innerHTML=list.length?list.map(j=>`<tr><td>${j.num}</td><td>${j.name}</td><td>${j.customer}</td><td>${j.location||''}</td><td>${statusBadge(j.status)}</td><td>${j.start||''}</td><td>$${fmt(j.rate)}/${j.rateType}</td><td><button class="btn btn-danger btn-sm" onclick="deleteJob(${j.id})">Del</button></td></tr>`).join(''):emptyRow(8,'No jobs found. Add your first job!');
+}
+
+// ── WEEKLY ACTIVITY ──
+function autoFillActivityCust(){
+  const jobNum=document.getElementById('a-job').value;
+  const job=jobs.find(j=>j.num===jobNum);
+  if(job){document.getElementById('a-cust').value=job.customer;document.getElementById('a-rate').value=job.rate||'';}
+}
+function saveActivity(){
+  const date=document.getElementById('a-date').value;
+  const job=document.getElementById('a-job').value;
+  if(!date||!job){alert('Date and job required.');return;}
+  const hours=parseFloat(document.getElementById('a-hours').value)||1;
+  const rate=parseFloat(document.getElementById('a-rate').value)||0;
+  const rateType=document.getElementById('a-rate-type').value;
+  const total=rateType==='Daily'?rate*hours:rate*hours;
+  const act={id:Date.now(),date,job,customer:document.getElementById('a-cust').value,person:document.getElementById('a-person').value,service:document.getElementById('a-service').value,hours,rate,rateType,total,notes:document.getElementById('a-notes').value};
+  activities.push(act);save('activities',activities);closeModal('modal-activity');renderWeekly();
+}
+function deleteActivity(id){if(confirm('Delete this entry?')){activities=activities.filter(a=>a.id!==id);save('activities',activities);renderWeekly();}}
+function populateWeeklyFilters(){
+  const wf=document.getElementById('week-filter');
+  if(wf&&!wf.value){const n=new Date();const y=n.getFullYear();const w=getWeekNum(n);wf.value=y+'-W'+(w<10?'0':'')+w;}
+  const jf=document.getElementById('weekly-job-filter');
+  if(jf){jf.innerHTML='<option value="">All Jobs</option>';jobs.forEach(j=>jf.innerHTML+=`<option>${j.num} - ${j.name}</option>`);}
+  const cf=document.getElementById('weekly-cust-filter');
+  if(cf){cf.innerHTML='<option value="">All Customers</option>';[...new Set(activities.map(a=>a.customer).filter(Boolean))].forEach(c=>cf.innerHTML+=`<option>${c}</option>`);}
+}
+function getWeekNum(d){const s=new Date(d.getFullYear(),0,1);return Math.ceil(((d-s)/86400000+s.getDay()+1)/7);}
+function renderWeekly(){
+  const jf=(document.getElementById('weekly-job-filter')||{}).value||'';
+  const cf=(document.getElementById('weekly-cust-filter')||{}).value||'';
+  let list=activities.filter(a=>(!jf||a.job===jf.split(' - ')[0])&&(!cf||a.customer===cf));
+  list.sort((a,b)=>a.date.localeCompare(b.date));
+  const b=document.getElementById('weekly-body');
+  if(!b)return;
+  b.innerHTML=list.length?list.map(a=>`<tr><td>${a.date}</td><td>${a.job}</td><td>${a.customer}</td><td>${a.person||''}</td><td>${a.service}</td><td>${a.hours}</td><td>$${fmt(a.rate)}/${a.rateType}</td><td>$${fmt(a.total)}</td><td>${a.notes||''}</td><td><button class="btn btn-danger btn-sm" onclick="deleteActivity(${a.id})">X</button></td></tr>`).join(''):emptyRow(10,'No activity logged. Click + Log Activity.');
+  const total=list.reduce((s,a)=>s+parseFloat(a.total||0),0);
+  document.getElementById('weekly-totals').innerHTML=statCard('Total Billable','$'+fmt(total),list.length+' line items','blue')+statCard('Total Hours',list.reduce((s,a)=>s+parseFloat(a.hours||0),0),'hours logged','green');
+}
+function exportWeeklyToBill(){
+  const list=activities;
+  if(!list.length){alert('No activity to bill.');return;}
+  const total=list.reduce((s,a)=>s+parseFloat(a.total||0),0);
+  document.getElementById('inv-amount').value=total.toFixed(2);
+  openModal('modal-invoice');
+}
+
+// ── BILLING ──
+function saveInvoice(){
+  const num=document.getElementById('inv-num').value.trim();
+  if(!num){alert('Invoice number required.');return;}
+  const inv={id:Date.now(),num,customer:document.getElementById('inv-cust').value,job:document.getElementById('inv-job').value,week:document.getElementById('inv-week').value,amount:document.getElementById('inv-amount').value,due:document.getElementById('inv-due').value,status:document.getElementById('inv-status').value,po:document.getElementById('inv-po').value,notes:document.getElementById('inv-notes').value};
+  invoices.push(inv);save('invoices',invoices);closeModal('modal-invoice');renderBilling();renderDashboard();
+}
+function updateInvoiceStatus(id,status){
+  const inv=invoices.find(i=>i.id===id);if(inv){inv.status=status;save('invoices',invoices);renderBilling();renderDashboard();}
+}
+function deleteInvoice(id){if(confirm('Delete invoice?')){invoices=invoices.filter(i=>i.id!==id);save('invoices',invoices);renderBilling();renderDashboard();}}
+function populateBillingFilters(){
+  const s=document.getElementById('billing-cust-filter');
+  if(s){s.innerHTML='<option value="">All Customers</option>';[...new Set(invoices.map(i=>i.customer).filter(Boolean))].forEach(c=>s.innerHTML+=`<option>${c}</option>`);}
+}
+function renderBilling(){
+  const search=(document.getElementById('billing-search')||{}).value||'';
+  const sf=(document.getElementById('billing-status-filter')||{}).value||'';
+  const cf=(document.getElementById('billing-cust-filter')||{}).value||'';
+  let list=invoices.filter(i=>
+    (!search||i.num.toLowerCase().includes(search.toLowerCase())||i.customer.toLowerCase().includes(search.toLowerCase()))&&
+    (!sf||i.status===sf)&&(!cf||i.customer===cf));
+  const b=document.getElementById('billing-body');if(!b)return;
+  b.innerHTML=list.length?list.map(i=>`<tr><td>${i.num}</td><td>${i.customer}</td><td>${i.job}</td><td>${i.week||''}</td><td>$${fmt(i.amount)}</td><td>${statusBadge(i.status)}</td><td>${i.due||''}</td><td style="display:flex;gap:4px;flex-wrap:wrap;">
+    <select class="filter-select" style="padding:4px 6px;font-size:11px;" onchange="updateInvoiceStatus(${i.id},this.value)"><option ${i.status==='Draft'?'selected':''}>Draft</option><option ${i.status==='Sent'?'selected':''}>Sent</option><option ${i.status==='Paid'?'selected':''}>Paid</option><option ${i.status==='Overdue'?'selected':''}>Overdue</option></select>
+    <button class="btn btn-danger btn-sm" onclick="deleteInvoice(${i.id})">Del</button></td></tr>`).join(''):emptyRow(8,'No invoices yet. Click + New Invoice.');
+}
+
+// ── VENDORS ──
+function saveVendor(){
+  const name=document.getElementById('v-name').value.trim();if(!name){alert('Vendor name required.');return;}
+  const v={id:Date.now(),name,category:document.getElementById('v-cat').value,contact:document.getElementById('v-contact').value,phone:document.getElementById('v-phone').value,email:document.getElementById('v-email').value,status:document.getElementById('v-status').value,notes:document.getElementById('v-notes').value};
+  vendors.push(v);save('vendors',vendors);closeModal('modal-vendor');renderVendors();
+}
+function deleteVendor(id){if(confirm('Delete vendor?')){vendors=vendors.filter(v=>v.id!==id);save('vendors',vendors);renderVendors();}}
+function renderVendors(){
+  const b=document.getElementById('vendors-body');if(!b)return;
+  b.innerHTML=vendors.length?vendors.map(v=>`<tr><td>${v.name}</td><td>${v.category}</td><td>${v.contact||''}</td><td>${statusBadge(v.status)}</td><td><button class="btn btn-danger btn-sm" onclick="deleteVendor(${v.id})">Del</button></td></tr>`).join(''):emptyRow(5,'No vendors added.');
+}
+function saveVendorCost(){
+  const date=document.getElementById('vc-date').value;const vendor=document.getElementById('vc-vendor').value;const amount=document.getElementById('vc-amount').value;
+  if(!date||!vendor||!amount){alert('Date, vendor, and amount required.');return;}
+  const vc={id:Date.now(),date,vendor,job:document.getElementById('vc-job').value,amount,notes:document.getElementById('vc-notes').value};
+  vendorCosts.push(vc);save('vendorCosts',vendorCosts);closeModal('modal-vendor-cost');renderVendorCosts();
+}
+function deleteVendorCost(id){if(confirm('Delete cost?')){vendorCosts=vendorCosts.filter(v=>v.id!==id);save('vendorCosts',vendorCosts);renderVendorCosts();}}
+function renderVendorCosts(){
+  const b=document.getElementById('vendor-costs-body');if(!b)return;
+  b.innerHTML=vendorCosts.length?vendorCosts.map(v=>`<tr><td>${v.date}</td><td>${v.vendor}</td><td>${v.job||''}</td><td>$${fmt(v.amount)}</td><td>${v.notes||''}</td><td><button class="btn btn-danger btn-sm" onclick="deleteVendorCost(${v.id})">X</button></td></tr>`).join(''):emptyRow(6,'No vendor costs logged.');
+}
+
+// ── CUSTOMERS ──
+function saveCustomer(){
+  const name=document.getElementById('c-name').value.trim();if(!name){alert('Company name required.');return;}
+  const c={id:Date.now(),name,contact:document.getElementById('c-contact').value,email:document.getElementById('c-email').value,phone:document.getElementById('c-phone').value,address:document.getElementById('c-addr').value,terms:document.getElementById('c-terms').value||30,notes:document.getElementById('c-notes').value};
+  customers.push(c);save('customers',customers);closeModal('modal-customer');renderCustomers();
+}
+function deleteCustomer(id){if(confirm('Delete customer?')){customers=customers.filter(c=>c.id!==id);save('customers',customers);renderCustomers();}}
+function renderCustomers(){
+  const search=(document.getElementById('cust-search')||{}).value||'';
+  let list=customers.filter(c=>!search||c.name.toLowerCase().includes(search.toLowerCase())||c.contact.toLowerCase().includes(search.toLowerCase()));
+  const b=document.getElementById('customers-body');if(!b)return;
+  b.innerHTML=list.length?list.map(c=>{
+    const custInv=invoices.filter(i=>i.customer===c.name&&i.status!=='Paid');
+    const totalAR=custInv.reduce((s,i)=>s+parseFloat(i.amount||0),0);
+    return `<tr><td style="font-weight:700;color:var(--white)">${c.name}</td><td>${c.contact||''}</td><td>${c.email||''}</td><td>${c.phone||''}</td><td>${custInv.length}</td><td>$${fmt(totalAR)}</td><td><button class="btn btn-danger btn-sm" onclick="deleteCustomer(${c.id})">Del</button></td></tr>`;
+  }).join(''):emptyRow(7,'No customers yet. Click + Add Customer.');
+}
+
+// ── PERSONNEL ──
+function savePerson(){
+  const name=document.getElementById('p-name').value.trim();if(!name){alert('Name required.');return;}
+  const p={id:Date.now(),name,type:document.getElementById('p-type').value,role:document.getElementById('p-role').value,phone:document.getElementById('p-phone').value,email:document.getElementById('p-email').value,rate:document.getElementById('p-rate').value,job:document.getElementById('p-job').value,start:document.getElementById('p-start').value,emerg:document.getElementById('p-emerg').value,active:document.getElementById('p-active').value,notes:document.getElementById('p-notes').value};
+  personnel.push(p);save('personnel',personnel);closeModal('modal-person');renderPersonnel();renderDashboard();
+}
+function togglePersonActive(id){
+  const p=personnel.find(x=>x.id===id);
+  if(p){p.active=p.active==='active'?'inactive':'active';save('personnel',personnel);renderPersonnel();renderDashboard();}
+}
+function deletePerson(id){if(confirm('Delete personnel record?')){personnel=personnel.filter(p=>p.id!==id);save('personnel',personnel);renderPersonnel();renderDashboard();}}
+function populatePersonnelFilters(){
+  const lf=document.getElementById('p-location-filter');
+  if(lf){lf.innerHTML='<option value="">All Locations</option>';[...new Set(personnel.map(p=>p.job).filter(Boolean))].forEach(j=>lf.innerHTML+=`<option>${j}</option>`);}
+  const rf=document.getElementById('p-role-filter');
+  if(rf){rf.innerHTML='<option value="">All Roles</option>';[...new Set(personnel.map(p=>p.role).filter(Boolean))].forEach(r=>rf.innerHTML+=`<option>${r}</option>`);}
+}
+function renderPersonnel(){
+  const search=(document.getElementById('p-search')||{}).value||'';
+  const tf=(document.getElementById('p-type-filter')||{}).value||'';
+  const sf=(document.getElementById('p-status-filter')||{}).value||'';
+  const lf=(document.getElementById('p-location-filter')||{}).value||'';
+  const rf=(document.getElementById('p-role-filter')||{}).value||'';
+  let list=personnel.filter(p=>
+    (!search||p.name.toLowerCase().includes(search.toLowerCase())||p.role.toLowerCase().includes(search.toLowerCase()))&&
+    (!tf||p.type===tf)&&(!sf||p.active===sf)&&(!lf||p.job===lf)&&(!rf||p.role===rf));
+  const b=document.getElementById('personnel-body');if(!b)return;
+  b.innerHTML=list.length?list.map(p=>`<tr>
+    <td style="font-weight:700;color:var(--white)">${p.name}</td>
+    <td>${statusBadge(p.type)}</td>
+    <td>${p.role||''}</td>
+    <td>${p.job||'Unassigned'}</td>
+    <td>${p.rate?'$'+fmt(p.rate):''}</td>
+    <td>${p.phone||''}</td>
+    <td><label class="toggle"><input type="checkbox" ${p.active==='active'?'checked':''} onchange="togglePersonActive(${p.id})"><span class="toggle-slider"></span></label></td>
+    <td><button class="btn btn-danger btn-sm" onclick="deletePerson(${p.id})">Del</button></td>
+  </tr>`).join(''):emptyRow(8,'No personnel found. Click + Add Personnel.');
+}
+
+// ── AR REPORTS ──
+function toggleARCustomer(){
+  const v=document.getElementById('ar-view').value;
+  const pick=document.getElementById('ar-customer-pick');
+  if(pick)pick.style.display=v==='customer'?'block':'none';
+}
+function populateARFilters(){
+  const s=document.getElementById('ar-customer-pick');
+  if(s){s.innerHTML='<option value="">-- Select Customer --</option>';customers.forEach(c=>s.innerHTML+=`<option>${c.name}</option>`);}
+}
+function renderARReport(){
+  const view=document.getElementById('ar-view').value;
+  const custPick=(document.getElementById('ar-customer-pick')||{}).value||'';
+  const period=document.getElementById('ar-period').value;
+  let list=invoices.filter(i=>filterByPeriod(i.week||i.due,period));
+  if(view==='customer'&&custPick)list=list.filter(i=>i.customer===custPick);
+  const out=document.getElementById('ar-report-output');if(!out)return;
+  const totalAll=list.reduce((s,i)=>s+parseFloat(i.amount||0),0);
+  const totalPaid=list.filter(i=>i.status==='Paid').reduce((s,i)=>s+parseFloat(i.amount||0),0);
+  const totalOpen=list.filter(i=>i.status!=='Paid').reduce((s,i)=>s+parseFloat(i.amount||0),0);
+  const totalOverdue=list.filter(i=>i.status==='Overdue').reduce((s,i)=>s+parseFloat(i.amount||0),0);
+  let html=`<div class="stats-row">
+    ${statCard('Total Invoiced','$'+fmt(totalAll),list.length+' invoices','blue')}
+    ${statCard('Total Collected','$'+fmt(totalPaid),list.filter(i=>i.status==='Paid').length+' paid','green')}
+    ${statCard('Outstanding AR','$'+fmt(totalOpen),list.filter(i=>i.status!=='Paid').length+' open','yellow')}
+    ${statCard('Overdue','$'+fmt(totalOverdue),list.filter(i=>i.status==='Overdue').length+' invoices','red')}
+  </div>`;
+  if(view==='company'){
+    const byCust={};
+    list.forEach(i=>{if(!byCust[i.customer])byCust[i.customer]={total:0,paid:0,open:0,count:0};byCust[i.customer].total+=parseFloat(i.amount||0);if(i.status==='Paid')byCust[i.customer].paid+=parseFloat(i.amount||0);else byCust[i.customer].open+=parseFloat(i.amount||0);byCust[i.customer].count++;});
+    html+=`<div class="report-section"><h4>AR by Customer</h4><table><thead><tr><th>Customer</th><th>Invoices</th><th>Total Billed</th><th>Collected</th><th>Open AR</th></tr></thead><tbody>${Object.entries(byCust).map(([c,d])=>`<tr><td style="font-weight:700">${c}</td><td>${d.count}</td><td>$${fmt(d.total)}</td><td style="color:var(--green)">$${fmt(d.paid)}</td><td style="color:var(--yellow)">$${fmt(d.open)}</td></tr>`).join('')||emptyRow(5,'No data')}</tbody></table></div>`;
+  }
+  html+=`<div class="report-section"><h4>Invoice Detail</h4><table><thead><tr><th>Invoice #</th><th>Customer</th><th>Job</th><th>Week Ending</th><th>Amount</th><th>Due</th><th>Status</th></tr></thead><tbody>${list.map(i=>`<tr><td>${i.num}</td><td>${i.customer}</td><td>${i.job||''}</td><td>${i.week||''}</td><td>$${fmt(i.amount)}</td><td>${i.due||''}</td><td>${statusBadge(i.status)}</td></tr>`).join('')||emptyRow(7,'No invoices match filters.')}</tbody></table></div>`;
+  out.innerHTML=html;
+}
+function filterByPeriod(dateStr,period){
+  if(period==='all'||!dateStr)return true;
+  const d=new Date(dateStr),n=new Date();
+  if(period==='month')return d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear();
+  if(period==='quarter')return Math.floor(d.getMonth()/3)===Math.floor(n.getMonth()/3)&&d.getFullYear()===n.getFullYear();
+  if(period==='year')return d.getFullYear()===n.getFullYear();
+  return true;
+}
+
+// ── PERSONNEL REPORTS ──
+function populatePRFilters(){
+  const lf=document.getElementById('pr-location');
+  if(lf){lf.innerHTML='<option value="">All Locations</option>';[...new Set(personnel.map(p=>p.job).filter(Boolean))].forEach(j=>lf.innerHTML+=`<option>${j}</option>`);}
+}
+function renderPersonnelReport(){
+  const tf=document.getElementById('pr-type').value;
+  const sf=document.getElementById('pr-status').value;
+  const lf=(document.getElementById('pr-location')||{}).value||'';
+  let list=personnel.filter(p=>
+    (tf==='all'||p.type===tf)&&
+    (sf==='all'||p.active===sf)&&
+    (!lf||p.job===lf));
+  const out=document.getElementById('personnel-report-output');if(!out)return;
+  const w2=list.filter(p=>p.type==='W-2');
+  const contract=list.filter(p=>p.type==='Contract');
+  const active=list.filter(p=>p.active==='active');
+  let html=`<div class="stats-row">
+    ${statCard('Total Personnel',list.length,'in selection','blue')}
+    ${statCard('W-2 Employees',w2.length,'direct employees','green')}
+    ${statCard('Contract Workers',contract.length,'contractors','yellow')}
+    ${statCard('Active in Field',active.length,'currently active','green')}
+  </div>`;
+  const byLoc={};
+  list.forEach(p=>{const loc=p.job||'Unassigned';if(!byLoc[loc])byLoc[loc]=[];byLoc[loc].push(p);});
+  html+=`<div class="report-section"><h4>Personnel by Location / Job</h4>${Object.entries(byLoc).map(([loc,ppl])=>`
+    <div style="margin-bottom:16px;"><div style="font-weight:700;color:var(--white);margin-bottom:8px;font-size:13px;">${loc} (${ppl.length} personnel)</div>
+    <table><thead><tr><th>Name</th><th>Type</th><th>Role</th><th>Rate</th><th>Phone</th><th>Status</th></tr></thead><tbody>
+    ${ppl.map(p=>`<tr><td>${p.name}</td><td>${statusBadge(p.type)}</td><td>${p.role||''}</td><td>${p.rate?'$'+fmt(p.rate):'-'}</td><td>${p.phone||''}</td><td>${statusBadge(p.active==='active'?'Active':'Inactive')}</td></tr>`).join('')}
+    </tbody></table></div>`).join('')||'<p style="color:var(--gray)">No personnel match filters.</p>'}</div>`;
+  out.innerHTML=html;
+}
+
+// ── INIT ──
+renderDashboard();
+</script>
 </body>
 </html>
