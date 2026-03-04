@@ -93,6 +93,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .page-watermark{position:fixed;top:calc(50% + 30px);left:calc(50% + 105px);transform:translate(-50%,-50%);width:919px;height:919px;opacity:0.06;pointer-events:none;z-index:0;background-image:url('logo.png');background-repeat:no-repeat;background-position:center;background-size:contain;}
 #content{position:relative;}
 
+
 /* ═══ PERSONNEL SPLIT-SCREEN ═══ */
 #page-personnel{display:flex;flex-direction:column;height:calc(100vh - 60px);padding:0;overflow:hidden;}
 .personnel-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px 12px;background:#fff;border-bottom:1px solid var(--border);flex-shrink:0;gap:12px;flex-wrap:wrap;}
@@ -107,7 +108,6 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .p-filter-select{background:#f5f5f5;border:1.5px solid var(--border);color:#000;padding:7px 10px;border-radius:8px;font-size:12px;cursor:pointer;outline:none;transition:border 0.2s;}
 .p-filter-select:focus{border-color:var(--blue);}
 .personnel-split{display:flex;flex:1;overflow:hidden;min-height:0;}
-/* LEFT ROSTER */
 .personnel-roster{width:340px;min-width:260px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:#fafafa;overflow:hidden;}
 .roster-sort-bar{display:flex;align-items:center;gap:6px;padding:8px 14px;border-bottom:1px solid var(--border);background:#f0f2f5;font-size:11px;color:#777;font-weight:600;letter-spacing:0.5px;}
 .sort-btn{cursor:pointer;padding:3px 8px;border-radius:5px;transition:background 0.15s;border:none;background:none;color:#555;font-size:11px;font-weight:600;}
@@ -125,7 +125,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .av-other{background:linear-gradient(135deg,#7e5a1a,#5c3e0d);}
 .roster-info{flex:1;min-width:0;}
 .roster-name{font-size:13px;font-weight:700;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.roster-role{font-size:11px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+.roster-sub{font-size:11px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
 .roster-badges{display:flex;align-items:center;gap:5px;margin-top:3px;}
 .badge-type{font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;letter-spacing:0.3px;}
 .badge-w2{background:#dbeafe;color:#1e40af;}
@@ -134,8 +134,8 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .dot-active{background:#22c55e;}
 .dot-inactive{background:#d1d5db;}
-.roster-rate{font-size:11px;color:#555;font-weight:600;flex-shrink:0;text-align:right;}
-/* RIGHT PROFILE PANEL */
+.star-rating{color:#f59e0b;font-size:11px;letter-spacing:1px;}
+.roster-rate-col{font-size:11px;color:#555;font-weight:600;flex-shrink:0;text-align:right;}
 .personnel-profile{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;}
 .profile-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#bbb;}
 .profile-empty-icon{font-size:56px;opacity:0.3;}
@@ -143,17 +143,22 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .profile-panel{flex:1;display:flex;flex-direction:column;overflow-y:auto;padding:0;}
 .profile-panel::-webkit-scrollbar{width:5px;}
 .profile-panel::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px;}
-.profile-header{padding:22px 28px 18px;background:linear-gradient(135deg,#1a7ab5 0%,#0d5a8a 100%);color:#fff;display:flex;align-items:center;gap:18px;position:relative;}
+.profile-header{padding:22px 28px 18px;color:#fff;display:flex;align-items:center;gap:18px;position:relative;}
+.profile-header.header-w2{background:linear-gradient(135deg,#1a7ab5 0%,#0d5a8a 100%);}
+.profile-header.header-contract{background:linear-gradient(135deg,#1d6a5e 0%,#0f4a41 100%);}
 .profile-header-avatar{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.5);flex-shrink:0;letter-spacing:1px;}
 .profile-header-info{flex:1;}
 .profile-header-name{font-size:20px;font-weight:800;letter-spacing:0.3px;}
 .profile-header-role{font-size:13px;opacity:0.85;margin-top:3px;}
-.profile-header-badges{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.profile-header-badges{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;}
 .ph-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;}
 .ph-badge-type{background:rgba(255,255,255,0.25);color:#fff;}
 .ph-badge-active{background:#22c55e;color:#fff;}
 .ph-badge-inactive{background:#ef4444;color:#fff;}
 .ph-badge-agency{background:rgba(255,200,0,0.3);color:#ffe066;}
+.ph-badge-pending{background:#f59e0b;color:#fff;}
+.ph-badge-closed{background:#6b7280;color:#fff;}
+.ph-stars{font-size:14px;color:#fbbf24;letter-spacing:2px;}
 .profile-header-actions{display:flex;gap:8px;flex-shrink:0;}
 .btn-edit-profile{background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.5);color:#fff;padding:7px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;}
 .btn-edit-profile:hover{background:rgba(255,255,255,0.35);}
@@ -162,6 +167,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .profile-body{padding:20px 28px;display:flex;flex-direction:column;gap:16px;}
 .profile-section{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;}
 .profile-section-title{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--blue);padding:8px 14px;background:#eef5fc;border-bottom:1px solid #d1e5f7;text-transform:uppercase;}
+.profile-section-title.contract-section{color:#1d6a5e;background:#e6f4f1;border-bottom-color:#b3ddd7;}
 .profile-fields{display:grid;grid-template-columns:1fr 1fr;gap:0;}
 .profile-field{padding:10px 14px;border-bottom:1px solid #f0f0f0;border-right:1px solid #f0f0f0;}
 .profile-field:nth-child(even){border-right:none;}
@@ -170,43 +176,60 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .profile-field-value{font-size:13px;font-weight:600;color:#111;}
 .profile-field-value.phone-val{color:var(--blue);font-family:monospace;}
 .profile-field-value.rate-val{color:#16a34a;font-weight:800;}
+.profile-field-value.rate-secondary{color:#555;font-size:12px;font-weight:500;margin-top:2px;}
 .profile-field-value.emerg-val{color:#dc2626;font-weight:700;}
 .profile-field-value.unassigned{color:#aaa;font-style:italic;font-weight:400;}
 .profile-field-value.email-val{color:var(--blue);font-size:12px;}
-/* EDIT MODE */
+.profile-field-value.perdiem-val{color:#7c3aed;font-weight:700;}
+.profile-field-value.status-active{color:#16a34a;font-weight:700;}
+.profile-field-value.status-closed{color:#6b7280;font-weight:700;}
+.profile-field-value.status-pending{color:#d97706;font-weight:700;}
+.rate-box{display:flex;flex-direction:column;gap:2px;}
+.rate-main{font-size:15px;font-weight:800;color:#16a34a;}
+.rate-detail{font-size:11px;color:#777;font-weight:500;}
+/* EDIT DRAWER */
 .profile-edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:flex-start;justify-content:flex-end;}
 .profile-edit-overlay.open{display:flex;}
-.profile-edit-drawer{width:420px;max-width:95vw;height:100%;background:#fff;display:flex;flex-direction:column;overflow:hidden;box-shadow:-4px 0 20px rgba(0,0,0,0.15);}
-.edit-drawer-header{padding:18px 20px;background:linear-gradient(135deg,#1a7ab5,#0d5a8a);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.profile-edit-drawer{width:460px;max-width:95vw;height:100%;background:#fff;display:flex;flex-direction:column;overflow:hidden;box-shadow:-4px 0 20px rgba(0,0,0,0.15);}
+.edit-drawer-header{padding:18px 20px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.edit-drawer-header.header-w2{background:linear-gradient(135deg,#1a7ab5,#0d5a8a);}
+.edit-drawer-header.header-contract{background:linear-gradient(135deg,#1d6a5e,#0f4a41);}
 .edit-drawer-title{font-size:16px;font-weight:800;letter-spacing:0.5px;}
 .edit-drawer-close{background:rgba(255,255,255,0.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .edit-drawer-body{flex:1;overflow-y:auto;padding:20px;}
 .edit-drawer-body::-webkit-scrollbar{width:4px;}
 .edit-drawer-body::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px;}
-.edit-section-label{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid #e5e7eb;}
+.edit-section-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid #e5e7eb;}
+.edit-section-label.w2-label{color:var(--blue);border-bottom-color:#bfdbfe;}
+.edit-section-label.contract-label{color:#1d6a5e;border-bottom-color:#99d6cc;}
 .edit-section-label:first-child{margin-top:0;}
 .edit-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .edit-row.full{grid-template-columns:1fr;}
+.edit-row.three{grid-template-columns:1fr 1fr 1fr;}
 .edit-group label{display:block;font-size:11px;font-weight:700;color:#555;letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;}
-.edit-group input,.edit-group select,.edit-group textarea{width:100%;padding:8px 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:13px;color:#111;background:#fafafa;outline:none;transition:border 0.2s;}
+.edit-group input,.edit-group select,.edit-group textarea{width:100%;padding:8px 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:13px;color:#111;background:#fafafa;outline:none;transition:border 0.2s;box-sizing:border-box;}
 .edit-group input:focus,.edit-group select:focus,.edit-group textarea:focus{border-color:var(--blue);background:#fff;}
 .edit-group textarea{resize:vertical;min-height:60px;}
+.star-edit-row{display:flex;gap:8px;align-items:center;padding:6px 0;}
+.star-edit-btn{background:none;border:2px solid #e5e7eb;color:#d1d5db;width:36px;height:36px;border-radius:8px;font-size:18px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+.star-edit-btn.filled{border-color:#f59e0b;color:#f59e0b;background:#fffbeb;}
+.star-edit-btn:hover{border-color:#f59e0b;color:#f59e0b;}
 .edit-drawer-footer{padding:14px 20px;border-top:1px solid #e5e7eb;display:flex;gap:10px;flex-shrink:0;background:#f9fafb;}
 .btn-save-edit{flex:1;background:var(--blue);color:#fff;border:none;padding:10px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.2s;}
 .btn-save-edit:hover{background:var(--blue-dark);}
+.btn-save-edit.contract-save{background:#1d6a5e;}
+.btn-save-edit.contract-save:hover{background:#0f4a41;}
 .btn-cancel-edit{background:#f3f4f6;border:1.5px solid #d1d5db;color:#555;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;}
 .btn-cancel-edit:hover{background:#e5e7eb;}
-.toggle-active-btn{padding:8px 14px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid;transition:all 0.2s;}
-.toggle-active-btn.set-active{border-color:#16a34a;color:#16a34a;background:#f0fdf4;}
-.toggle-active-btn.set-active:hover{background:#16a34a;color:#fff;}
-.toggle-active-btn.set-inactive{border-color:#dc2626;color:#dc2626;background:#fef2f2;}
-.toggle-active-btn.set-inactive:hover{background:#dc2626;color:#fff;}
 @media(max-width:700px){
   .personnel-split{flex-direction:column;}
-  .personnel-roster{width:100%;height:280px;border-right:none;border-bottom:1px solid var(--border);}
+  .personnel-roster{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);}
   .profile-fields{grid-template-columns:1fr;}
   .profile-field{border-right:none;}
+  .edit-row{grid-template-columns:1fr;}
+  .edit-row.three{grid-template-columns:1fr 1fr;}
 }
+
 </style>
 </head>
 <body>
@@ -328,7 +351,6 @@ tr:hover td{background:rgba(74,184,232,.04);}
 
 <!-- PERSONNEL -->
 <div id="page-personnel" class="page">
-  <!-- TOP BAR -->
   <div class="personnel-topbar">
     <div class="personnel-topbar-left">
       <span class="personnel-title">Personnel Directory</span>
@@ -336,20 +358,17 @@ tr:hover td{background:rgba(74,184,232,.04);}
     </div>
     <div class="personnel-filters">
       <div class="p-search-wrap">
-        <input class="p-search" id="p-search" placeholder="Search by name, role, phone..." oninput="renderPersonnel()">
+        <input class="p-search" id="p-search" placeholder="Search name, role, phone..." oninput="renderPersonnel()">
       </div>
       <select class="p-filter-select" id="p-type-filter" onchange="renderPersonnel()">
         <option value="">All Types</option>
-        <option value="W-2">W-2 Employee</option>
-        <option value="Contract">Contract</option>
+        <option value="W-2">W-2 Employees</option>
+        <option value="Contract">Contractors</option>
       </select>
       <select class="p-filter-select" id="p-status-filter" onchange="renderPersonnel()">
         <option value="">All Status</option>
         <option value="active">Active</option>
         <option value="inactive">Inactive</option>
-      </select>
-      <select class="p-filter-select" id="p-location-filter" onchange="renderPersonnel()">
-        <option value="">All Locations</option>
       </select>
       <select class="p-filter-select" id="p-role-filter" onchange="renderPersonnel()">
         <option value="">All Roles</option>
@@ -357,9 +376,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
       <button class="btn btn-primary" onclick="openModal('modal-person')" style="white-space:nowrap;font-size:12px;padding:7px 14px;">+ Add Personnel</button>
     </div>
   </div>
-  <!-- SPLIT SCREEN -->
   <div class="personnel-split">
-    <!-- LEFT: ROSTER LIST -->
     <div class="personnel-roster">
       <div class="roster-sort-bar">
         <span>SORT:</span>
@@ -370,7 +387,6 @@ tr:hover td{background:rgba(74,184,232,.04);}
       </div>
       <div class="roster-list" id="personnel-roster-list"></div>
     </div>
-    <!-- RIGHT: PROFILE PANEL -->
     <div class="personnel-profile">
       <div class="profile-empty" id="profile-empty-state">
         <div class="profile-empty-icon">👷</div>
@@ -379,60 +395,16 @@ tr:hover td{background:rgba(74,184,232,.04);}
       <div class="profile-panel" id="personnel-profile-panel" style="display:none;"></div>
     </div>
   </div>
-  <!-- EDIT DRAWER -->
   <div class="profile-edit-overlay" id="personnel-edit-overlay">
-    <div class="profile-edit-drawer">
-      <div class="edit-drawer-header">
+    <div class="profile-edit-drawer" id="edit-drawer-container">
+      <div class="edit-drawer-header header-w2" id="edit-drawer-header">
         <span class="edit-drawer-title" id="edit-drawer-title">Edit Employee</span>
         <button class="edit-drawer-close" onclick="closePersonnelEdit()">✕</button>
       </div>
-      <div class="edit-drawer-body" id="edit-drawer-body">
-        <div class="edit-section-label">Identity</div>
-        <div class="edit-row">
-          <div class="edit-group"><label>Full Name</label><input id="pe-name"></div>
-          <div class="edit-group"><label>Type</label><select id="pe-type"><option value="W-2 Employee">W-2 Employee</option><option value="Contract">Contract</option></select></div>
-        </div>
-        <div class="edit-row">
-          <div class="edit-group"><label>Role / Title</label><input id="pe-role" placeholder="Flowback Operator..."></div>
-          <div class="edit-group"><label>Status</label>
-            <select id="pe-active">
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
-        </div>
-        <div class="edit-section-label">Contact</div>
-        <div class="edit-row">
-          <div class="edit-group"><label>Phone</label><input id="pe-phone" type="tel"></div>
-          <div class="edit-group"><label>Email</label><input id="pe-email" type="email"></div>
-        </div>
-        <div class="edit-row full">
-          <div class="edit-group"><label>Emergency Contact</label><input id="pe-emerg" placeholder="Name / Phone"></div>
-        </div>
-        <div class="edit-section-label">Assignment & Pay</div>
-        <div class="edit-row">
-          <div class="edit-group"><label>Current Job</label><select id="pe-job"></select></div>
-          <div class="edit-group"><label>Daily / Hourly Rate ($)</label><input id="pe-rate" type="number"></div>
-        </div>
-        <div class="edit-row">
-          <div class="edit-group"><label>Agency</label><input id="pe-agency"></div>
-          <div class="edit-group"><label>Per Diem Type</label>
-            <select id="pe-perdiem">
-              <option value="">None</option>
-              <option value="Man Camp">Man Camp</option>
-              <option value="Camper">RV / Camper</option>
-            </select>
-          </div>
-        </div>
-        <div class="edit-section-label">Notes</div>
-        <div class="edit-row full">
-          <div class="edit-group"><textarea id="pe-notes" rows="3" placeholder="Additional notes..."></textarea></div>
-        </div>
-        <input type="hidden" id="pe-id">
-      </div>
+      <div class="edit-drawer-body" id="edit-drawer-body"></div>
       <div class="edit-drawer-footer">
         <button class="btn-cancel-edit" onclick="closePersonnelEdit()">Cancel</button>
-        <button class="btn-save-edit" onclick="savePersonnelEdit()">Save Changes</button>
+        <button class="btn-save-edit" id="btn-save-edit" onclick="savePersonnelEdit()">Save Changes</button>
       </div>
     </div>
   </div>
@@ -524,13 +496,52 @@ tr:hover td{background:rgba(74,184,232,.04);}
 
 <div id="modal-person" class="modal-overlay">
 <div class="modal"><h3>Add Personnel</h3>
-<div class="form-row"><div class="form-group"><label>Full Name</label><input id="p-name"></div><div class="form-group"><label>Type</label><select id="p-type"><option>W-2</option><option>Contract</option></select></div></div>
-<div class="form-row"><div class="form-group"><label>Role / Title</label><input id="p-role" placeholder="Flowback Operator, Supervisor..."></div><div class="form-group"><label>Phone</label><input id="p-phone"></div></div>
-<div class="form-row"><div class="form-group"><label>Email</label><input id="p-email"></div><div class="form-group"><label>Daily / Hourly Rate ($)</label><input id="p-rate" type="number"></div></div>
-<div class="form-row"><div class="form-group"><label>Current Job / Location</label><select id="p-job"></select></div><div class="form-group"><label>Start Date</label><input type="date" id="p-start"></div></div>
-<div class="form-row"><div class="form-group"><label>Emergency Contact</label><input id="p-emerg"></div><div class="form-group"><label>Status</label><select id="p-active"><option value="active">Active</option><option value="inactive">Inactive</option></select></div></div>
-<div class="form-row"><div class="form-group"><label>Per Diem Type</label><select id="p-perdiem-type"><option value="">None</option><option value="Man Camp">Man Camp</option><option value="RV">RV / Camper</option></select></div><div class="form-group"><label>Per Diem Cost ($/day)</label><input id="p-perdiem-cost" type="number" placeholder="Auto-filled" readonly></div></div>
-<div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="p-notes" rows="2"></textarea></div></div>
+<div class="form-row">
+  <div class="form-group"><label>Full Name</label><input id="p-name"></div>
+  <div class="form-group"><label>Type</label><select id="p-type" onchange="toggleAddPersonType()"><option value="W-2 Employee">W-2 Employee</option><option value="Contract">Contractor</option></select></div>
+</div>
+<div id="p-w2-fields">
+  <div class="form-row">
+    <div class="form-group"><label>Position</label><select id="p-position"><option value="">Select Position</option><option>Operator I</option><option>Operator II</option><option>Operator III</option><option>Field Representative</option><option>Field Supervisor</option></select></div>
+    <div class="form-group"><label>Hire Date</label><input type="date" id="p-hire-date"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Work Email</label><input type="email" id="p-email"></div>
+    <div class="form-group"><label>Phone</label><input id="p-phone"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Hourly Rate ($/hr)</label><input id="p-rate" type="number" step="0.01"></div>
+    <div class="form-group"><label>OT Rate (%)</label><input id="p-ot" type="number" value="65"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Per Diem Type</label><select id="p-perdiem-type" onchange="autoFillPerDiem()"><option value="">None</option><option value="Camper">Camper ($130/day)</option><option value="Man Camp">Man Camp ($75/day)</option></select></div>
+    <div class="form-group"><label>Per Diem ($/day)</label><input id="p-perdiem-cost" type="number" readonly></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Truck Allowance ($/wk)</label><input id="p-truck" type="number" step="0.01"></div>
+    <div class="form-group"><label>Emergency Contact</label><input id="p-emerg" placeholder="Name / Phone"></div>
+  </div>
+</div>
+<div id="p-contract-fields" style="display:none;">
+  <div class="form-row">
+    <div class="form-group"><label>Job Title / Role</label><input id="p-role" placeholder="Flowback Operator..."></div>
+    <div class="form-group"><label>Phone</label><input id="p-phone-c"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Email</label><input type="email" id="p-email-c"></div>
+    <div class="form-group"><label>Agency / Platform</label><input id="p-agency" value="Rig Up"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Day Rate ($/day)</label><input id="p-dayrate" type="number"></div>
+    <div class="form-group"><label>Contract Status</label><select id="p-contract-status"><option value="ACTIVE">Active</option><option value="CLOSED">Closed</option><option value="PENDING">Pending</option></select></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Start Date</label><input type="date" id="p-start-c"></div>
+    <div class="form-group"><label>Experience (1–4 ★)</label><select id="p-stars"><option value="1">★ (1) Entry Level</option><option value="2">★★ (2) Developing</option><option value="3" selected>★★★ (3) Experienced</option><option value="4">★★★★ (4) Expert</option></select></div>
+  </div>
+  <div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="p-notes" rows="2"></textarea></div></div>
+</div>
+<div class="form-row"><div class="form-group"><label>Current Job Assignment</label><select id="p-job"></select></div></div>
 <div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-person')">Cancel</button><button class="btn btn-primary" onclick="savePerson()">Save Personnel</button></div>
 </div></div>
 
@@ -771,6 +782,7 @@ function renderCustomers(){
 
 // Ã¢ÂÂÃ¢ÂÂ PERSONNEL Ã¢ÂÂÃ¢ÂÂ
 
+
 // ═══ PERSONNEL SPLIT-SCREEN UI ═══
 let _personnelSort = 'name';
 let _selectedPersonId = null;
@@ -788,32 +800,34 @@ function getInitials(name) {
   return (name || '?').substring(0,2).toUpperCase();
 }
 
-function getAvatarClass(type) {
-  if ((type||'').includes('W-2')) return 'av-w2';
-  if ((type||'').toLowerCase() === 'contract') return 'av-contract';
-  return 'av-other';
+function isW2(p) { return (p.type||'').includes('W-2'); }
+function isPersonActive(p) { return p.active === true || p.active === 'active'; }
+
+function getStarDisplay(stars) {
+  const n = parseInt(stars) || 0;
+  return '★'.repeat(n) + '☆'.repeat(Math.max(0, 4-n));
 }
 
-function getBadgeClass(type) {
-  if ((type||'').includes('W-2')) return 'badge-w2';
-  if ((type||'').toLowerCase() === 'contract') return 'badge-contract';
-  return 'badge-other';
+function getPerDiemAmount(type) {
+  if (type === 'Camper' || type === 'RV') return 130;
+  if (type === 'Man Camp') return 75;
+  return 0;
 }
 
-function getBadgeLabel(type) {
-  if ((type||'').includes('W-2')) return 'W-2';
-  if ((type||'').toLowerCase() === 'contract') return 'Contract';
-  return type || 'Unknown';
+function autoFillPerDiem() {
+  const sel = document.getElementById('p-perdiem-type');
+  const cost = document.getElementById('p-perdiem-cost');
+  if (!sel || !cost) return;
+  cost.value = getPerDiemAmount(sel.value) || '';
 }
 
-function isPersonActive(p) {
-  return p.active === true || p.active === 'active';
-}
-
-function getRoleDisplay(p) {
-  const role = p.role || '';
-  if (role.includes('@')) return p.name;
-  return role || '—';
+function toggleAddPersonType() {
+  const t = (document.getElementById('p-type')||{}).value || '';
+  const isW2type = t.includes('W-2');
+  const w2 = document.getElementById('p-w2-fields');
+  const con = document.getElementById('p-contract-fields');
+  if (w2) w2.style.display = isW2type ? '' : 'none';
+  if (con) con.style.display = isW2type ? 'none' : '';
 }
 
 function getJobDisplay(p) {
@@ -827,50 +841,47 @@ function getJobDisplay(p) {
 }
 
 function populatePersonnelFilters() {
-  const lf = document.getElementById('p-location-filter');
   const rf = document.getElementById('p-role-filter');
-  if (!lf || !rf) return;
+  if (!rf) return;
   const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
-  const locs = [...new Set(allP.map(p => p.location).filter(Boolean))].sort();
-  const roles = [...new Set(allP.map(p => p.role).filter(r => r && !r.includes('@')))].sort();
-  const curLoc = lf.value;
-  const curRole = rf.value;
-  lf.innerHTML = '<option value="">All Locations</option>' + locs.map(l => '<option value="'+l+'"'+( l===curLoc?' selected':'')+'>'+l+'</option>').join('');
-  rf.innerHTML = '<option value="">All Roles</option>' + roles.map(r => '<option value="'+r+'"'+(r===curRole?' selected':'')+'>'+r+'</option>').join('');
+  const roles = [...new Set(allP.map(p => {
+    if (isW2(p)) return p.position || p.role || '';
+    return p.role || p.position || '';
+  }).filter(r => r && !r.includes('@')))].sort();
+  const cur = rf.value;
+  rf.innerHTML = '<option value="">All Roles</option>' + roles.map(r => '<option value="'+r+'"'+(r===cur?' selected':'')+'>'+r+'</option>').join('');
 }
 
 function renderPersonnel() {
   const roster = document.getElementById('personnel-roster-list');
   if (!roster) return;
-  const search = (document.getElementById('p-search') || {}).value || '';
-  const tf = (document.getElementById('p-type-filter') || {}).value || '';
-  const sf = (document.getElementById('p-status-filter') || {}).value || '';
-  const lf = (document.getElementById('p-location-filter') || {}).value || '';
-  const rolef = (document.getElementById('p-role-filter') || {}).value || '';
+  const search = (document.getElementById('p-search')||{}).value || '';
+  const tf = (document.getElementById('p-type-filter')||{}).value || '';
+  const sf = (document.getElementById('p-status-filter')||{}).value || '';
+  const rolef = (document.getElementById('p-role-filter')||{}).value || '';
   const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
   populatePersonnelFilters();
 
   let filtered = allP.filter(p => {
     const s = search.toLowerCase();
-    const matchSearch = !s || (p.name||'').toLowerCase().includes(s) || (p.role||'').toLowerCase().includes(s) || (p.phone||'').includes(s) || (p.email||'').toLowerCase().includes(s);
+    const role = isW2(p) ? (p.position||p.role||'') : (p.role||'');
+    const matchSearch = !s || (p.name||'').toLowerCase().includes(s) || role.toLowerCase().includes(s) || (p.phone||'').includes(s) || (p.email||'').toLowerCase().includes(s);
     const matchType = !tf || (p.type||'').toLowerCase().includes(tf.toLowerCase());
     const active = isPersonActive(p);
-    const matchStatus = !sf || (sf === 'active' ? active : !active);
-    const matchLoc = !lf || p.location === lf;
-    const matchRole = !rolef || p.role === rolef;
-    return matchSearch && matchType && matchStatus && matchLoc && matchRole;
+    const matchStatus = !sf || (sf==='active' ? active : !active);
+    const matchRole = !rolef || role === rolef || (p.position||p.role||'') === rolef;
+    return matchSearch && matchType && matchStatus && matchRole;
   });
 
-  // Sort
   filtered.sort((a,b) => {
     if (_personnelSort === 'name') return (a.name||'').localeCompare(b.name||'');
     if (_personnelSort === 'type') return (a.type||'').localeCompare(b.type||'');
-    if (_personnelSort === 'rate') return (parseFloat(b.rate)||0) - (parseFloat(a.rate)||0);
-    if (_personnelSort === 'status') {
-      const aA = isPersonActive(a) ? 0 : 1;
-      const bA = isPersonActive(b) ? 0 : 1;
-      return aA - bA;
+    if (_personnelSort === 'rate') {
+      const ar = isW2(a) ? (parseFloat(a.estimatedDayRate)||parseFloat(a.rate)||0) : (parseFloat(a.dayRate)||parseFloat(a.rate)||0);
+      const br = isW2(b) ? (parseFloat(b.estimatedDayRate)||parseFloat(b.rate)||0) : (parseFloat(b.dayRate)||parseFloat(b.rate)||0);
+      return br - ar;
     }
+    if (_personnelSort === 'status') return (isPersonActive(a)?0:1) - (isPersonActive(b)?0:1);
     return 0;
   });
 
@@ -878,37 +889,38 @@ function renderPersonnel() {
   if (badge) badge.textContent = filtered.length;
 
   if (!filtered.length) {
-    roster.innerHTML = '<div style="padding:30px;text-align:center;color:#aaa;font-size:13px;">No personnel match your filters</div>';
+    roster.innerHTML = '<div style="padding:30px;text-align:center;color:#aaa;font-size:13px;">No personnel match</div>';
     return;
   }
 
   roster.innerHTML = filtered.map(p => {
     const active = isPersonActive(p);
+    const w2 = isW2(p);
     const initials = getInitials(p.name);
-    const avClass = getAvatarClass(p.type);
-    const badgeClass = getBadgeClass(p.type);
-    const badgeLabel = getBadgeLabel(p.type);
-    const roleDisplay = getRoleDisplay(p);
-    const rateDisplay = p.rate ? '$' + parseFloat(p.rate).toLocaleString('en-US', {minimumFractionDigits:0,maximumFractionDigits:2}) : '';
+    const avClass = w2 ? 'av-w2' : 'av-contract';
+    const badgeClass = w2 ? 'badge-w2' : 'badge-contract';
+    const badgeLabel = w2 ? 'W-2' : 'Contract';
+    const role = w2 ? (p.position||p.role||'—') : (p.role||'Flowback Operator');
+    const rateVal = w2 ? (p.estimatedDayRate ? '$'+parseFloat(p.estimatedDayRate).toFixed(0)+'/day' : (p.rate ? '$'+parseFloat(p.rate).toFixed(2)+'/hr' : '')) : (p.dayRate ? '$'+parseFloat(p.dayRate).toFixed(0)+'/day' : (p.rate ? '$'+parseFloat(p.rate).toFixed(0) : ''));
     const isSelected = p.id === _selectedPersonId;
-    return `<div class="roster-item${isSelected ? ' selected' : ''}" onclick="selectPerson('${p.id}')">
+    const sub = w2 ? role : (p.stars ? getStarDisplay(p.stars) + ' ' + role : role);
+    return `<div class="roster-item${isSelected?' selected':''}" onclick="selectPerson('${p.id}')">
       <div class="roster-avatar ${avClass}">${initials}</div>
       <div class="roster-info">
         <div class="roster-name">${p.name}</div>
-        <div class="roster-role">${roleDisplay}</div>
+        <div class="roster-sub">${sub}</div>
         <div class="roster-badges">
           <span class="badge-type ${badgeClass}">${badgeLabel}</span>
-          <span class="status-dot ${active ? 'dot-active' : 'dot-inactive'}" title="${active ? 'Active' : 'Inactive'}"></span>
+          <span class="status-dot ${active?'dot-active':'dot-inactive'}" title="${active?'Active':'Inactive'}"></span>
         </div>
       </div>
-      <div class="roster-rate">${rateDisplay}</div>
+      <div class="roster-rate-col">${rateVal}</div>
     </div>`;
   }).join('');
 
-  // If selected person is still visible, keep profile shown
   if (_selectedPersonId) {
-    const stillVisible = filtered.find(p => p.id === _selectedPersonId);
-    if (stillVisible) renderPersonnelProfile(stillVisible);
+    const still = filtered.find(p => p.id === _selectedPersonId);
+    if (still) renderPersonnelProfile(still);
   }
 }
 
@@ -930,79 +942,118 @@ function renderPersonnelProfile(p) {
   panel.style.flexDirection = 'column';
 
   const active = isPersonActive(p);
+  const w2 = isW2(p);
   const initials = getInitials(p.name);
-  const avClass = getAvatarClass(p.type);
-  const badgeLabel = getBadgeLabel(p.type);
-  const roleDisplay = getRoleDisplay(p);
+  const headerClass = w2 ? 'header-w2' : 'header-contract';
   const jobDisplay = getJobDisplay(p);
-  const rateDisplay = p.rate ? '$' + parseFloat(p.rate).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + (p.type === 'W-2 Employee' ? '/day' : '/day') : '—';
-  const perdiemDisplay = p.perdiem || p.perdiemType || '—';
+
+  let headerBadges = '';
+  headerBadges += `<span class="ph-badge ph-badge-type">${w2 ? 'W-2 Employee' : 'Contractor'}</span>`;
+  headerBadges += `<span class="ph-badge ${active?'ph-badge-active':'ph-badge-inactive'}">${active?'● Active':'○ Inactive'}</span>`;
+  if (!w2 && p.contractStatus === 'PENDING') headerBadges += '<span class="ph-badge ph-badge-pending">⏳ Pending</span>';
+  if (!w2 && p.contractStatus === 'CLOSED') headerBadges += '<span class="ph-badge ph-badge-closed">✕ Closed</span>';
+  if (!w2 && p.agency) headerBadges += `<span class="ph-badge ph-badge-agency">🏢 ${p.agency}</span>`;
+  if (!w2 && p.stars) headerBadges += `<span class="ph-stars">${getStarDisplay(p.stars)}</span>`;
+
+  const roleTitle = w2 ? (p.position||p.role||'—') : (p.role||'Flowback Operator');
+
+  let sectionsHTML = '';
+
+  // Contact section
+  const emailVal = p.email || '';
+  const phoneVal = p.phone || '';
+  const emergVal = p.emerg || p.emergency || '';
+  sectionsHTML += `<div class="profile-section">
+    <div class="profile-section-title${w2?'':' contract-section'}">Contact Information</div>
+    <div class="profile-fields">
+      <div class="profile-field"><div class="profile-field-label">📞 Phone</div><div class="profile-field-value phone-val">${phoneVal||'<span class="unassigned">—</span>'}</div></div>
+      <div class="profile-field"><div class="profile-field-label">✉ Email</div><div class="profile-field-value email-val">${emailVal||'<span class="unassigned">—</span>'}</div></div>
+      ${w2 ? `<div class="profile-field full"><div class="profile-field-label">🚨 Emergency Contact</div><div class="profile-field-value emerg-val">${emergVal||'<span class="unassigned">Not provided</span>'}</div></div>` : ''}
+    </div>
+  </div>`;
+
+  if (w2) {
+    // W-2 specific section
+    const hrRate = p.hourlyRate || p.rate;
+    const dayRate = p.estimatedDayRate;
+    const otRate = p.otRate || '65';
+    const truck = p.truckAllowance;
+    const perdiem = p.perdiem || p.perdiemType || '';
+    const perdiemAmt = perdiem ? (getPerDiemAmount(perdiem) || p.perdiemCost || '') : '';
+
+    sectionsHTML += `<div class="profile-section">
+      <div class="profile-section-title">W-2 Employment</div>
+      <div class="profile-fields">
+        <div class="profile-field"><div class="profile-field-label">📋 Position</div><div class="profile-field-value">${p.position||p.role||'<span class="unassigned">—</span>'}</div></div>
+        <div class="profile-field"><div class="profile-field-label">📅 Hire Date</div><div class="profile-field-value">${p.hireDate||p.start||'<span class="unassigned">—</span>'}</div></div>
+        <div class="profile-field">
+          <div class="profile-field-label">💰 Hourly Rate</div>
+          <div class="rate-box">
+            <div class="rate-main">${hrRate?'$'+parseFloat(hrRate).toFixed(2)+'/hr':'<span class="unassigned">—</span>'}</div>
+            ${dayRate?'<div class="rate-detail">Est. Day Rate: $'+parseFloat(dayRate).toFixed(2)+'</div>':''}
+          </div>
+        </div>
+        <div class="profile-field"><div class="profile-field-label">⏱ OT Rate</div><div class="profile-field-value">${otRate?otRate+'% after 40hrs':'<span class="unassigned">—</span>'}</div></div>
+        <div class="profile-field">
+          <div class="profile-field-label">🏕 Per Diem</div>
+          <div class="profile-field-value perdiem-val">${perdiem||'<span class="unassigned">None</span>'}${perdiemAmt?' – $'+perdiemAmt+'/day':''}</div>
+        </div>
+        <div class="profile-field"><div class="profile-field-label">🚛 Truck Allowance</div><div class="profile-field-value">${truck?'$'+parseFloat(truck).toFixed(2)+'/wk':'<span class="unassigned">—</span>'}</div></div>
+      </div>
+    </div>`;
+  } else {
+    // Contractor specific section
+    const cStatus = p.contractStatus || 'ACTIVE';
+    const statusClass = cStatus==='ACTIVE'?'status-active':cStatus==='PENDING'?'status-pending':'status-closed';
+    const dayRate = p.dayRate || p.rate;
+    const startDate = p.contractStart || p.start || '';
+    sectionsHTML += `<div class="profile-section">
+      <div class="profile-section-title contract-section">Contract Details</div>
+      <div class="profile-fields">
+        <div class="profile-field">
+          <div class="profile-field-label">💰 Day Rate</div>
+          <div class="rate-box"><div class="rate-main">${dayRate?'$'+parseFloat(dayRate).toFixed(0)+'/day':'<span class="unassigned">—</span>'}</div></div>
+        </div>
+        <div class="profile-field"><div class="profile-field-label">📊 Contract Status</div><div class="profile-field-value ${statusClass}">${cStatus}</div></div>
+        <div class="profile-field"><div class="profile-field-label">📅 Contract Start</div><div class="profile-field-value">${startDate||'<span class="unassigned">—</span>'}</div></div>
+        <div class="profile-field"><div class="profile-field-label">🏢 Agency</div><div class="profile-field-value">${p.agency||'<span class="unassigned">—</span>'}</div></div>
+        <div class="profile-field"><div class="profile-field-label">⭐ Experience</div><div class="profile-field-value"><span style="color:#f59e0b;font-size:16px;">${p.stars?getStarDisplay(p.stars):'<span class="unassigned">Not rated</span>'}</span></div></div>
+        <div class="profile-field"><div class="profile-field-label">📍 Basin</div><div class="profile-field-value">${p.basin||'<span class="unassigned">—</span>'}</div></div>
+      </div>
+    </div>`;
+  }
+
+  // Assignment section
+  sectionsHTML += `<div class="profile-section">
+    <div class="profile-section-title${w2?'':' contract-section'}">Job Assignment</div>
+    <div class="profile-fields">
+      <div class="profile-field full"><div class="profile-field-label">💼 Current Job</div><div class="profile-field-value ${jobDisplay?'':'unassigned'}">${jobDisplay||'Unassigned'}</div></div>
+    </div>
+  </div>`;
+
+  // Notes
+  const notes = p.notes || p.contractNotes || '';
+  if (notes) {
+    sectionsHTML += `<div class="profile-section">
+      <div class="profile-section-title${w2?'':' contract-section'}">Notes</div>
+      <div class="profile-fields"><div class="profile-field full"><div class="profile-field-value" style="white-space:pre-wrap;font-size:12px;color:#444;">${notes}</div></div></div>
+    </div>`;
+  }
 
   panel.innerHTML = `
-    <div class="profile-header">
-      <div class="profile-header-avatar ${avClass}">${initials}</div>
+    <div class="profile-header ${headerClass}">
+      <div class="profile-header-avatar">${initials}</div>
       <div class="profile-header-info">
         <div class="profile-header-name">${p.name}</div>
-        <div class="profile-header-role">${roleDisplay}</div>
-        <div class="profile-header-badges">
-          <span class="ph-badge ph-badge-type">${badgeLabel}</span>
-          <span class="ph-badge ${active ? 'ph-badge-active' : 'ph-badge-inactive'}">${active ? '● Active' : '○ Inactive'}</span>
-          ${p.agency ? `<span class="ph-badge ph-badge-agency">🏢 ${p.agency}</span>` : ''}
-        </div>
+        <div class="profile-header-role">${roleTitle}</div>
+        <div class="profile-header-badges">${headerBadges}</div>
       </div>
       <div class="profile-header-actions">
         <button class="btn-edit-profile" onclick="openPersonnelEdit('${p.id}')">✏ Edit</button>
         <button class="btn-del-profile" onclick="deletePersonFromProfile('${p.id}')">🗑</button>
       </div>
     </div>
-    <div class="profile-body">
-      <div class="profile-section">
-        <div class="profile-section-title">Contact Information</div>
-        <div class="profile-fields">
-          <div class="profile-field">
-            <div class="profile-field-label">📞 Phone</div>
-            <div class="profile-field-value phone-val">${p.phone || '<span class=\"unassigned\">—</span>'}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">✉ Email</div>
-            <div class="profile-field-value email-val">${p.email && !p.email.includes('@') ? '' : (p.email || '<span class=\"unassigned\">—</span>')}</div>
-          </div>
-          <div class="profile-field full">
-            <div class="profile-field-label">🚨 Emergency Contact</div>
-            <div class="profile-field-value emerg-val">${p.emerg || p.emergency || '<span class=\"unassigned\">Not provided</span>'}</div>
-          </div>
-        </div>
-      </div>
-      <div class="profile-section">
-        <div class="profile-section-title">Assignment & Compensation</div>
-        <div class="profile-fields">
-          <div class="profile-field">
-            <div class="profile-field-label">💼 Current Job</div>
-            <div class="profile-field-value ${jobDisplay ? '' : 'unassigned'}">${jobDisplay || 'Unassigned'}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">💰 Rate</div>
-            <div class="profile-field-value rate-val">${rateDisplay}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">🏢 Agency</div>
-            <div class="profile-field-value ${p.agency ? '' : 'unassigned'}">${p.agency || '—'}</div>
-          </div>
-          <div class="profile-field">
-            <div class="profile-field-label">🏕 Per Diem</div>
-            <div class="profile-field-value ${perdiemDisplay === '—' ? 'unassigned' : ''}">${perdiemDisplay}</div>
-          </div>
-        </div>
-      </div>
-      ${p.notes ? `<div class="profile-section">
-        <div class="profile-section-title">Notes</div>
-        <div class="profile-fields">
-          <div class="profile-field full">
-            <div class="profile-field-value" style="white-space:pre-wrap">${p.notes}</div>
-          </div>
-        </div>
-      </div>` : ''}
-    </div>
+    <div class="profile-body">${sectionsHTML}</div>
   `;
 }
 
@@ -1010,24 +1061,134 @@ function openPersonnelEdit(id) {
   const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
   const p = allP.find(x => x.id === id);
   if (!p) return;
-  // Populate jobs dropdown
+  const w2 = isW2(p);
   const jobs = JSON.parse(localStorage.getItem('ghs_jobs') || '[]');
-  const jeSelect = document.getElementById('pe-job');
-  jeSelect.innerHTML = '<option value="">— Unassigned —</option>' + jobs.map(j => '<option value="'+j.id+'"'+(p.job===j.id?' selected':'')+'>'+j.num+' – '+j.name+'</option>').join('');
-  document.getElementById('pe-id').value = p.id;
-  document.getElementById('pe-name').value = p.name || '';
-  document.getElementById('pe-type').value = p.type || 'Contract';
-  document.getElementById('pe-role').value = (p.role && !p.role.includes('@')) ? p.role : '';
-  document.getElementById('pe-active').value = isPersonActive(p) ? 'active' : 'inactive';
-  document.getElementById('pe-phone').value = p.phone || '';
-  document.getElementById('pe-email').value = p.email || '';
-  document.getElementById('pe-emerg').value = p.emerg || p.emergency || '';
-  document.getElementById('pe-rate').value = p.rate || '';
-  document.getElementById('pe-agency').value = p.agency || '';
-  document.getElementById('pe-perdiem').value = p.perdiem || p.perdiemType || '';
-  document.getElementById('pe-notes').value = p.notes || '';
-  document.getElementById('edit-drawer-title').textContent = 'Edit: ' + p.name;
+
+  const header = document.getElementById('edit-drawer-header');
+  const saveBtn = document.getElementById('btn-save-edit');
+  const title = document.getElementById('edit-drawer-title');
+  if (header) { header.className = 'edit-drawer-header ' + (w2 ? 'header-w2' : 'header-contract'); }
+  if (saveBtn) { saveBtn.className = 'btn-save-edit' + (w2 ? '' : ' contract-save'); }
+  if (title) title.textContent = 'Edit: ' + p.name;
+
+  const jobOptions = '<option value="">— Unassigned —</option>' + jobs.map(j => '<option value="'+j.id+'"'+(p.job===j.id?' selected':'')+'>'+j.num+' – '+j.name+'</option>').join('');
+
+  let bodyHTML = '';
+  const labelClass = w2 ? 'w2-label' : 'contract-label';
+
+  // Common: name + type
+  bodyHTML += `<div class="edit-section-label ${labelClass}">Identity</div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Full Name</label><input id="pe-name" value="${esc(p.name)}"></div>
+    <div class="edit-group"><label>Type</label><select id="pe-type"><option value="W-2 Employee"${w2?' selected':''}>W-2 Employee</option><option value="Contract"${!w2?' selected':''}>Contractor</option></select></div>
+  </div>`;
+
+  if (w2) {
+    const hrRate = p.hourlyRate || p.rate || '';
+    const pdType = p.perdiem || p.perdiemType || '';
+    const pdAmt = pdType ? getPerDiemAmount(pdType) : (p.perdiemCost || '');
+    bodyHTML += `
+  <div class="edit-section-label w2-label">Position & Hire</div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Position</label><select id="pe-position">
+      <option value="">Select</option>
+      ${['Operator I','Operator II','Operator III','Field Representative','Field Supervisor'].map(r=>'<option value="'+r+'"'+(p.position===r?' selected':'')+'>'+r+'</option>').join('')}
+    </select></div>
+    <div class="edit-group"><label>Hire Date</label><input type="date" id="pe-hire-date" value="${p.hireDate||p.start||''}"></div>
+  </div>
+  <div class="edit-section-label w2-label">Contact</div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Work Email</label><input type="email" id="pe-email" value="${esc(p.email||'')}"></div>
+    <div class="edit-group"><label>Phone</label><input id="pe-phone" value="${esc(p.phone||'')}"></div>
+  </div>
+  <div class="edit-row full">
+    <div class="edit-group"><label>Emergency Contact</label><input id="pe-emerg" value="${esc(p.emerg||p.emergency||'')}"></div>
+  </div>
+  <div class="edit-section-label w2-label">Compensation</div>
+  <div class="edit-row three">
+    <div class="edit-group"><label>Hourly Rate ($)</label><input type="number" step="0.01" id="pe-hourly" value="${hrRate}"></div>
+    <div class="edit-group"><label>OT Rate (%)</label><input type="number" id="pe-ot" value="${p.otRate||65}"></div>
+    <div class="edit-group"><label>Truck Allowance ($/wk)</label><input type="number" step="0.01" id="pe-truck" value="${p.truckAllowance||''}"></div>
+  </div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Per Diem Type</label><select id="pe-perdiem" onchange="editAutoFillPerDiem()">
+      <option value="">None</option>
+      <option value="Camper"${pdType==='Camper'?' selected':''}>Camper ($130/day)</option>
+      <option value="Man Camp"${pdType==='Man Camp'?' selected':''}>Man Camp ($75/day)</option>
+    </select></div>
+    <div class="edit-group"><label>Per Diem ($/day)</label><input type="number" id="pe-perdiem-cost" value="${pdAmt}" readonly></div>
+  </div>
+  <div class="edit-section-label w2-label">Assignment</div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Current Job</label><select id="pe-job">${jobOptions}</select></div>
+    <div class="edit-group"><label>Status</label><select id="pe-active"><option value="active"${isPersonActive(p)?' selected':''}>Active</option><option value="inactive"${!isPersonActive(p)?' selected':''}>Inactive</option></select></div>
+  </div>
+  <div class="edit-row full">
+    <div class="edit-group"><label>Notes</label><textarea id="pe-notes">${esc(p.notes||'')}</textarea></div>
+  </div>`;
+  } else {
+    // Contract fields
+    const cStatus = p.contractStatus || 'ACTIVE';
+    const stars = parseInt(p.stars) || 3;
+    const starHTML = [1,2,3,4].map(n => `<button type="button" class="star-edit-btn${n<=stars?' filled':''}" onclick="setStarEdit(${n})" title="${n} star${n>1?'s':''}">${n<=stars?'★':'☆'}</button>`).join('');
+    bodyHTML += `
+  <div class="edit-section-label contract-label">Contract Info</div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Job Title / Role</label><input id="pe-role" value="${esc(p.role||'Flowback Operator')}"></div>
+    <div class="edit-group"><label>Agency / Platform</label><input id="pe-agency" value="${esc(p.agency||'Rig Up')}"></div>
+  </div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Day Rate ($/day)</label><input type="number" id="pe-dayrate" value="${p.dayRate||p.rate||''}"></div>
+    <div class="edit-group"><label>Contract Status</label><select id="pe-contract-status">
+      <option value="ACTIVE"${cStatus==='ACTIVE'?' selected':''}>Active</option>
+      <option value="CLOSED"${cStatus==='CLOSED'?' selected':''}>Closed</option>
+      <option value="PENDING"${cStatus==='PENDING'?' selected':''}>Pending</option>
+    </select></div>
+  </div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Contract Start Date</label><input type="date" id="pe-contract-start" value="${p.contractStart||p.start||''}"></div>
+    <div class="edit-group"><label>Basin</label><input id="pe-basin" value="${esc(p.basin||'Permian')}"></div>
+  </div>
+  <div class="edit-section-label contract-label">Contact</div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Email</label><input type="email" id="pe-email" value="${esc(p.email||'')}"></div>
+    <div class="edit-group"><label>Phone</label><input id="pe-phone" value="${esc(p.phone||'')}"></div>
+  </div>
+  <div class="edit-section-label contract-label">Experience Level</div>
+  <div class="star-edit-row" id="star-edit-row">${starHTML}</div>
+  <input type="hidden" id="pe-stars" value="${stars}">
+  <div class="edit-section-label contract-label">Assignment & Notes</div>
+  <div class="edit-row">
+    <div class="edit-group"><label>Current Job</label><select id="pe-job">${jobOptions}</select></div>
+    <div class="edit-group"><label>Status</label><select id="pe-active"><option value="active"${isPersonActive(p)?' selected':''}>Active</option><option value="inactive"${!isPersonActive(p)?' selected':''}>Inactive</option></select></div>
+  </div>
+  <div class="edit-row full">
+    <div class="edit-group"><label>Notes</label><textarea id="pe-notes">${esc(p.contractNotes||p.notes||'')}</textarea></div>
+  </div>`;
+  }
+
+  bodyHTML += `<input type="hidden" id="pe-id" value="${p.id}">`;
+  const body = document.getElementById('edit-drawer-body');
+  if (body) body.innerHTML = bodyHTML;
   document.getElementById('personnel-edit-overlay').classList.add('open');
+}
+
+function esc(s) { return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function editAutoFillPerDiem() {
+  const sel = document.getElementById('pe-perdiem');
+  const cost = document.getElementById('pe-perdiem-cost');
+  if (sel && cost) cost.value = getPerDiemAmount(sel.value) || '';
+}
+
+function setStarEdit(n) {
+  const hidden = document.getElementById('pe-stars');
+  if (hidden) hidden.value = n;
+  const btns = document.querySelectorAll('.star-edit-btn');
+  btns.forEach((b, i) => {
+    if (i < n) { b.classList.add('filled'); b.textContent = '★'; }
+    else { b.classList.remove('filled'); b.textContent = '☆'; }
+  });
 }
 
 function closePersonnelEdit() {
@@ -1043,17 +1204,61 @@ function savePersonnelEdit() {
   p.name = document.getElementById('pe-name').value.trim();
   if (!p.name) { alert('Name is required.'); return; }
   p.type = document.getElementById('pe-type').value;
-  p.role = document.getElementById('pe-role').value.trim();
-  p.active = document.getElementById('pe-active').value === 'active';
-  p.phone = document.getElementById('pe-phone').value.trim();
-  p.email = document.getElementById('pe-email').value.trim();
-  p.emerg = document.getElementById('pe-emerg').value.trim();
-  p.emergency = p.emerg;
-  p.rate = parseFloat(document.getElementById('pe-rate').value) || 0;
-  p.agency = document.getElementById('pe-agency').value.trim();
-  p.perdiem = document.getElementById('pe-perdiem').value;
-  p.notes = document.getElementById('pe-notes').value.trim();
-  p.job = document.getElementById('pe-job').value;
+  const w2 = (p.type||'').includes('W-2');
+
+  if (w2) {
+    p.position = document.getElementById('pe-position').value;
+    p.role = p.position;
+    p.hireDate = document.getElementById('pe-hire-date').value;
+    p.start = p.hireDate;
+    p.email = document.getElementById('pe-email').value.trim();
+    p.phone = document.getElementById('pe-phone').value.trim();
+    p.emerg = document.getElementById('pe-emerg').value.trim();
+    p.emergency = p.emerg;
+    p.hourlyRate = parseFloat(document.getElementById('pe-hourly').value) || 0;
+    p.rate = p.hourlyRate;
+    p.otRate = document.getElementById('pe-ot').value;
+    p.truckAllowance = parseFloat(document.getElementById('pe-truck').value) || 0;
+    p.perdiem = document.getElementById('pe-perdiem').value;
+    p.perdiemType = p.perdiem;
+    p.perdiemCost = parseFloat(document.getElementById('pe-perdiem-cost').value) || getPerDiemAmount(p.perdiem);
+  } else {
+    p.role = document.getElementById('pe-role').value.trim();
+    p.agency = document.getElementById('pe-agency').value.trim();
+    p.dayRate = parseFloat(document.getElementById('pe-dayrate').value) || 0;
+    p.rate = p.dayRate;
+    p.contractStatus = document.getElementById('pe-contract-status').value;
+    p.contractStart = document.getElementById('pe-contract-start').value;
+    p.start = p.contractStart;
+    p.basin = document.getElementById('pe-basin').value.trim();
+    p.email = document.getElementById('pe-email').value.trim();
+    p.phone = document.getElementById('pe-phone').value.trim();
+    p.stars = parseInt(document.getElementById('pe-stars').value) || 3;
+    p.contractNotes = document.getElementById('pe-notes').value.trim();
+    p.notes = p.contractNotes;
+  }
+
+  // Job assignment drives active status
+  const jobSel = document.getElementById('pe-job');
+  const prevJob = p.job;
+  p.job = jobSel ? jobSel.value : '';
+  if (p.job && p.job !== prevJob) {
+    p.active = true; // Assigned to job = active
+  } else if (!p.job && p.job !== prevJob) {
+    p.active = false; // Removed from job = inactive
+  } else {
+    // Manual override from status select
+    const activeSel = document.getElementById('pe-active');
+    if (activeSel) p.active = activeSel.value === 'active';
+  }
+
+  if (!w2) {
+    p.notes = document.getElementById('pe-notes').value.trim();
+    p.contractNotes = p.notes;
+  } else {
+    p.notes = document.getElementById('pe-notes').value.trim();
+  }
+
   allP[idx] = p;
   save('personnel', allP);
   closePersonnelEdit();
@@ -1065,13 +1270,12 @@ function savePersonnelEdit() {
 function deletePersonFromProfile(id) {
   if (!confirm('Delete this employee? This cannot be undone.')) return;
   const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
-  const updated = allP.filter(x => x.id !== id);
-  save('personnel', updated);
+  save('personnel', allP.filter(x => x.id !== id));
   _selectedPersonId = null;
-  const emptyState = document.getElementById('profile-empty-state');
-  const panel = document.getElementById('personnel-profile-panel');
-  if (emptyState) emptyState.style.display = 'flex';
-  if (panel) panel.style.display = 'none';
+  const es = document.getElementById('profile-empty-state');
+  const pp = document.getElementById('personnel-profile-panel');
+  if (es) es.style.display = 'flex';
+  if (pp) pp.style.display = 'none';
   renderPersonnel();
   renderDashboard();
 }
@@ -1088,32 +1292,60 @@ function togglePersonActive(id) {
   }
 }
 
-function deletePerson(id) {
-  deletePersonFromProfile(id);
+function deletePerson(id) { deletePersonFromProfile(id); }
+
+function toggleAddPersonType() {
+  const t = (document.getElementById('p-type')||{}).value || '';
+  const isW2type = t.includes('W-2');
+  const w2 = document.getElementById('p-w2-fields');
+  const con = document.getElementById('p-contract-fields');
+  if (w2) w2.style.display = isW2type ? '' : 'none';
+  if (con) con.style.display = isW2type ? 'none' : '';
 }
 
 function savePerson() {
-  const name = document.getElementById('p-name').value.trim();
+  const name = (document.getElementById('p-name')||{}).value.trim();
   if (!name) { alert('Name required.'); return; }
   const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
-  const newId = 'p' + Date.now();
-  const p = {
-    id: newId,
-    name,
-    type: document.getElementById('p-type').value,
-    role: document.getElementById('p-role').value,
-    phone: document.getElementById('p-phone').value,
-    email: document.getElementById('p-email').value,
-    rate: parseFloat(document.getElementById('p-rate').value) || 0,
-    job: document.getElementById('p-job').value,
-    start: document.getElementById('p-start').value,
-    emerg: document.getElementById('p-emerg').value,
-    emergency: document.getElementById('p-emerg').value,
-    active: document.getElementById('p-active').value === 'active',
-    notes: document.getElementById('p-notes').value,
-    perdiem: document.getElementById('p-perdiem-type') ? document.getElementById('p-perdiem-type').value : '',
-    perdiemCost: document.getElementById('p-perdiem-cost') ? parseFloat(document.getElementById('p-perdiem-cost').value) || 0 : 0
-  };
+  const typeVal = document.getElementById('p-type').value;
+  const isW2type = typeVal.includes('W-2');
+  const jobVal = (document.getElementById('p-job')||{}).value || '';
+  const p = { id: 'p'+Date.now(), name, type: typeVal };
+
+  if (isW2type) {
+    p.position = (document.getElementById('p-position')||{}).value || '';
+    p.role = p.position;
+    p.hireDate = (document.getElementById('p-hire-date')||{}).value || '';
+    p.start = p.hireDate;
+    p.email = (document.getElementById('p-email')||{}).value || '';
+    p.phone = (document.getElementById('p-phone')||{}).value || '';
+    p.emerg = (document.getElementById('p-emerg')||{}).value || '';
+    p.emergency = p.emerg;
+    p.hourlyRate = parseFloat((document.getElementById('p-rate')||{}).value) || 0;
+    p.rate = p.hourlyRate;
+    p.otRate = (document.getElementById('p-ot')||{}).value || '65';
+    p.truckAllowance = parseFloat((document.getElementById('p-truck')||{}).value) || 0;
+    p.perdiem = (document.getElementById('p-perdiem-type')||{}).value || '';
+    p.perdiemType = p.perdiem;
+    p.perdiemCost = getPerDiemAmount(p.perdiem);
+  } else {
+    p.role = (document.getElementById('p-role')||{}).value || 'Flowback Operator';
+    p.phone = (document.getElementById('p-phone-c')||{}).value || '';
+    p.email = (document.getElementById('p-email-c')||{}).value || '';
+    p.agency = (document.getElementById('p-agency')||{}).value || 'Rig Up';
+    p.dayRate = parseFloat((document.getElementById('p-dayrate')||{}).value) || 0;
+    p.rate = p.dayRate;
+    p.contractStatus = (document.getElementById('p-contract-status')||{}).value || 'ACTIVE';
+    p.contractStart = (document.getElementById('p-start-c')||{}).value || '';
+    p.start = p.contractStart;
+    p.stars = parseInt((document.getElementById('p-stars')||{}).value) || 3;
+    p.notes = (document.getElementById('p-notes')||{}).value || '';
+    p.contractNotes = p.notes;
+    p.basin = 'Permian';
+  }
+
+  p.job = jobVal;
+  p.active = !!jobVal; // Active only when assigned to a job
   allP.push(p);
   save('personnel', allP);
   closeModal('modal-person');
@@ -1121,54 +1353,78 @@ function savePerson() {
   renderDashboard();
 }
 
-function toggleARCustomer(){
-  const v=document.getElementById('ar-view').value;
-  const pick=document.getElementById('ar-customer-pick');
-  if(pick)pick.style.display=v==='customer'?'block':'none';
-}
-function populateARFilters(){
-  const s=document.getElementById('ar-customer-pick');
-  if(s){s.innerHTML='<option value="">-- Select Customer --</option>';customers.forEach(c=>s.innerHTML+=`<option>${c.name}</option>`);}
-}
-function renderARReport(){
-  const view=document.getElementById('ar-view').value;
-  const custPick=(document.getElementById('ar-customer-pick')||{}).value||'';
-  const period=document.getElementById('ar-period').value;
-  let list=invoices.filter(i=>filterByPeriod(i.week||i.due,period));
-  if(view==='customer'&&custPick)list=list.filter(i=>i.customer===custPick);
-  const out=document.getElementById('ar-report-output');if(!out)return;
-  const totalAll=list.reduce((s,i)=>s+parseFloat(i.amount||0),0);
-  const totalPaid=list.filter(i=>i.status==='Paid').reduce((s,i)=>s+parseFloat(i.amount||0),0);
-  const totalOpen=list.filter(i=>i.status!=='Paid').reduce((s,i)=>s+parseFloat(i.amount||0),0);
-  const totalOverdue=list.filter(i=>i.status==='Overdue').reduce((s,i)=>s+parseFloat(i.amount||0),0);
-  let html=`<div class="stats-row">
-    ${statCard('Total Invoiced','$'+fmt(totalAll),list.length+' invoices','blue')}
-    ${statCard('Total Collected','$'+fmt(totalPaid),list.filter(i=>i.status==='Paid').length+' paid','green')}
-    ${statCard('Outstanding AR','$'+fmt(totalOpen),list.filter(i=>i.status!=='Paid').length+' open','yellow')}
-    ${statCard('Overdue','$'+fmt(totalOverdue),list.filter(i=>i.status==='Overdue').length+' invoices','red')}
-  </div>`;
-  if(view==='company'){
-    const byCust={};
-    list.forEach(i=>{if(!byCust[i.customer])byCust[i.customer]={total:0,paid:0,open:0,count:0};byCust[i.customer].total+=parseFloat(i.amount||0);if(i.status==='Paid')byCust[i.customer].paid+=parseFloat(i.amount||0);else byCust[i.customer].open+=parseFloat(i.amount||0);byCust[i.customer].count++;});
-    html+=`<div class="report-section"><h4>AR by Customer</h4><table><thead><tr><th>Customer</th><th>Invoices</th><th>Total Billed</th><th>Collected</th><th>Open AR</th></tr></thead><tbody>${Object.entries(byCust).map(([c,d])=>`<tr><td style="font-weight:700">${c}</td><td>${d.count}</td><td>$${fmt(d.total)}</td><td style="color:var(--green)">$${fmt(d.paid)}</td><td style="color:var(--yellow)">$${fmt(d.open)}</td></tr>`).join('')||emptyRow(5,'No data')}</tbody></table></div>`;
-  }
-  html+=`<div class="report-section"><h4>Invoice Detail</h4><table><thead><tr><th>Invoice #</th><th>Customer</th><th>Job</th><th>Week Ending</th><th>Amount</th><th>Due</th><th>Status</th></tr></thead><tbody>${list.map(i=>`<tr><td>${i.num}</td><td>${i.customer}</td><td>${i.job||''}</td><td>${i.week||''}</td><td>$${fmt(i.amount)}</td><td>${i.due||''}</td><td>${statusBadge(i.status)}</td></tr>`).join('')||emptyRow(7,'No invoices match filters.')}</tbody></table></div>`;
-  out.innerHTML=html;
-}
-function filterByPeriod(dateStr,period){
-  if(period==='all'||!dateStr)return true;
-  const d=new Date(dateStr),n=new Date();
-  if(period==='month')return d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear();
-  if(period==='quarter')return Math.floor(d.getMonth()/3)===Math.floor(n.getMonth()/3)&&d.getFullYear()===n.getFullYear();
-  if(period==='year')return d.getFullYear()===n.getFullYear();
-  return true;
-}
 
-// Ã¢ÂÂÃ¢ÂÂ PERSONNEL REPORTS Ã¢ÂÂÃ¢ÂÂ
-function populatePRFilters(){
-  const lf=document.getElementById('pr-location');
-  if(lf){lf.innerHTML='<option value="">All Locations</option>';[...new Set(personnel.map(p=>p.job).filter(Boolean))].forEach(j=>lf.innerHTML+=`<option>${j}</option>`);}
-}
+// ═══ PERSONNEL DATA MIGRATION v2 ═══
+(function migratePersonnelData() {
+  const VERSION = 'v2_typed_fields';
+  if (localStorage.getItem('ghs_personnel_migrated') === VERSION) return;
+
+  const existing = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  
+  const w2Updates = [{"name":"David Blakely","position":"Field Supervisor","hireDate":"04/08/2024","email":"david@ghsenergyllc.com","phone":"(806)994-1867","hourlyRate":32,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":628.57},{"name":"Kyle Harvison","position":"Field Supervisor","hireDate":"04/08/2024","email":"kyle.harvison@ghsenergyllc.com","phone":"(601)433-4784","hourlyRate":30.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":599.11},{"name":"Shad Oquin","position":"Field Supervisor","hireDate":"04/08/2024","email":"shad@ghsenergyllc.com","phone":"(940)536-9466","hourlyRate":31,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":608.93},{"name":"Kyle Kessel","position":"Field Supervisor","hireDate":"04/08/2024","email":"kyle.kessel@ghsenergyllc.com","phone":"(580)729-2660","hourlyRate":31.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":618.75},{"name":"Nathan Neighbors","position":"Field Supervisor","hireDate":"04/08/2024","email":"nathan@ghsenergyllc.com","phone":"(970)844-7701","hourlyRate":30,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":589.29},{"name":"Edgar Vasquez","position":"Field Supervisor","hireDate":"05/26/2025","email":"edgar.vasquez@ghsenergyllc.com","phone":"(903)724-2549","hourlyRate":30.5,"otRate":65,"perdiem":"Man Camp","perdiemCost":75,"truckAllowance":0,"estimatedDayRate":599.11},{"name":"Blakely Ray Embry","position":"Operator II","hireDate":"04/08/2024","email":"blakely.embry@ghsenergyllc.com","phone":"(806)681-2960","hourlyRate":16,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":314.29},{"name":"Danny Ray Brockington Jr","position":"Operator II","hireDate":"04/09/2024","email":"danny.brockington@ghsenergyllc.com","phone":"(940)354-3790","hourlyRate":26.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":520.54},{"name":"James Chad Trawick","position":"Operator II","hireDate":"04/09/2024","email":"chad.trawick@ghsenergyllc.com","phone":"(817)876-2520","hourlyRate":25,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":491.07},{"name":"Christian Dayle Hepworth","position":"Operator II","hireDate":"05/01/2024","email":"louie@ghsenergyllc.com","phone":"(928)640-2421","hourlyRate":24,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":471.43},{"name":"Coby Bachman","position":"Operator II","hireDate":"05/01/2024","email":"coby.bachman@ghsenergyllc.com","phone":"(405)435-5341","hourlyRate":24,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":471.43},{"name":"Logan Dean Powell","position":"Operator II","hireDate":"06/10/2024","email":"logan.powell@ghsenergyllc.com","phone":"(864)238-9411","hourlyRate":26.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":520.54},{"name":"Rylan Thomas Powell","position":"Operator II","hireDate":"06/17/2024","email":"rylan.powell@ghsenergyllc.com","phone":"(864)238-9484","hourlyRate":26.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":576.92,"estimatedDayRate":520.54},{"name":"Todd Lynn Barber","position":"Operator II","hireDate":"01/31/2025","email":"todd.barber@ghsenergyllc.com","phone":"(830)477-6175","hourlyRate":28,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":576.92,"estimatedDayRate":550},{"name":"Mark Orr","position":"Operator II","hireDate":"10/20/2025","email":"mark.orr@ghsenergyllc.com","phone":"(903)826-2887","hourlyRate":25,"otRate":65,"perdiem":"Man Camp","perdiemCost":75,"truckAllowance":0,"estimatedDayRate":491.07},{"name":"Joshua Cole Williams","position":"Operator III","hireDate":"04/30/2024","email":"joshua.williams@ghsenergyllc.com","phone":"(936)219-0101","hourlyRate":29,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":569.64},{"name":"Lance Jarrett","position":"Operator III","hireDate":"05/16/2024","email":"lance.jarrett@ghsenergyllc.com","phone":"(318)332-9786","hourlyRate":29.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":579.46},{"name":"Cody Allen Adcock","position":"Operator III","hireDate":"08/05/2024","email":"cody.adcock@ghsenergyllc.com","phone":"(870)703-9999","hourlyRate":26,"otRate":65,"perdiem":"Man Camp","perdiemCost":75,"truckAllowance":0,"estimatedDayRate":510.71},{"name":"Drew Ken Ledford","position":"Operator III","hireDate":"10/20/2024","email":"drew@ghsenergyllc.com","phone":"(405)538-5048","hourlyRate":29,"otRate":65,"perdiem":"Man Camp","perdiemCost":75,"truckAllowance":576.92,"estimatedDayRate":569.64},{"name":"Brady Nathan Wade Shelton","position":"Operator III","hireDate":"01/10/2025","email":"brady.shelton@ghsenergyllc.com","phone":"(432)444-3109","hourlyRate":29.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":576.92,"estimatedDayRate":579.46},{"name":"Travis Barker","position":"Operator III","hireDate":"01/10/2025","email":"travis.barker@ghsenergyllc.com","phone":"(210)870-0310","hourlyRate":28.5,"otRate":65,"perdiem":"Camper","perdiemCost":130,"truckAllowance":0,"estimatedDayRate":559.82},{"name":"George Edwin Tucker","position":"Operator III","hireDate":"02/14/2025","email":"george.tucker@ghsenergyllc.com","phone":"(682)240-9979","hourlyRate":26,"otRate":65,"perdiem":"Man Camp","perdiemCost":75,"truckAllowance":0,"estimatedDayRate":510.71}];
+  const contractUpdates = [{"name":"Abraham Pena","email":"pena.lopez.abraham@gmail.com","phone":"(928)285-4746","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-15","dayRate":550,"contractStatus":"ACTIVE","stars":3},{"name":"Kai Armour","email":"kaimarmour@icloud.com","phone":"(817)727-6489","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-11-10","dayRate":650,"contractStatus":"ACTIVE","stars":3},{"name":"Thomas Swinney","email":"tommybllc@yahoo.com","phone":"(432)227-7440","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-11-07","dayRate":650,"contractStatus":"ACTIVE","stars":4},{"name":"Danyel Mendoza","email":"danyel.mendoza98@icloud.com","phone":"(442)322-0440","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-15","dayRate":650,"contractStatus":"ACTIVE","stars":2},{"name":"German Macharigui","email":"german.welder24@gmail.com","phone":"(432)209-5236","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-05-14","dayRate":714,"contractStatus":"ACTIVE","stars":3},{"name":"Luis Rios","email":"tank0460@gmail.com","phone":"(956)286-8526","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-06","dayRate":500,"contractStatus":"ACTIVE","stars":2},{"name":"Rudolfo Ruiz","email":"rruiz84chevy@yahoo.com","phone":"(956)949-0604","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-02-06","dayRate":650,"contractStatus":"ACTIVE","stars":3},{"name":"Cayden Caddell","email":"caydencaddell27@gmail.com","phone":"(432)223-7779","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-12","dayRate":600,"contractStatus":"ACTIVE","stars":2},{"name":"Alejandro Nunez","email":"nalex9086@icloud.com","phone":"(903)372-0146","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-31","dayRate":700,"contractStatus":"ACTIVE","stars":3},{"name":"Markus Cooper","email":"cooplcooper01@gmail.com","phone":"(940)577-7264","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-06","dayRate":600,"contractStatus":"ACTIVE","stars":2},{"name":"Carlos Gonzales","email":"cgonzalez9692@yahoo.com","phone":"(903)394-9692","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-31","dayRate":700,"contractStatus":"ACTIVE","stars":3},{"name":"Edgar Flores","email":"floresedgar176@gmail.com","phone":"(325)226-5057","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-01-06","dayRate":714,"contractStatus":"ACTIVE","stars":4},{"name":"Kelly Lewis","email":"soonerenergy07@hotmail.com","phone":"(580)919-1579","agency":"Rig Up","role":"Lease Operator / Pumper","basin":"Permian","contractStart":"2025-10-06","dayRate":650,"contractStatus":"ACTIVE","stars":3},{"name":"Luis Arambula","email":"nightowlops23@gmail.com","phone":"(915)920-1006","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-10-17","dayRate":700,"contractStatus":"ACTIVE","stars":4},{"name":"Nate Gaytan","email":"natagaytan@icloud.com","phone":"(903)339-4803","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-31","dayRate":550,"contractStatus":"ACTIVE","stars":2},{"name":"Charlie Valdez","email":"21.charlievaldez.11@gmail.com","phone":"(325)304-5431","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-10","dayRate":765,"contractStatus":"ACTIVE","stars":4,"notes":"Currently covering for relief partner"},{"name":"Lucio Padron","email":"l_padron2@yahoo.com","phone":"(432)212-5492","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-11-07","dayRate":725,"contractStatus":"ACTIVE","stars":4},{"name":"Luis Garcia","email":"kikimachinnn1979@gmail.com","phone":"(928)920-2874","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-02-03","dayRate":575,"contractStatus":"ACTIVE","stars":2},{"name":"Emmanuel Gonzalez","email":"eg300342@gmail.com","phone":"(830)309-9187","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-12-10","dayRate":714,"contractStatus":"ACTIVE","stars":3},{"name":"David Charnik","email":"dj_flowback@yahoo.com","phone":"(940)229-1130","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-07-06","dayRate":650,"contractStatus":"ACTIVE","stars":3},{"name":"Nicholas Uvalle","email":"uvallenico11@gmail.com","phone":"(432)241-1757","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-05","dayRate":600,"contractStatus":"ACTIVE","stars":2},{"name":"Ricardo Nunez","email":"ricky6884@gmail.com","phone":"(903)426-8018","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-31","dayRate":625,"contractStatus":"ACTIVE","stars":3},{"name":"Amy Wade","email":"amariewade44@gmail.com","phone":"(580)212-9700","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-06-06","dayRate":550,"contractStatus":"ACTIVE","stars":3},{"name":"Martin Campuzano","email":"martin92_gc@hotmail.com","phone":"(928)430-6948","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-26","dayRate":650,"contractStatus":"ACTIVE","stars":2},{"name":"Demarcus Taylor","email":"demarcusholding@gmail.com","phone":"(337)224-9541","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-05-19","dayRate":650,"contractStatus":"ACTIVE","stars":3},{"name":"Felipe Aguilar","email":"alonzowsl@gmail.com","phone":"(214)223-1318","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-30","dayRate":600,"contractStatus":"ACTIVE","stars":2},{"name":"Brandon Tyler","email":"tylertrouble@gmail.com","phone":"(940)210-2211","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-19","dayRate":700,"contractStatus":"ACTIVE","stars":3},{"name":"Brandon Black","email":"bubbablack1215@yahoo.com","phone":"(832)253-6887","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-02-24","dayRate":725,"contractStatus":"ACTIVE","stars":3},{"name":"James Black","email":"nigiwoods@live.com","phone":"(432)552-9230","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-10-14","dayRate":600,"contractStatus":"ACTIVE","stars":3},{"name":"Frank Tovar","email":"frank1tovar34@gmail.com","phone":"(817)805-3406","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-12-01","dayRate":550,"contractStatus":"ACTIVE","stars":2},{"name":"Sandor Hamilton","email":"sandor219@gmail.com","phone":"(432)257-9776","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-10-30","dayRate":775,"contractStatus":"ACTIVE","stars":4},{"name":"David Castillo","email":"davidcast0827@icloud.com","phone":"(956)358-9529","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-12","dayRate":550,"contractStatus":"ACTIVE","stars":2},{"name":"Brandon Heppner","email":"1sax1451@gmail.com","phone":"(318)882-9322","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-11-08","dayRate":650,"contractStatus":"ACTIVE","stars":3,"notes":"Temp Per Diem $125/day effective 10/8/2025"},{"name":"Jesus Robles","email":"business@jrslogisticsllc.com","phone":"(760)695-2726","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-02-06","dayRate":600,"contractStatus":"ACTIVE","stars":2},{"name":"Chance Luckett","email":"chance.luckett@gmail.com","phone":"(918)316-7006","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-02-10","dayRate":700,"contractStatus":"ACTIVE","stars":3},{"name":"Jermaine Medford","email":"jdmedford52@gmail.com","phone":"(903)363-2797","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-11-12","dayRate":750,"contractStatus":"ACTIVE","stars":3},{"name":"Arslen Ayyazi","email":"ray.ayyazi@naftenterprises.com","phone":"(432)241-4466","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-31","dayRate":800,"contractStatus":"ACTIVE","stars":4},{"name":"Nicholas Oliveros","email":"noliveros12@yahoo.com","phone":"(956)220-5033","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-27","dayRate":550,"contractStatus":"ACTIVE","stars":2},{"name":"Armando Gonzalez Jr","email":"gonzalez2320@icloud.com","phone":"(325)812-5328","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-11-08","dayRate":714,"contractStatus":"ACTIVE","stars":3},{"name":"Leonardo Balderrama","email":"balderrama_leonardo@yahoo.com","phone":"(928)287-2066","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-26","dayRate":550,"contractStatus":"ACTIVE","stars":2},{"name":"Garry Bolton","email":"garry.bolton@gmail.com","phone":"(432)231-3646","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-11-10","dayRate":750,"contractStatus":"ACTIVE","stars":3},{"name":"Joel Mitchell","email":"joel.mitchell001@gmail.com","phone":"(817)860-8066","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-04-16","dayRate":800,"contractStatus":"ACTIVE","stars":4},{"name":"Francisco Espinoza","email":"el_javier19@hotmail.com","phone":"(928)285-2133","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-15","dayRate":550,"contractStatus":"ACTIVE","stars":2},{"name":"Ryland Wilson","email":"rywillywellservices@gmail.com","phone":"(970)261-7281","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-08-04","dayRate":750,"contractStatus":"ACTIVE","stars":3},{"name":"Matthew Ramirez","email":"matthewramirez323@yahoo.com","phone":"(432)557-0972","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-12-23","dayRate":650,"contractStatus":"ACTIVE","stars":3},{"name":"Christopher Arellano","email":"carellano27@gmail.com","phone":"(432)280-8927","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-01-20","dayRate":800,"contractStatus":"ACTIVE","stars":3},{"name":"Joshua Kimble","email":"jkk80506@yahoo.com","phone":"(903)285-7188","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-02-10","dayRate":700,"contractStatus":"PENDING","stars":2},{"name":"Micah Alba","email":"albamicah@gmail.com","phone":"(806)601-7394","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-01-13","dayRate":600,"contractStatus":"CLOSED","stars":3,"notes":"Rig-Up Rate = $500/day"},{"name":"Destin Aguero","email":"tyleraguero13@icloud.com","phone":"(325)450-1635","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-07-25","dayRate":725,"contractStatus":"CLOSED","stars":2},{"name":"Tyler Adcock","email":"tadcock9694@gmail.com","phone":"(918)617-7995","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-03-24","dayRate":725,"contractStatus":"CLOSED","stars":3},{"name":"Corey Dalton","email":"diamonddconsulting01@gmail.com","phone":"(682)582-6230","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-11-08","dayRate":600,"contractStatus":"CLOSED","stars":2,"notes":"Per Diem $15/day camper"},{"name":"Hector Sosa","email":"hectorsosa2015@yahoo.com","phone":"(432)227-1183","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-12-23","dayRate":650,"contractStatus":"CLOSED","stars":3},{"name":"Mike Sosa","email":"mikesosa1987@gmail.com","phone":"(432)227-3052","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2024-12-30","dayRate":650,"contractStatus":"CLOSED","stars":3},{"name":"Kolby Fields","email":"fields.kolby@yahoo.com","phone":"(432)444-1609","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2025-06-18","dayRate":650,"contractStatus":"CLOSED","stars":3},{"name":"Chris Gillum","email":"gillumgang85@gmail.com","phone":"(832)840-1084","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-23","dayRate":650,"contractStatus":"CLOSED","stars":2},{"name":"Omar Mendez","email":"elchacorta66@gmail.com","phone":"(918)329-0813","agency":"Rig Up","role":"Flowback Operator","basin":"Permian","contractStart":"2026-01-16","dayRate":650,"contractStatus":"CLOSED","stars":2}];
+
+  function normName(n) { return (n||'').toLowerCase().replace(/[^a-z]/g,''); }
+
+  // Update or create W-2 employees
+  w2Updates.forEach(upd => {
+    const key = normName(upd.name);
+    let p = existing.find(x => normName(x.name) === key);
+    if (!p) { p = {id:'p'+Date.now()+Math.random().toString(36).slice(2,6)}; existing.push(p); }
+    Object.assign(p, {
+      name: upd.name, type: 'W-2 Employee',
+      position: upd.position, role: upd.position,
+      hireDate: upd.hireDate, start: upd.hireDate,
+      email: upd.email, phone: upd.phone,
+      hourlyRate: upd.hourlyRate, rate: upd.hourlyRate,
+      estimatedDayRate: upd.estimatedDayRate,
+      otRate: upd.otRate,
+      perdiem: upd.perdiem, perdiemType: upd.perdiem,
+      perdiemCost: upd.perdiemCost,
+      truckAllowance: upd.truckAllowance || 0,
+      agency: '', // W-2 has no agency
+    });
+    if (!p.job) p.active = false; // inactive unless assigned
+  });
+
+  // Update or create contractors
+  contractUpdates.forEach(upd => {
+    const key = normName(upd.name);
+    let matches = existing.filter(x => normName(x.name) === key && (x.type||'').toLowerCase() !== 'w-2 employee');
+    let p = matches[0];
+    if (!p) { p = {id:'p'+Date.now()+Math.random().toString(36).slice(2,6)}; existing.push(p); }
+    Object.assign(p, {
+      name: upd.name, type: 'Contract',
+      role: upd.role, position: '',
+      email: upd.email, phone: upd.phone,
+      agency: upd.agency, basin: upd.basin || 'Permian',
+      dayRate: upd.dayRate, rate: upd.dayRate,
+      contractStatus: upd.contractStatus,
+      contractStart: upd.contractStart, start: upd.contractStart,
+      stars: upd.stars || 3,
+      notes: upd.notes || '', contractNotes: upd.notes || '',
+      perdiem: '', perdiemCost: 0,
+    });
+    // Active only if assigned to a job AND contract is ACTIVE
+    if (!p.job) p.active = false;
+    if (upd.contractStatus !== 'ACTIVE') p.active = false;
+  });
+
+  // Mark any remaining legacy records with proper type
+  existing.forEach(p => {
+    if (!p.type) p.type = 'Contract';
+    if (p.type === 'W-2') p.type = 'W-2 Employee';
+    // Ensure active is boolean
+    if (p.active === 'active') p.active = true;
+    if (p.active === 'inactive') p.active = false;
+    if (typeof p.active !== 'boolean') p.active = !!p.job;
+  });
+
+  localStorage.setItem('ghs_personnel', JSON.stringify(existing));
+  localStorage.setItem('ghs_personnel_migrated', VERSION);
+})();
+
+
 function renderPersonnelReport(){
   const tf=document.getElementById('pr-type').value;
   const sf=document.getElementById('pr-status').value;
