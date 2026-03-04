@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GHS Energy – Operations Platform</title>
+<title>GHS Energy â Operations Platform</title>
 <style>
 :root{--blue:#4ab8e8;--blue-dark:#2a8ec0;--black:#0d0d0d;--dark:#1a1a1a;--panel:#232323;--border:#333;--gray:#888;--light-gray:#bbb;--white:#fff;--green:#3ecf8e;--red:#e85c5c;--yellow:#f0b429;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -311,12 +311,13 @@ tr:hover td{background:rgba(74,184,232,.04);}
 <div class="form-row"><div class="form-group"><label>Email</label><input id="p-email"></div><div class="form-group"><label>Daily / Hourly Rate ($)</label><input id="p-rate" type="number"></div></div>
 <div class="form-row"><div class="form-group"><label>Current Job / Location</label><select id="p-job"></select></div><div class="form-group"><label>Start Date</label><input type="date" id="p-start"></div></div>
 <div class="form-row"><div class="form-group"><label>Emergency Contact</label><input id="p-emerg"></div><div class="form-group"><label>Status</label><select id="p-active"><option value="active">Active</option><option value="inactive">Inactive</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Per Diem Type</label><select id="p-perdiem-type"><option value="">None</option><option value="Man Camp">Man Camp</option><option value="RV">RV / Camper</option></select></div><div class="form-group"><label>Per Diem Cost ($/day)</label><input id="p-perdiem-cost" type="number" placeholder="Auto-filled" readonly></div></div>
 <div class="form-row full"><div class="form-group"><label>Notes</label><textarea id="p-notes" rows="2"></textarea></div></div>
 <div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-person')">Cancel</button><button class="btn btn-primary" onclick="savePerson()">Save Personnel</button></div>
 </div></div>
 
 <script>
-// ── DATA STORE ──
+// ââ DATA STORE ââ
 function load(k){try{return JSON.parse(localStorage.getItem('ghs_'+k))||[];}catch(e){return[];}}
 function save(k,v){localStorage.setItem('ghs_'+k,JSON.stringify(v));}
 
@@ -324,7 +325,7 @@ let jobs=load('jobs'),activities=load('activities'),invoices=load('invoices'),
     vendors=load('vendors'),vendorCosts=load('vendorCosts'),customers=load('customers'),
     personnel=load('personnel');
 
-// ── CLOCK ──
+// ââ CLOCK ââ
 function updateClock(){
   const n=new Date();
   document.getElementById('clock').textContent=n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
@@ -333,7 +334,7 @@ setInterval(updateClock,60000);updateClock();
 const dd=document.getElementById('dash-date');
 if(dd)dd.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
 
-// ── NAVIGATION ──
+// ââ NAVIGATION ââ
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const pg=document.getElementById('page-'+id);
@@ -357,7 +358,7 @@ function renderPage(id){
   else if(id==='personnel-reports'){populatePRFilters();renderPersonnelReport();}
 }
 
-// ── MODAL ──
+// ââ MODAL ââ
 function openModal(id){
   document.getElementById(id).classList.add('open');
   if(id==='modal-job')populateSelect('j-cust',customers,'name');
@@ -367,6 +368,12 @@ function openModal(id){
   if(id==='modal-person')populateSelect('p-job',jobs,'num','name','-- Unassigned --');
 }
 function closeModal(id){document.getElementById(id).classList.remove('open');}
+function initPerDiemAutoFill(){
+  const PERDIEM_RATES={'Man Camp':75,'RV':130};
+  const sel=document.getElementById('p-perdiem-type');
+  if(sel){sel.addEventListener('change',function(){const c=document.getElementById('p-perdiem-cost');if(c){c.value=PERDIEM_RATES[this.value]!==undefined?PERDIEM_RATES[this.value]:'';}});}
+}
+document.addEventListener('DOMContentLoaded',initPerDiemAutoFill);
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');}));
 
 function populateSelect(id,arr,valKey,labelKey,placeholder){
@@ -376,7 +383,7 @@ function populateSelect(id,arr,valKey,labelKey,placeholder){
   arr.forEach(item=>{const o=document.createElement('option');o.value=item[valKey];o.textContent=labelKey?item[valKey]+' - '+item[labelKey]:item[valKey];s.appendChild(o);});
 }
 
-// ── DASHBOARD ──
+// ââ DASHBOARD ââ
 function renderDashboard(){
   const openInv=invoices.filter(i=>i.status!=='Paid');
   const totalAR=openInv.reduce((s,i)=>s+parseFloat(i.amount||0),0);
@@ -404,7 +411,7 @@ function statusBadge(s){
   return `<span class="badge badge-${m[s]||'gray'}">${s}</span>`;
 }
 
-// ── JOBS ──
+// ââ JOBS ââ
 function saveJob(){
   const num=document.getElementById('j-num').value.trim();
   const name=document.getElementById('j-name').value.trim();
@@ -429,7 +436,7 @@ function renderJobs(){
   b.innerHTML=list.length?list.map(j=>`<tr><td>${j.num}</td><td>${j.name}</td><td>${j.customer}</td><td>${j.location||''}</td><td>${statusBadge(j.status)}</td><td>${j.start||''}</td><td>$${fmt(j.rate)}/${j.rateType}</td><td><button class="btn btn-danger btn-sm" onclick="deleteJob(${j.id})">Del</button></td></tr>`).join(''):emptyRow(8,'No jobs found. Add your first job!');
 }
 
-// ── WEEKLY ACTIVITY ──
+// ââ WEEKLY ACTIVITY ââ
 function autoFillActivityCust(){
   const jobNum=document.getElementById('a-job').value;
   const job=jobs.find(j=>j.num===jobNum);
@@ -475,7 +482,7 @@ function exportWeeklyToBill(){
   openModal('modal-invoice');
 }
 
-// ── BILLING ──
+// ââ BILLING ââ
 function saveInvoice(){
   const num=document.getElementById('inv-num').value.trim();
   if(!num){alert('Invoice number required.');return;}
@@ -503,7 +510,7 @@ function renderBilling(){
     <button class="btn btn-danger btn-sm" onclick="deleteInvoice(${i.id})">Del</button></td></tr>`).join(''):emptyRow(8,'No invoices yet. Click + New Invoice.');
 }
 
-// ── VENDORS ──
+// ââ VENDORS ââ
 function saveVendor(){
   const name=document.getElementById('v-name').value.trim();if(!name){alert('Vendor name required.');return;}
   const v={id:Date.now(),name,category:document.getElementById('v-cat').value,contact:document.getElementById('v-contact').value,phone:document.getElementById('v-phone').value,email:document.getElementById('v-email').value,status:document.getElementById('v-status').value,notes:document.getElementById('v-notes').value};
@@ -526,7 +533,7 @@ function renderVendorCosts(){
   b.innerHTML=vendorCosts.length?vendorCosts.map(v=>`<tr><td>${v.date}</td><td>${v.vendor}</td><td>${v.job||''}</td><td>$${fmt(v.amount)}</td><td>${v.notes||''}</td><td><button class="btn btn-danger btn-sm" onclick="deleteVendorCost(${v.id})">X</button></td></tr>`).join(''):emptyRow(6,'No vendor costs logged.');
 }
 
-// ── CUSTOMERS ──
+// ââ CUSTOMERS ââ
 function saveCustomer(){
   const name=document.getElementById('c-name').value.trim();if(!name){alert('Company name required.');return;}
   const c={id:Date.now(),name,contact:document.getElementById('c-contact').value,email:document.getElementById('c-email').value,phone:document.getElementById('c-phone').value,address:document.getElementById('c-addr').value,terms:document.getElementById('c-terms').value||30,notes:document.getElementById('c-notes').value};
@@ -544,10 +551,10 @@ function renderCustomers(){
   }).join(''):emptyRow(7,'No customers yet. Click + Add Customer.');
 }
 
-// ── PERSONNEL ──
+// ââ PERSONNEL ââ
 function savePerson(){
   const name=document.getElementById('p-name').value.trim();if(!name){alert('Name required.');return;}
-  const p={id:Date.now(),name,type:document.getElementById('p-type').value,role:document.getElementById('p-role').value,phone:document.getElementById('p-phone').value,email:document.getElementById('p-email').value,rate:document.getElementById('p-rate').value,job:document.getElementById('p-job').value,start:document.getElementById('p-start').value,emerg:document.getElementById('p-emerg').value,active:document.getElementById('p-active').value,notes:document.getElementById('p-notes').value};
+  const p={id:Date.now(),name,type:document.getElementById('p-type').value,role:document.getElementById('p-role').value,phone:document.getElementById('p-phone').value,email:document.getElementById('p-email').value,rate:document.getElementById('p-rate').value,job:document.getElementById('p-job').value,start:document.getElementById('p-start').value,emerg:document.getElementById('p-emerg').value,active:document.getElementById('p-active').value,notes:document.getElementById('p-notes').value,perdiem:document.getElementById('p-perdiem-type')?document.getElementById('p-perdiem-type').value:'',perdiemCost:document.getElementById('p-perdiem-cost')?parseFloat(document.getElementById('p-perdiem-cost').value)||0:0};
   personnel.push(p);save('personnel',personnel);closeModal('modal-person');renderPersonnel();renderDashboard();
 }
 function togglePersonActive(id){
@@ -583,7 +590,7 @@ function renderPersonnel(){
   </tr>`).join(''):emptyRow(8,'No personnel found. Click + Add Personnel.');
 }
 
-// ── AR REPORTS ──
+// ââ AR REPORTS ââ
 function toggleARCustomer(){
   const v=document.getElementById('ar-view').value;
   const pick=document.getElementById('ar-customer-pick');
@@ -627,7 +634,7 @@ function filterByPeriod(dateStr,period){
   return true;
 }
 
-// ── PERSONNEL REPORTS ──
+// ââ PERSONNEL REPORTS ââ
 function populatePRFilters(){
   const lf=document.getElementById('pr-location');
   if(lf){lf.innerHTML='<option value="">All Locations</option>';[...new Set(personnel.map(p=>p.job).filter(Boolean))].forEach(j=>lf.innerHTML+=`<option>${j}</option>`);}
@@ -660,7 +667,7 @@ function renderPersonnelReport(){
   out.innerHTML=html;
 }
 
-// ── INIT ──
+// ââ INIT ââ
 renderDashboard();
 </script>
 </body>
