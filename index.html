@@ -129,7 +129,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .roster-badges{display:flex;align-items:center;gap:5px;margin-top:3px;}
 .badge-type{font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;letter-spacing:0.3px;}
 .badge-w2{background:#dbeafe;color:#1e40af;}
-.badge-contract{background:#d1fae5;color:#065f46;}
+.badge-contract{background:#f3f4f6;color:#374151;}
 .badge-other{background:#fef3c7;color:#92400e;}
 .status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .dot-active{background:#22c55e;}
@@ -145,7 +145,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .profile-panel::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px;}
 .profile-header{padding:22px 28px 18px;color:#fff;display:flex;align-items:center;gap:18px;position:relative;}
 .profile-header.header-w2{background:linear-gradient(135deg,#1a7ab5 0%,#0d5a8a 100%);}
-.profile-header.header-contract{background:linear-gradient(135deg,#1d6a5e 0%,#0f4a41 100%);}
+.profile-header.header-contract{background:linear-gradient(135deg,#4b5563 0%,#374151 100%);}
 .profile-header-avatar{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.5);flex-shrink:0;letter-spacing:1px;}
 .profile-header-info{flex:1;}
 .profile-header-name{font-size:20px;font-weight:800;letter-spacing:0.3px;}
@@ -167,7 +167,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .profile-body{padding:20px 28px;display:flex;flex-direction:column;gap:16px;}
 .profile-section{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;}
 .profile-section-title{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--blue);padding:8px 14px;background:#eef5fc;border-bottom:1px solid #d1e5f7;text-transform:uppercase;}
-.profile-section-title.contract-section{color:#1d6a5e;background:#e6f4f1;border-bottom-color:#b3ddd7;}
+.profile-section-title.contract-section{color:#374151;background:#f3f4f6;border-bottom-color:#d1d5db;}
 .profile-fields{display:grid;grid-template-columns:1fr 1fr;gap:0;}
 .profile-field{padding:10px 14px;border-bottom:1px solid #f0f0f0;border-right:1px solid #f0f0f0;}
 .profile-field:nth-child(even){border-right:none;}
@@ -193,7 +193,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .profile-edit-drawer{width:460px;max-width:95vw;height:100%;background:#fff;display:flex;flex-direction:column;overflow:hidden;box-shadow:-4px 0 20px rgba(0,0,0,0.15);}
 .edit-drawer-header{padding:18px 20px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .edit-drawer-header.header-w2{background:linear-gradient(135deg,#1a7ab5,#0d5a8a);}
-.edit-drawer-header.header-contract{background:linear-gradient(135deg,#1d6a5e,#0f4a41);}
+.edit-drawer-header.header-contract{background:linear-gradient(135deg,#4b5563,#374151);}
 .edit-drawer-title{font-size:16px;font-weight:800;letter-spacing:0.5px;}
 .edit-drawer-close{background:rgba(255,255,255,0.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .edit-drawer-body{flex:1;overflow-y:auto;padding:20px;}
@@ -201,7 +201,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .edit-drawer-body::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px;}
 .edit-section-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid #e5e7eb;}
 .edit-section-label.w2-label{color:var(--blue);border-bottom-color:#bfdbfe;}
-.edit-section-label.contract-label{color:#1d6a5e;border-bottom-color:#99d6cc;}
+.edit-section-label.contract-label{color:#374151;border-bottom-color:#9ca3af;}
 .edit-section-label:first-child{margin-top:0;}
 .edit-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .edit-row.full{grid-template-columns:1fr;}
@@ -217,8 +217,8 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .edit-drawer-footer{padding:14px 20px;border-top:1px solid #e5e7eb;display:flex;gap:10px;flex-shrink:0;background:#f9fafb;}
 .btn-save-edit{flex:1;background:var(--blue);color:#fff;border:none;padding:10px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.2s;}
 .btn-save-edit:hover{background:var(--blue-dark);}
-.btn-save-edit.contract-save{background:#1d6a5e;}
-.btn-save-edit.contract-save:hover{background:#0f4a41;}
+.btn-save-edit.contract-save{background:#4b5563;}
+.btn-save-edit.contract-save:hover{background:#374151;}
 .btn-cancel-edit{background:#f3f4f6;border:1.5px solid #d1d5db;color:#555;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;}
 .btn-cancel-edit:hover{background:#e5e7eb;}
 @media(max-width:700px){
@@ -524,12 +524,11 @@ tr:hover td{background:rgba(74,184,232,.04);}
 </div>
 <div id="p-contract-fields" style="display:none;">
   <div class="form-row">
-    <div class="form-group"><label>Job Title / Role</label><input id="p-role" placeholder="Flowback Operator..."></div>
-    <div class="form-group"><label>Phone</label><input id="p-phone-c"></div>
+     <div class="form-group"><label>Phone</label><input id="p-phone-c"></div>
   </div>
   <div class="form-row">
     <div class="form-group"><label>Email</label><input type="email" id="p-email-c"></div>
-    <div class="form-group"><label>Agency / Platform</label><input id="p-agency" value="Rig Up"></div>
+    <div class="form-group"><label>Billing Agency</label><input id="p-agency" value="Rig Up"></div>
   </div>
   <div class="form-row">
     <div class="form-group"><label>Day Rate ($/day)</label><input id="p-dayrate" type="number"></div>
@@ -955,7 +954,7 @@ function renderPersonnelProfile(p) {
   if (!w2 && p.agency) headerBadges += `<span class="ph-badge ph-badge-agency">🏢 ${p.agency}</span>`;
   if (!w2 && p.stars) headerBadges += `<span class="ph-stars">${getStarDisplay(p.stars)}</span>`;
 
-  const roleTitle = w2 ? (p.position||p.role||'—') : (p.role||'Flowback Operator');
+  const roleTitle = w2 ? (p.position||p.role||'—') : '';
 
   let sectionsHTML = '';
 
@@ -1016,7 +1015,7 @@ function renderPersonnelProfile(p) {
         </div>
         <div class="profile-field"><div class="profile-field-label">📊 Contract Status</div><div class="profile-field-value ${statusClass}">${cStatus}</div></div>
         <div class="profile-field"><div class="profile-field-label">📅 Contract Start</div><div class="profile-field-value">${startDate||'<span class="unassigned">—</span>'}</div></div>
-        <div class="profile-field"><div class="profile-field-label">🏢 Agency</div><div class="profile-field-value">${p.agency||'<span class="unassigned">—</span>'}</div></div>
+        <div class="profile-field"><div class="profile-field-label">🏢 Billing Agency</div><div class="profile-field-value">${p.agency||'<span class="unassigned">—</span>'}</div></div>
         <div class="profile-field"><div class="profile-field-label">⭐ Experience</div><div class="profile-field-value"><span style="color:#f59e0b;font-size:16px;">${p.stars?getStarDisplay(p.stars):'<span class="unassigned">Not rated</span>'}</span></div></div>
         <div class="profile-field"><div class="profile-field-label">📍 Basin</div><div class="profile-field-value">${p.basin||'<span class="unassigned">—</span>'}</div></div>
       </div>
@@ -1132,10 +1131,9 @@ function openPersonnelEdit(id) {
     const stars = parseInt(p.stars) || 3;
     const starHTML = [1,2,3,4].map(n => `<button type="button" class="star-edit-btn${n<=stars?' filled':''}" onclick="setStarEdit(${n})" title="${n} star${n>1?'s':''}">${n<=stars?'★':'☆'}</button>`).join('');
     bodyHTML += `
-  <div class="edit-section-label contract-label">Contract Info</div>
+  <div class="edit-section-label contract-label">Contractor Info</div>
   <div class="edit-row">
-    <div class="edit-group"><label>Job Title / Role</label><input id="pe-role" value="${esc(p.role||'Flowback Operator')}"></div>
-    <div class="edit-group"><label>Agency / Platform</label><input id="pe-agency" value="${esc(p.agency||'Rig Up')}"></div>
+    <div class="edit-group"><label>Billing Agency</label><input id="pe-agency" value="${esc(p.agency||'Rig Up')}"></div>
   </div>
   <div class="edit-row">
     <div class="edit-group"><label>Day Rate ($/day)</label><input type="number" id="pe-dayrate" value="${p.dayRate||p.rate||''}"></div>
@@ -1223,7 +1221,7 @@ function savePersonnelEdit() {
     p.perdiemType = p.perdiem;
     p.perdiemCost = parseFloat(document.getElementById('pe-perdiem-cost').value) || getPerDiemAmount(p.perdiem);
   } else {
-    p.role = document.getElementById('pe-role').value.trim();
+    // role not editable for contractors
     p.agency = document.getElementById('pe-agency').value.trim();
     p.dayRate = parseFloat(document.getElementById('pe-dayrate').value) || 0;
     p.rate = p.dayRate;
@@ -1356,7 +1354,7 @@ function savePerson() {
 
 // ═══ PERSONNEL DATA MIGRATION v2 ═══
 (function migratePersonnelData() {
-  const VERSION = 'v2_typed_fields';
+  const VERSION = 'v3_fix_emails';
   if (localStorage.getItem('ghs_personnel_migrated') === VERSION) return;
 
   const existing = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
