@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GHS Energy Ã¢ÂÂ Operations Platform</title>
+<title>GHS Energy - Operations Platform</title>
 <style>
 :root{--blue:#1a7ab5;--blue-dark:#155d8a;--black:#ffffff;--dark:#f0f0f0;--panel:#ffffff;--border:#cccccc;--gray:#555555;--light-gray:#333333;--white:#000000;--green:#2a9e6a;--red:#cc3333;--yellow:#c08000;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -90,7 +90,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .empty-state p{font-size:14px;}
 @media(max-width:768px){#sidebar{display:none;}#content{padding:16px;}.stats-row{grid-template-columns:1fr 1fr;}.form-row{grid-template-columns:1fr;}}
 
-.page-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:919px;height:919px;opacity:0.06;pointer-events:none;z-index:0;background-image:url('logo.png');background-repeat:no-repeat;background-position:center;background-size:contain;}
+.page-watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:919px;height:919px;opacity:0.06;pointer-events:none;z-index:0;background-image:url('logo.png');background-repeat:no-repeat;background-position:center;background-size:contain;}
 #content{position:relative;}
 </style>
 </head>
@@ -248,7 +248,7 @@ tr:hover td{background:rgba(74,184,232,.04);}
   <div id="personnel-report-output"></div>
 </div>
 
-<div class="page-watermark" id="watermark"></div></main>
+</main>
 </div>
 <!-- MODALS -->
 <div id="modal-job" class="modal-overlay">
@@ -673,5 +673,6 @@ function renderPersonnelReport(){
 // Ã¢ÂÂÃ¢ÂÂ INIT Ã¢ÂÂÃ¢ÂÂ
 renderDashboard();
 </script>
+<div class="page-watermark" id="watermark"></div>
 </body>
 </html>
