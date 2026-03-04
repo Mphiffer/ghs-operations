@@ -92,6 +92,121 @@ tr:hover td{background:rgba(74,184,232,.04);}
 
 .page-watermark{position:fixed;top:calc(50% + 30px);left:calc(50% + 105px);transform:translate(-50%,-50%);width:919px;height:919px;opacity:0.06;pointer-events:none;z-index:0;background-image:url('logo.png');background-repeat:no-repeat;background-position:center;background-size:contain;}
 #content{position:relative;}
+
+/* ═══ PERSONNEL SPLIT-SCREEN ═══ */
+#page-personnel{display:flex;flex-direction:column;height:calc(100vh - 60px);padding:0;overflow:hidden;}
+.personnel-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px 12px;background:#fff;border-bottom:1px solid var(--border);flex-shrink:0;gap:12px;flex-wrap:wrap;}
+.personnel-topbar-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.personnel-title{font-size:20px;font-weight:800;color:var(--blue);letter-spacing:0.5px;white-space:nowrap;}
+.personnel-count{background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.5px;}
+.personnel-filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.p-search{background:#f5f5f5;border:1.5px solid var(--border);color:#000;padding:7px 12px 7px 32px;border-radius:8px;font-size:13px;width:200px;outline:none;transition:border 0.2s;}
+.p-search:focus{border-color:var(--blue);background:#fff;}
+.p-search-wrap{position:relative;display:flex;align-items:center;}
+.p-search-wrap::before{content:'⌕';position:absolute;left:9px;font-size:16px;color:#999;pointer-events:none;}
+.p-filter-select{background:#f5f5f5;border:1.5px solid var(--border);color:#000;padding:7px 10px;border-radius:8px;font-size:12px;cursor:pointer;outline:none;transition:border 0.2s;}
+.p-filter-select:focus{border-color:var(--blue);}
+.personnel-split{display:flex;flex:1;overflow:hidden;min-height:0;}
+/* LEFT ROSTER */
+.personnel-roster{width:340px;min-width:260px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:#fafafa;overflow:hidden;}
+.roster-sort-bar{display:flex;align-items:center;gap:6px;padding:8px 14px;border-bottom:1px solid var(--border);background:#f0f2f5;font-size:11px;color:#777;font-weight:600;letter-spacing:0.5px;}
+.sort-btn{cursor:pointer;padding:3px 8px;border-radius:5px;transition:background 0.15s;border:none;background:none;color:#555;font-size:11px;font-weight:600;}
+.sort-btn:hover,.sort-btn.active{background:var(--blue);color:#fff;}
+.roster-list{flex:1;overflow-y:auto;padding:6px 0;}
+.roster-list::-webkit-scrollbar{width:4px;}
+.roster-list::-webkit-scrollbar-track{background:transparent;}
+.roster-list::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px;}
+.roster-item{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;border-left:3px solid transparent;transition:all 0.15s;border-bottom:1px solid #ececec;}
+.roster-item:hover{background:#e8f0fb;border-left-color:var(--blue);}
+.roster-item.selected{background:#dceafb;border-left-color:var(--blue);}
+.roster-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:0.5px;}
+.av-w2{background:linear-gradient(135deg,#1a7ab5,#0d5a8a);}
+.av-contract{background:linear-gradient(135deg,#2a7e6e,#1a5c50);}
+.av-other{background:linear-gradient(135deg,#7e5a1a,#5c3e0d);}
+.roster-info{flex:1;min-width:0;}
+.roster-name{font-size:13px;font-weight:700;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.roster-role{font-size:11px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+.roster-badges{display:flex;align-items:center;gap:5px;margin-top:3px;}
+.badge-type{font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;letter-spacing:0.3px;}
+.badge-w2{background:#dbeafe;color:#1e40af;}
+.badge-contract{background:#d1fae5;color:#065f46;}
+.badge-other{background:#fef3c7;color:#92400e;}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dot-active{background:#22c55e;}
+.dot-inactive{background:#d1d5db;}
+.roster-rate{font-size:11px;color:#555;font-weight:600;flex-shrink:0;text-align:right;}
+/* RIGHT PROFILE PANEL */
+.personnel-profile{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;}
+.profile-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#bbb;}
+.profile-empty-icon{font-size:56px;opacity:0.3;}
+.profile-empty-text{font-size:15px;font-weight:600;color:#ccc;}
+.profile-panel{flex:1;display:flex;flex-direction:column;overflow-y:auto;padding:0;}
+.profile-panel::-webkit-scrollbar{width:5px;}
+.profile-panel::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px;}
+.profile-header{padding:22px 28px 18px;background:linear-gradient(135deg,#1a7ab5 0%,#0d5a8a 100%);color:#fff;display:flex;align-items:center;gap:18px;position:relative;}
+.profile-header-avatar{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.5);flex-shrink:0;letter-spacing:1px;}
+.profile-header-info{flex:1;}
+.profile-header-name{font-size:20px;font-weight:800;letter-spacing:0.3px;}
+.profile-header-role{font-size:13px;opacity:0.85;margin-top:3px;}
+.profile-header-badges{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.ph-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;}
+.ph-badge-type{background:rgba(255,255,255,0.25);color:#fff;}
+.ph-badge-active{background:#22c55e;color:#fff;}
+.ph-badge-inactive{background:#ef4444;color:#fff;}
+.ph-badge-agency{background:rgba(255,200,0,0.3);color:#ffe066;}
+.profile-header-actions{display:flex;gap:8px;flex-shrink:0;}
+.btn-edit-profile{background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.5);color:#fff;padding:7px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;}
+.btn-edit-profile:hover{background:rgba(255,255,255,0.35);}
+.btn-del-profile{background:rgba(239,68,68,0.25);border:1.5px solid rgba(239,68,68,0.5);color:#fca5a5;padding:7px 12px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-del-profile:hover{background:rgba(239,68,68,0.5);color:#fff;}
+.profile-body{padding:20px 28px;display:flex;flex-direction:column;gap:16px;}
+.profile-section{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;}
+.profile-section-title{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--blue);padding:8px 14px;background:#eef5fc;border-bottom:1px solid #d1e5f7;text-transform:uppercase;}
+.profile-fields{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.profile-field{padding:10px 14px;border-bottom:1px solid #f0f0f0;border-right:1px solid #f0f0f0;}
+.profile-field:nth-child(even){border-right:none;}
+.profile-field.full{grid-column:1/-1;border-right:none;}
+.profile-field-label{font-size:10px;font-weight:700;color:#999;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:3px;}
+.profile-field-value{font-size:13px;font-weight:600;color:#111;}
+.profile-field-value.phone-val{color:var(--blue);font-family:monospace;}
+.profile-field-value.rate-val{color:#16a34a;font-weight:800;}
+.profile-field-value.emerg-val{color:#dc2626;font-weight:700;}
+.profile-field-value.unassigned{color:#aaa;font-style:italic;font-weight:400;}
+.profile-field-value.email-val{color:var(--blue);font-size:12px;}
+/* EDIT MODE */
+.profile-edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:flex-start;justify-content:flex-end;}
+.profile-edit-overlay.open{display:flex;}
+.profile-edit-drawer{width:420px;max-width:95vw;height:100%;background:#fff;display:flex;flex-direction:column;overflow:hidden;box-shadow:-4px 0 20px rgba(0,0,0,0.15);}
+.edit-drawer-header{padding:18px 20px;background:linear-gradient(135deg,#1a7ab5,#0d5a8a);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.edit-drawer-title{font-size:16px;font-weight:800;letter-spacing:0.5px;}
+.edit-drawer-close{background:rgba(255,255,255,0.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.edit-drawer-body{flex:1;overflow-y:auto;padding:20px;}
+.edit-drawer-body::-webkit-scrollbar{width:4px;}
+.edit-drawer-body::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px;}
+.edit-section-label{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid #e5e7eb;}
+.edit-section-label:first-child{margin-top:0;}
+.edit-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.edit-row.full{grid-template-columns:1fr;}
+.edit-group label{display:block;font-size:11px;font-weight:700;color:#555;letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;}
+.edit-group input,.edit-group select,.edit-group textarea{width:100%;padding:8px 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:13px;color:#111;background:#fafafa;outline:none;transition:border 0.2s;}
+.edit-group input:focus,.edit-group select:focus,.edit-group textarea:focus{border-color:var(--blue);background:#fff;}
+.edit-group textarea{resize:vertical;min-height:60px;}
+.edit-drawer-footer{padding:14px 20px;border-top:1px solid #e5e7eb;display:flex;gap:10px;flex-shrink:0;background:#f9fafb;}
+.btn-save-edit{flex:1;background:var(--blue);color:#fff;border:none;padding:10px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.2s;}
+.btn-save-edit:hover{background:var(--blue-dark);}
+.btn-cancel-edit{background:#f3f4f6;border:1.5px solid #d1d5db;color:#555;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;}
+.btn-cancel-edit:hover{background:#e5e7eb;}
+.toggle-active-btn{padding:8px 14px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid;transition:all 0.2s;}
+.toggle-active-btn.set-active{border-color:#16a34a;color:#16a34a;background:#f0fdf4;}
+.toggle-active-btn.set-active:hover{background:#16a34a;color:#fff;}
+.toggle-active-btn.set-inactive{border-color:#dc2626;color:#dc2626;background:#fef2f2;}
+.toggle-active-btn.set-inactive:hover{background:#dc2626;color:#fff;}
+@media(max-width:700px){
+  .personnel-split{flex-direction:column;}
+  .personnel-roster{width:100%;height:280px;border-right:none;border-bottom:1px solid var(--border);}
+  .profile-fields{grid-template-columns:1fr;}
+  .profile-field{border-right:none;}
+}
 </style>
 </head>
 <body>
@@ -213,16 +328,116 @@ tr:hover td{background:rgba(74,184,232,.04);}
 
 <!-- PERSONNEL -->
 <div id="page-personnel" class="page">
-  <div class="page-header"><div class="page-title">Personnel</div><button class="btn btn-primary" onclick="openModal('modal-person')">+ Add Personnel</button></div>
-  <div class="filter-bar">
-    <input class="search-input" id="p-search" placeholder="Search personnel..." oninput="renderPersonnel()">
-    <select class="filter-select" id="p-type-filter" onchange="renderPersonnel()"><option value="">All Types</option><option value="W-2">W-2 Employee</option><option value="Contract">Contract</option></select>
-    <select class="filter-select" id="p-status-filter" onchange="renderPersonnel()"><option value="">Active &amp; Inactive</option><option value="active">Active Only</option><option value="inactive">Inactive Only</option></select>
-    <select class="filter-select" id="p-location-filter" onchange="renderPersonnel()"><option value="">All Locations</option></select>
-    <select class="filter-select" id="p-role-filter" onchange="renderPersonnel()"><option value="">All Roles</option></select>
+  <!-- TOP BAR -->
+  <div class="personnel-topbar">
+    <div class="personnel-topbar-left">
+      <span class="personnel-title">Personnel Directory</span>
+      <span class="personnel-count" id="p-count-badge">0</span>
+    </div>
+    <div class="personnel-filters">
+      <div class="p-search-wrap">
+        <input class="p-search" id="p-search" placeholder="Search by name, role, phone..." oninput="renderPersonnel()">
+      </div>
+      <select class="p-filter-select" id="p-type-filter" onchange="renderPersonnel()">
+        <option value="">All Types</option>
+        <option value="W-2">W-2 Employee</option>
+        <option value="Contract">Contract</option>
+      </select>
+      <select class="p-filter-select" id="p-status-filter" onchange="renderPersonnel()">
+        <option value="">All Status</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+      <select class="p-filter-select" id="p-location-filter" onchange="renderPersonnel()">
+        <option value="">All Locations</option>
+      </select>
+      <select class="p-filter-select" id="p-role-filter" onchange="renderPersonnel()">
+        <option value="">All Roles</option>
+      </select>
+      <button class="btn btn-primary" onclick="openModal('modal-person')" style="white-space:nowrap;font-size:12px;padding:7px 14px;">+ Add Personnel</button>
+    </div>
   </div>
-  <div class="table-wrap"><table><thead><tr><th>Name</th><th>Type</th><th>Role</th><th>Current Job / Location</th><th>Rate</th><th>Phone</th><th>Active</th><th>Actions</th></tr></thead><tbody id="personnel-body"></tbody></table></div>
+  <!-- SPLIT SCREEN -->
+  <div class="personnel-split">
+    <!-- LEFT: ROSTER LIST -->
+    <div class="personnel-roster">
+      <div class="roster-sort-bar">
+        <span>SORT:</span>
+        <button class="sort-btn active" id="sort-name" onclick="setSortPersonnel('name',this)">Name</button>
+        <button class="sort-btn" id="sort-type" onclick="setSortPersonnel('type',this)">Type</button>
+        <button class="sort-btn" id="sort-rate" onclick="setSortPersonnel('rate',this)">Rate</button>
+        <button class="sort-btn" id="sort-status" onclick="setSortPersonnel('status',this)">Status</button>
+      </div>
+      <div class="roster-list" id="personnel-roster-list"></div>
+    </div>
+    <!-- RIGHT: PROFILE PANEL -->
+    <div class="personnel-profile">
+      <div class="profile-empty" id="profile-empty-state">
+        <div class="profile-empty-icon">👷</div>
+        <div class="profile-empty-text">Select an employee to view their profile</div>
+      </div>
+      <div class="profile-panel" id="personnel-profile-panel" style="display:none;"></div>
+    </div>
+  </div>
+  <!-- EDIT DRAWER -->
+  <div class="profile-edit-overlay" id="personnel-edit-overlay">
+    <div class="profile-edit-drawer">
+      <div class="edit-drawer-header">
+        <span class="edit-drawer-title" id="edit-drawer-title">Edit Employee</span>
+        <button class="edit-drawer-close" onclick="closePersonnelEdit()">✕</button>
+      </div>
+      <div class="edit-drawer-body" id="edit-drawer-body">
+        <div class="edit-section-label">Identity</div>
+        <div class="edit-row">
+          <div class="edit-group"><label>Full Name</label><input id="pe-name"></div>
+          <div class="edit-group"><label>Type</label><select id="pe-type"><option value="W-2 Employee">W-2 Employee</option><option value="Contract">Contract</option></select></div>
+        </div>
+        <div class="edit-row">
+          <div class="edit-group"><label>Role / Title</label><input id="pe-role" placeholder="Flowback Operator..."></div>
+          <div class="edit-group"><label>Status</label>
+            <select id="pe-active">
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="edit-section-label">Contact</div>
+        <div class="edit-row">
+          <div class="edit-group"><label>Phone</label><input id="pe-phone" type="tel"></div>
+          <div class="edit-group"><label>Email</label><input id="pe-email" type="email"></div>
+        </div>
+        <div class="edit-row full">
+          <div class="edit-group"><label>Emergency Contact</label><input id="pe-emerg" placeholder="Name / Phone"></div>
+        </div>
+        <div class="edit-section-label">Assignment & Pay</div>
+        <div class="edit-row">
+          <div class="edit-group"><label>Current Job</label><select id="pe-job"></select></div>
+          <div class="edit-group"><label>Daily / Hourly Rate ($)</label><input id="pe-rate" type="number"></div>
+        </div>
+        <div class="edit-row">
+          <div class="edit-group"><label>Agency</label><input id="pe-agency"></div>
+          <div class="edit-group"><label>Per Diem Type</label>
+            <select id="pe-perdiem">
+              <option value="">None</option>
+              <option value="Man Camp">Man Camp</option>
+              <option value="Camper">RV / Camper</option>
+            </select>
+          </div>
+        </div>
+        <div class="edit-section-label">Notes</div>
+        <div class="edit-row full">
+          <div class="edit-group"><textarea id="pe-notes" rows="3" placeholder="Additional notes..."></textarea></div>
+        </div>
+        <input type="hidden" id="pe-id">
+      </div>
+      <div class="edit-drawer-footer">
+        <button class="btn-cancel-edit" onclick="closePersonnelEdit()">Cancel</button>
+        <button class="btn-save-edit" onclick="savePersonnelEdit()">Save Changes</button>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <!-- AR REPORTS -->
 <div id="page-reports" class="page">
@@ -555,45 +770,357 @@ function renderCustomers(){
 }
 
 // Ã¢ÂÂÃ¢ÂÂ PERSONNEL Ã¢ÂÂÃ¢ÂÂ
-function savePerson(){
-  const name=document.getElementById('p-name').value.trim();if(!name){alert('Name required.');return;}
-  const p={id:Date.now(),name,type:document.getElementById('p-type').value,role:document.getElementById('p-role').value,phone:document.getElementById('p-phone').value,email:document.getElementById('p-email').value,rate:document.getElementById('p-rate').value,job:document.getElementById('p-job').value,start:document.getElementById('p-start').value,emerg:document.getElementById('p-emerg').value,active:document.getElementById('p-active').value,notes:document.getElementById('p-notes').value,perdiem:document.getElementById('p-perdiem-type')?document.getElementById('p-perdiem-type').value:'',perdiemCost:document.getElementById('p-perdiem-cost')?parseFloat(document.getElementById('p-perdiem-cost').value)||0:0};
-  personnel.push(p);save('personnel',personnel);closeModal('modal-person');renderPersonnel();renderDashboard();
-}
-function togglePersonActive(id){
-  const p=personnel.find(x=>x.id===id);
-  if(p){p.active=p.active==='active'?'inactive':'active';save('personnel',personnel);renderPersonnel();renderDashboard();}
-}
-function deletePerson(id){if(confirm('Delete personnel record?')){personnel=personnel.filter(p=>p.id!==id);save('personnel',personnel);renderPersonnel();renderDashboard();}}
-function populatePersonnelFilters(){
-  const lf=document.getElementById('p-location-filter');
-  if(lf){lf.innerHTML='<option value="">All Locations</option>';[...new Set(personnel.map(p=>p.job).filter(Boolean))].forEach(j=>lf.innerHTML+=`<option>${j}</option>`);}
-  const rf=document.getElementById('p-role-filter');
-  if(rf){rf.innerHTML='<option value="">All Roles</option>';[...new Set(personnel.map(p=>p.role).filter(Boolean))].forEach(r=>rf.innerHTML+=`<option>${r}</option>`);}
-}
-function renderPersonnel(){
-  const search=(document.getElementById('p-search')||{}).value||'';
-  const tf=(document.getElementById('p-type-filter')||{}).value||'';
-  const sf=(document.getElementById('p-status-filter')||{}).value||'';
-  const lf=(document.getElementById('p-location-filter')||{}).value||'';
-  const rf=(document.getElementById('p-role-filter')||{}).value||'';
-  let list=personnel.filter(p=>
-    (!search||p.name.toLowerCase().includes(search.toLowerCase())||p.role.toLowerCase().includes(search.toLowerCase()))&&
-    (!tf||p.type===tf)&&(!sf||p.active===sf)&&(!lf||p.job===lf)&&(!rf||p.role===rf));
-  const b=document.getElementById('personnel-body');if(!b)return;
-  b.innerHTML=list.length?list.map(p=>`<tr>
-    <td style="font-weight:700;color:var(--white)">${p.name}</td>
-    <td>${statusBadge(p.type)}</td>
-    <td>${p.role||''}</td>
-    <td>${p.job||'Unassigned'}</td>
-    <td>${p.rate?'$'+fmt(p.rate):''}</td>
-    <td>${p.phone||''}</td>
-    <td><label class="toggle"><input type="checkbox" ${p.active==='active'?'checked':''} onchange="togglePersonActive(${p.id})"><span class="toggle-slider"></span></label></td>
-    <td><button class="btn btn-danger btn-sm" onclick="deletePerson(${p.id})">Del</button></td>
-  </tr>`).join(''):emptyRow(8,'No personnel found. Click + Add Personnel.');
+
+// ═══ PERSONNEL SPLIT-SCREEN UI ═══
+let _personnelSort = 'name';
+let _selectedPersonId = null;
+
+function setSortPersonnel(field, btn) {
+  _personnelSort = field;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderPersonnel();
 }
 
-// Ã¢ÂÂÃ¢ÂÂ AR REPORTS Ã¢ÂÂÃ¢ÂÂ
+function getInitials(name) {
+  const parts = (name || '').trim().split(/\s+/);
+  if (parts.length >= 2) return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+  return (name || '?').substring(0,2).toUpperCase();
+}
+
+function getAvatarClass(type) {
+  if ((type||'').includes('W-2')) return 'av-w2';
+  if ((type||'').toLowerCase() === 'contract') return 'av-contract';
+  return 'av-other';
+}
+
+function getBadgeClass(type) {
+  if ((type||'').includes('W-2')) return 'badge-w2';
+  if ((type||'').toLowerCase() === 'contract') return 'badge-contract';
+  return 'badge-other';
+}
+
+function getBadgeLabel(type) {
+  if ((type||'').includes('W-2')) return 'W-2';
+  if ((type||'').toLowerCase() === 'contract') return 'Contract';
+  return type || 'Unknown';
+}
+
+function isPersonActive(p) {
+  return p.active === true || p.active === 'active';
+}
+
+function getRoleDisplay(p) {
+  const role = p.role || '';
+  if (role.includes('@')) return p.name;
+  return role || '—';
+}
+
+function getJobDisplay(p) {
+  if (p.job) {
+    const jobs = JSON.parse(localStorage.getItem('ghs_jobs') || '[]');
+    const job = jobs.find(j => j.id === p.job || j.num === p.job);
+    if (job) return job.num + ' – ' + job.name + (job.location ? ' / ' + job.location : '');
+    return p.job;
+  }
+  return null;
+}
+
+function populatePersonnelFilters() {
+  const lf = document.getElementById('p-location-filter');
+  const rf = document.getElementById('p-role-filter');
+  if (!lf || !rf) return;
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  const locs = [...new Set(allP.map(p => p.location).filter(Boolean))].sort();
+  const roles = [...new Set(allP.map(p => p.role).filter(r => r && !r.includes('@')))].sort();
+  const curLoc = lf.value;
+  const curRole = rf.value;
+  lf.innerHTML = '<option value="">All Locations</option>' + locs.map(l => '<option value="'+l+'"'+( l===curLoc?' selected':'')+'>'+l+'</option>').join('');
+  rf.innerHTML = '<option value="">All Roles</option>' + roles.map(r => '<option value="'+r+'"'+(r===curRole?' selected':'')+'>'+r+'</option>').join('');
+}
+
+function renderPersonnel() {
+  const roster = document.getElementById('personnel-roster-list');
+  if (!roster) return;
+  const search = (document.getElementById('p-search') || {}).value || '';
+  const tf = (document.getElementById('p-type-filter') || {}).value || '';
+  const sf = (document.getElementById('p-status-filter') || {}).value || '';
+  const lf = (document.getElementById('p-location-filter') || {}).value || '';
+  const rolef = (document.getElementById('p-role-filter') || {}).value || '';
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  populatePersonnelFilters();
+
+  let filtered = allP.filter(p => {
+    const s = search.toLowerCase();
+    const matchSearch = !s || (p.name||'').toLowerCase().includes(s) || (p.role||'').toLowerCase().includes(s) || (p.phone||'').includes(s) || (p.email||'').toLowerCase().includes(s);
+    const matchType = !tf || (p.type||'').toLowerCase().includes(tf.toLowerCase());
+    const active = isPersonActive(p);
+    const matchStatus = !sf || (sf === 'active' ? active : !active);
+    const matchLoc = !lf || p.location === lf;
+    const matchRole = !rolef || p.role === rolef;
+    return matchSearch && matchType && matchStatus && matchLoc && matchRole;
+  });
+
+  // Sort
+  filtered.sort((a,b) => {
+    if (_personnelSort === 'name') return (a.name||'').localeCompare(b.name||'');
+    if (_personnelSort === 'type') return (a.type||'').localeCompare(b.type||'');
+    if (_personnelSort === 'rate') return (parseFloat(b.rate)||0) - (parseFloat(a.rate)||0);
+    if (_personnelSort === 'status') {
+      const aA = isPersonActive(a) ? 0 : 1;
+      const bA = isPersonActive(b) ? 0 : 1;
+      return aA - bA;
+    }
+    return 0;
+  });
+
+  const badge = document.getElementById('p-count-badge');
+  if (badge) badge.textContent = filtered.length;
+
+  if (!filtered.length) {
+    roster.innerHTML = '<div style="padding:30px;text-align:center;color:#aaa;font-size:13px;">No personnel match your filters</div>';
+    return;
+  }
+
+  roster.innerHTML = filtered.map(p => {
+    const active = isPersonActive(p);
+    const initials = getInitials(p.name);
+    const avClass = getAvatarClass(p.type);
+    const badgeClass = getBadgeClass(p.type);
+    const badgeLabel = getBadgeLabel(p.type);
+    const roleDisplay = getRoleDisplay(p);
+    const rateDisplay = p.rate ? '$' + parseFloat(p.rate).toLocaleString('en-US', {minimumFractionDigits:0,maximumFractionDigits:2}) : '';
+    const isSelected = p.id === _selectedPersonId;
+    return `<div class="roster-item${isSelected ? ' selected' : ''}" onclick="selectPerson('${p.id}')">
+      <div class="roster-avatar ${avClass}">${initials}</div>
+      <div class="roster-info">
+        <div class="roster-name">${p.name}</div>
+        <div class="roster-role">${roleDisplay}</div>
+        <div class="roster-badges">
+          <span class="badge-type ${badgeClass}">${badgeLabel}</span>
+          <span class="status-dot ${active ? 'dot-active' : 'dot-inactive'}" title="${active ? 'Active' : 'Inactive'}"></span>
+        </div>
+      </div>
+      <div class="roster-rate">${rateDisplay}</div>
+    </div>`;
+  }).join('');
+
+  // If selected person is still visible, keep profile shown
+  if (_selectedPersonId) {
+    const stillVisible = filtered.find(p => p.id === _selectedPersonId);
+    if (stillVisible) renderPersonnelProfile(stillVisible);
+  }
+}
+
+function selectPerson(id) {
+  _selectedPersonId = id;
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  const p = allP.find(x => x.id === id);
+  if (!p) return;
+  renderPersonnel();
+  renderPersonnelProfile(p);
+}
+
+function renderPersonnelProfile(p) {
+  const emptyState = document.getElementById('profile-empty-state');
+  const panel = document.getElementById('personnel-profile-panel');
+  if (!panel) return;
+  if (emptyState) emptyState.style.display = 'none';
+  panel.style.display = 'flex';
+  panel.style.flexDirection = 'column';
+
+  const active = isPersonActive(p);
+  const initials = getInitials(p.name);
+  const avClass = getAvatarClass(p.type);
+  const badgeLabel = getBadgeLabel(p.type);
+  const roleDisplay = getRoleDisplay(p);
+  const jobDisplay = getJobDisplay(p);
+  const rateDisplay = p.rate ? '$' + parseFloat(p.rate).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + (p.type === 'W-2 Employee' ? '/day' : '/day') : '—';
+  const perdiemDisplay = p.perdiem || p.perdiemType || '—';
+
+  panel.innerHTML = `
+    <div class="profile-header">
+      <div class="profile-header-avatar ${avClass}">${initials}</div>
+      <div class="profile-header-info">
+        <div class="profile-header-name">${p.name}</div>
+        <div class="profile-header-role">${roleDisplay}</div>
+        <div class="profile-header-badges">
+          <span class="ph-badge ph-badge-type">${badgeLabel}</span>
+          <span class="ph-badge ${active ? 'ph-badge-active' : 'ph-badge-inactive'}">${active ? '● Active' : '○ Inactive'}</span>
+          ${p.agency ? `<span class="ph-badge ph-badge-agency">🏢 ${p.agency}</span>` : ''}
+        </div>
+      </div>
+      <div class="profile-header-actions">
+        <button class="btn-edit-profile" onclick="openPersonnelEdit('${p.id}')">✏ Edit</button>
+        <button class="btn-del-profile" onclick="deletePersonFromProfile('${p.id}')">🗑</button>
+      </div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-section">
+        <div class="profile-section-title">Contact Information</div>
+        <div class="profile-fields">
+          <div class="profile-field">
+            <div class="profile-field-label">📞 Phone</div>
+            <div class="profile-field-value phone-val">${p.phone || '<span class=\"unassigned\">—</span>'}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">✉ Email</div>
+            <div class="profile-field-value email-val">${p.email && !p.email.includes('@') ? '' : (p.email || '<span class=\"unassigned\">—</span>')}</div>
+          </div>
+          <div class="profile-field full">
+            <div class="profile-field-label">🚨 Emergency Contact</div>
+            <div class="profile-field-value emerg-val">${p.emerg || p.emergency || '<span class=\"unassigned\">Not provided</span>'}</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-section">
+        <div class="profile-section-title">Assignment & Compensation</div>
+        <div class="profile-fields">
+          <div class="profile-field">
+            <div class="profile-field-label">💼 Current Job</div>
+            <div class="profile-field-value ${jobDisplay ? '' : 'unassigned'}">${jobDisplay || 'Unassigned'}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">💰 Rate</div>
+            <div class="profile-field-value rate-val">${rateDisplay}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">🏢 Agency</div>
+            <div class="profile-field-value ${p.agency ? '' : 'unassigned'}">${p.agency || '—'}</div>
+          </div>
+          <div class="profile-field">
+            <div class="profile-field-label">🏕 Per Diem</div>
+            <div class="profile-field-value ${perdiemDisplay === '—' ? 'unassigned' : ''}">${perdiemDisplay}</div>
+          </div>
+        </div>
+      </div>
+      ${p.notes ? `<div class="profile-section">
+        <div class="profile-section-title">Notes</div>
+        <div class="profile-fields">
+          <div class="profile-field full">
+            <div class="profile-field-value" style="white-space:pre-wrap">${p.notes}</div>
+          </div>
+        </div>
+      </div>` : ''}
+    </div>
+  `;
+}
+
+function openPersonnelEdit(id) {
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  const p = allP.find(x => x.id === id);
+  if (!p) return;
+  // Populate jobs dropdown
+  const jobs = JSON.parse(localStorage.getItem('ghs_jobs') || '[]');
+  const jeSelect = document.getElementById('pe-job');
+  jeSelect.innerHTML = '<option value="">— Unassigned —</option>' + jobs.map(j => '<option value="'+j.id+'"'+(p.job===j.id?' selected':'')+'>'+j.num+' – '+j.name+'</option>').join('');
+  document.getElementById('pe-id').value = p.id;
+  document.getElementById('pe-name').value = p.name || '';
+  document.getElementById('pe-type').value = p.type || 'Contract';
+  document.getElementById('pe-role').value = (p.role && !p.role.includes('@')) ? p.role : '';
+  document.getElementById('pe-active').value = isPersonActive(p) ? 'active' : 'inactive';
+  document.getElementById('pe-phone').value = p.phone || '';
+  document.getElementById('pe-email').value = p.email || '';
+  document.getElementById('pe-emerg').value = p.emerg || p.emergency || '';
+  document.getElementById('pe-rate').value = p.rate || '';
+  document.getElementById('pe-agency').value = p.agency || '';
+  document.getElementById('pe-perdiem').value = p.perdiem || p.perdiemType || '';
+  document.getElementById('pe-notes').value = p.notes || '';
+  document.getElementById('edit-drawer-title').textContent = 'Edit: ' + p.name;
+  document.getElementById('personnel-edit-overlay').classList.add('open');
+}
+
+function closePersonnelEdit() {
+  document.getElementById('personnel-edit-overlay').classList.remove('open');
+}
+
+function savePersonnelEdit() {
+  const id = document.getElementById('pe-id').value;
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  const idx = allP.findIndex(x => x.id === id);
+  if (idx === -1) return;
+  const p = allP[idx];
+  p.name = document.getElementById('pe-name').value.trim();
+  if (!p.name) { alert('Name is required.'); return; }
+  p.type = document.getElementById('pe-type').value;
+  p.role = document.getElementById('pe-role').value.trim();
+  p.active = document.getElementById('pe-active').value === 'active';
+  p.phone = document.getElementById('pe-phone').value.trim();
+  p.email = document.getElementById('pe-email').value.trim();
+  p.emerg = document.getElementById('pe-emerg').value.trim();
+  p.emergency = p.emerg;
+  p.rate = parseFloat(document.getElementById('pe-rate').value) || 0;
+  p.agency = document.getElementById('pe-agency').value.trim();
+  p.perdiem = document.getElementById('pe-perdiem').value;
+  p.notes = document.getElementById('pe-notes').value.trim();
+  p.job = document.getElementById('pe-job').value;
+  allP[idx] = p;
+  save('personnel', allP);
+  closePersonnelEdit();
+  renderPersonnel();
+  renderPersonnelProfile(p);
+  renderDashboard();
+}
+
+function deletePersonFromProfile(id) {
+  if (!confirm('Delete this employee? This cannot be undone.')) return;
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  const updated = allP.filter(x => x.id !== id);
+  save('personnel', updated);
+  _selectedPersonId = null;
+  const emptyState = document.getElementById('profile-empty-state');
+  const panel = document.getElementById('personnel-profile-panel');
+  if (emptyState) emptyState.style.display = 'flex';
+  if (panel) panel.style.display = 'none';
+  renderPersonnel();
+  renderDashboard();
+}
+
+function togglePersonActive(id) {
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  const p = allP.find(x => x.id === id);
+  if (p) {
+    p.active = !isPersonActive(p);
+    save('personnel', allP);
+    renderPersonnel();
+    if (_selectedPersonId === id) renderPersonnelProfile(p);
+    renderDashboard();
+  }
+}
+
+function deletePerson(id) {
+  deletePersonFromProfile(id);
+}
+
+function savePerson() {
+  const name = document.getElementById('p-name').value.trim();
+  if (!name) { alert('Name required.'); return; }
+  const allP = JSON.parse(localStorage.getItem('ghs_personnel') || '[]');
+  const newId = 'p' + Date.now();
+  const p = {
+    id: newId,
+    name,
+    type: document.getElementById('p-type').value,
+    role: document.getElementById('p-role').value,
+    phone: document.getElementById('p-phone').value,
+    email: document.getElementById('p-email').value,
+    rate: parseFloat(document.getElementById('p-rate').value) || 0,
+    job: document.getElementById('p-job').value,
+    start: document.getElementById('p-start').value,
+    emerg: document.getElementById('p-emerg').value,
+    emergency: document.getElementById('p-emerg').value,
+    active: document.getElementById('p-active').value === 'active',
+    notes: document.getElementById('p-notes').value,
+    perdiem: document.getElementById('p-perdiem-type') ? document.getElementById('p-perdiem-type').value : '',
+    perdiemCost: document.getElementById('p-perdiem-cost') ? parseFloat(document.getElementById('p-perdiem-cost').value) || 0 : 0
+  };
+  allP.push(p);
+  save('personnel', allP);
+  closeModal('modal-person');
+  renderPersonnel();
+  renderDashboard();
+}
+
 function toggleARCustomer(){
   const v=document.getElementById('ar-view').value;
   const pick=document.getElementById('ar-customer-pick');
