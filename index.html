@@ -518,7 +518,8 @@ tr:hover td{background:rgba(74,184,232,.04);}
     <div class="form-group"><label>Per Diem ($/day)</label><input id="p-perdiem-cost" type="number" readonly></div>
   </div>
   <div class="form-row">
-    <div class="form-group"><label>Vehicle Type</label><select id="p-vehicle-type" onchange="toggleUnitNumber('p-unit-row')"><option value="">None</option><option value="Truck Allowance">Truck Allowance</option><option value="Company Vehicle">Company Vehicle</option></select></div><div class="form-group"><label>Truck Allowance ($/wk)</label><input id="p-truck" type="number" step="0.01"></div><div class="form-group" id="p-unit-row" style="display:none"><label>Unit Number</label><input id="p-unit" type="text" placeholder="Unit #"></div>
+    <div class="form-group"><label>Vehicle Type</label><select id="p-vehicle-type" onchange="toggleVehicleFields('p')"><option value="">None</option><option value="Truck Allowance">Truck Allowance</option><option value="Company Vehicle">Company Vehicle</option></select></div><div class="form-group" id="p-unit-row" style="display:none"><label>Unit Number</label><input id="p-unit" type="text" placeholder="Unit #"></div>
+    <div class="form-group" id="p-truck-row" style="display:none"><label>Truck Allowance ($/wk)</label><input id="p-truck" type="number" step="0.01"></div>
     <div class="form-group"><label>Emergency Contact</label><input id="p-emerg" placeholder="Name / Phone"></div>
   </div>
 </div>
@@ -596,7 +597,7 @@ function openModal(id){
   if(id==='modal-person')populateSelect('p-job',jobs,'num','name','-- Unassigned --');
 }
 function closeModal(id){document.getElementById(id).classList.remove('open');}
-function toggleUnitNumber(rowId){const sel=document.getElementById(rowId.replace('-unit-row','-vehicle-type'));const row=document.getElementById(rowId);if(row&&sel)row.style.display=sel.value==='Company Vehicle'?'':'none';}    function initPerDiemAutoFill(){
+function toggleVehicleFields(prefix){const sel=document.getElementById(prefix+'-vehicle-type');const unitRow=document.getElementById(prefix+'-unit-row');const truckRow=document.getElementById(prefix+'-truck-row');if(unitRow)unitRow.style.display=sel&&sel.value==='Company Vehicle'?'':'none';if(truckRow)truckRow.style.display=sel&&sel.value==='Truck Allowance'?'':'none';}    function initPerDiemAutoFill(){
   const PERDIEM_RATES={'Man Camp':75,'RV':130};
   const sel=document.getElementById('p-perdiem-type');
   if(sel){sel.addEventListener('change',function(){const c=document.getElementById('p-perdiem-cost');if(c){c.value=PERDIEM_RATES[this.value]!==undefined?PERDIEM_RATES[this.value]:'';}});}
@@ -1104,10 +1105,16 @@ function openPersonnelEdit(id) {
     <div class="edit-group"><label>Emergency Contact</label><input id="pe-emerg" value="${esc(p.emerg||p.emergency||'')}"></div>
   </div>
   <div class="edit-section-label w2-label">Compensation</div>
-  <div class="edit-row three">
+  <div class="edit-row two">
     <div class="edit-group"><label>Hourly Rate ($)</label><input type="number" step="0.01" id="pe-hourly" value="${hrRate}"></div>
     
-    <div class="edit-group"><label>Vehicle Type</label><select id="pe-vehicle-type" onchange="toggleUnitNumber('pe-unit-row')"><option value="" ${!p.vehicleType?'selected':''}>None</option><option value="Truck Allowance" ${p.vehicleType==='Truck Allowance'?'selected':''}>Truck Allowance</option><option value="Company Vehicle" ${p.vehicleType==='Company Vehicle'?'selected':''}>Company Vehicle</option></select></div><div class="edit-group"><label>Truck Allowance ($/wk)</label><input type="number" step="0.01" id="pe-truck" value="${p.truckAllowance||''}"></div><div class="edit-group" id="pe-unit-row" style="${p.vehicleType==='Company Vehicle'?'':'display:none'}"><label>Unit Number</label><input type="text" id="pe-unit" value="${p.unitNumber||''}" placeholder="Unit #"></div>
+    <div class="edit-group"><label>Vehicle Type</label><select id="pe-vehicle-type" onchange="toggleVehicleFields('pe')"><option value="" ${!p.vehicleType?'selected':''}>None</option><option value="Truck Allowance" ${p.vehicleType==='Truck Allowance'?'selected':''}>Truck Allowance</option><option value="Company Vehicle" ${p.vehicleType==='Company Vehicle'?'selected':''}>Company Vehicle</option></select></div>
+  </div>
+  <div class="edit-row" id="pe-truck-row" style="${p.vehicleType==='Truck Allowance'?'':\'display:none\'}">
+    <div class="edit-group"><label>Truck Allowance ($/wk)</label><input type="number" step="0.01" id="pe-truck" value="${p.truckAllowance||''}" ></div>
+  </div>
+  <div class="edit-row" id="pe-unit-row" style="${p.vehicleType==='Company Vehicle'?'':\'display:none\'}">
+    <div class="edit-group"><label>Unit Number</label><input type="text" id="pe-unit" value="${p.unitNumber||''}" placeholder="Unit #"></div>
   </div>
   <div class="edit-row">
     <div class="edit-group"><label>Per Diem Type</label><select id="pe-perdiem" onchange="editAutoFillPerDiem()">
