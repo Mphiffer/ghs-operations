@@ -12,7 +12,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#ffffff;color:#000000;mi
 .logo-area{display:flex;align-items:center;gap:12px;}
 .logo-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#ffffff;}
 .logo-text{font-size:18px;font-weight:800;color:#000000;letter-spacing:1px;}
-.logo-text span{color:var(--blue);}
+.logo-text span{color:var(--blue);}h
 .nav-links{display:flex;gap:4px;}
 .nav-btn{background:none;border:none;color:#333333;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.5px;transition:all .2s;}
 .nav-btn:hover,.nav-btn.active{background:var(--blue);color:#ffffff;}
@@ -616,7 +616,7 @@ function renderDashboard(){
   const openInv=invoices.filter(i=>i.status!=='Paid');
   const totalAR=openInv.reduce((s,i)=>s+parseFloat(i.amount||0),0);
   const activeJobs=jobs.filter(j=>j.status==='Active');
-  const activePeople=personnel.filter(p=>p.active==='active');
+  const activePeople=personnel.filter(p=>p.active===true||p.active==='active');
   document.getElementById('dash-stats').innerHTML=
     statCard('Total Open AR','$'+fmt(totalAR),'invoices outstanding','blue')+
     statCard('Active Jobs',activeJobs.length,'currently running','green')+
