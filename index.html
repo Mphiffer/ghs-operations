@@ -6,10 +6,10 @@
 <title>GHS Energy - Operations Platform</title>
 <style>
 :root{--blue:#1a7ab5;--blue-dark:#155d8a;--black:#ffffff;--dark:#f0f0f0;--panel:#ffffff;--border:#cccccc;--gray:#555555;--light-gray:#333333;--white:#000000;--green:#2a9e6a;--red:#cc3333;--yellow:#c08000;}
-*{box-sizing:border-box;margin:0;padding:0;}h
+*{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#ffffff;color:#000000;min-height:100vh;display:flex;flex-direction:column;}
 #topnav{background:#ffffff;border-bottom:2px solid var(--blue);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;position:sticky;top:0;z-index:100;}
-.logo-area{display:flex;align-items:center;gap:12px;}h
+.logo-area{display:flex;align-items:center;gap:12px;}
 .logo-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#ffffff;}
 .logo-text{font-size:18px;font-weight:800;color:#000000;letter-spacing:1px;}
 .logo-text span{color:var(--blue);}
@@ -736,7 +736,7 @@ function renderBilling(){
   b.innerHTML=list.length?list.map(i=>`<tr><td>${i.num}</td><td>${i.customer}</td><td>${i.job}</td><td>${i.week||''}</td><td>$${fmt(i.amount)}</td><td>${statusBadge(i.status)}</td><td>${i.due||''}</td><td style="display:flex;gap:4px;flex-wrap:wrap;">
     <select class="filter-select" style="padding:4px 6px;font-size:11px;" onchange="updateInvoiceStatus(${i.id},this.value)"><option ${i.status==='Draft'?'selected':''}>Draft</option><option ${i.status==='Sent'?'selected':''}>Sent</option><option ${i.status==='Paid'?'selected':''}>Paid</option><option ${i.status==='Overdue'?'selected':''}>Overdue</option></select>
     <button class="btn btn-danger btn-sm" onclick="deleteInvoice(${i.id})">Del</button></td></tr>`).join(''):emptyRow(8,'No invoices yet. Click + New Invoice.');
-}h
+}
 
 // Ã¢ÂÂÃ¢ÂÂ VENDORS Ã¢ÂÂÃ¢ÂÂ
 function saveVendor(){
