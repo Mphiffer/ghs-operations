@@ -772,18 +772,19 @@ function renderJobs(){
     (!sf||j.status===sf)&&(!cf||j.customer===cf));
   const b=document.getElementById('jobs-body');
   if(!b)return;
-  b.innerHTML=list.length?list.map(j=>
-    '<tr style="cursor:pointer">' +
-    '<td onclick="openJobDetail('+j.id+')">'+j.num+'</td>' +
-    '<td onclick="openJobDetail('+j.id+')">'+j.name+'</td>' +
-    '<td onclick="openJobDetail('+j.id+')">'+j.customer+'</td>' +
-    '<td onclick="openJobDetail('+j.id+')">'+(j.location||'')+'</td>' +
-    '<td onclick="openJobDetail('+j.id+')">'+statusBadge(j.status)+'</td>' +
-    '<td onclick="openJobDetail('+j.id+')">'+(j.start||'')+'</td>' +
-    '<td onclick="openJobDetail('+j.id+')">$'+fmt(j.rate)+'/'+j.rateType+'</td>' +
-    '<td><button class="btn btn-primary btn-sm" onclick="openJobDetail('+j.id+')" style="margin-right:4px">View</button>' +
-    '<button class="btn btn-danger btn-sm" onclick="deleteJob('+j.id+')">Del</button></td></tr>'
-  ).join(''):emptyRow(8,'No jobs found. Add your first job with + New Job.');
+  b.innerHTML=list.length?list.map(j=>{
+    const jid="'"+j.id+"'";
+    return '<tr style="cursor:pointer">' +
+    '<td onclick="openJobDetail('+jid+')">'+j.num+'</td>' +
+    '<td onclick="openJobDetail('+jid+')">'+j.name+'</td>' +
+    '<td onclick="openJobDetail('+jid+')">'+j.customer+'</td>' +
+    '<td onclick="openJobDetail('+jid+')">'+(j.location||'')+'</td>' +
+    '<td onclick="openJobDetail('+jid+')">'+statusBadge(j.status)+'</td>' +
+    '<td onclick="openJobDetail('+jid+')">'+(j.start||'')+'</td>' +
+    '<td onclick="openJobDetail('+jid+')">$'+fmt(j.rate)+'/'+j.rateType+'</td>' +
+    '<td><button class="btn btn-primary btn-sm" onclick="openJobDetail('+jid+')" style="margin-right:4px">View</button>' +
+    '<button class="btn btn-danger btn-sm" onclick="deleteJob('+jid+')">Del</button></td></tr>';
+  }).join(''):emptyRow(8,'No jobs found. Add your first job with + New Job.');
 }
 
 function autoFillActivityCust(){
@@ -896,15 +897,16 @@ function renderCustomers(){
   b.innerHTML=list.length?list.map(c=>{
     const custInv=invoices.filter(i=>i.customer===c.name&&i.status!=='Paid');
     const totalAR=custInv.reduce((s,i)=>s+parseFloat(i.amount||0),0);
+    const cid="'"+c.id+"'";
     return '<tr style="cursor:pointer">' +
-      '<td style="font-weight:700;color:var(--white)" onclick="openCustomerDetail('+c.id+')">'+c.name+'</td>' +
-      '<td onclick="openCustomerDetail('+c.id+')">'+(c.contact||'')+'</td>' +
-      '<td onclick="openCustomerDetail('+c.id+')">'+(c.email||'')+'</td>' +
-      '<td onclick="openCustomerDetail('+c.id+')">'+(c.phone||'')+'</td>' +
-      '<td onclick="openCustomerDetail('+c.id+')">'+custInv.length+'</td>' +
-      '<td onclick="openCustomerDetail('+c.id+')">$'+fmt(totalAR)+'</td>' +
-      '<td><button class="btn btn-primary btn-sm" onclick="openCustomerDetail('+c.id+')" style="margin-right:4px">View</button>' +
-      '<button class="btn btn-danger btn-sm" onclick="deleteCustomer('+c.id+')">Del</button></td></tr>';
+      '<td style="font-weight:700;color:var(--white)" onclick="openCustomerDetail('+cid+')">'+c.name+'</td>' +
+      '<td onclick="openCustomerDetail('+cid+')">'+(c.contact||'')+'</td>' +
+      '<td onclick="openCustomerDetail('+cid+')">'+(c.email||'')+'</td>' +
+      '<td onclick="openCustomerDetail('+cid+')">'+(c.phone||'')+'</td>' +
+      '<td onclick="openCustomerDetail('+cid+')">'+custInv.length+'</td>' +
+      '<td onclick="openCustomerDetail('+cid+')">$'+fmt(totalAR)+'</td>' +
+      '<td><button class="btn btn-primary btn-sm" onclick="openCustomerDetail('+cid+')" style="margin-right:4px">View</button>' +
+      '<button class="btn btn-danger btn-sm" onclick="deleteCustomer('+cid+')">Del</button></td></tr>';
   }).join(''):emptyRow(7,'No customers yet. Click + Add Customer.');
 }
 
