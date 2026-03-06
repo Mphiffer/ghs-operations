@@ -230,6 +230,29 @@ tr:hover td{background:rgba(74,184,232,.04);}
   .edit-row.three{grid-template-columns:1fr 1fr;}
 }
 
+
+/* ── PRICE SHEET & JOB DETAIL STYLES ── */
+.customer-detail-overlay,.job-detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 12px;}
+.customer-detail-overlay.open,.job-detail-overlay.open{display:flex;}
+.customer-detail-panel,.job-detail-panel{background:#1a2332;border-radius:12px;width:100%;max-width:960px;padding:28px 32px;position:relative;margin:auto;}
+.customer-detail-panel h3,.job-detail-panel h3{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:6px;}
+.cust-tabs,.job-tabs{display:flex;gap:8px;margin:16px 0 20px;border-bottom:2px solid rgba(255,255,255,.12);padding-bottom:0;}
+.cust-tab-btn,.job-tab-btn{padding:8px 18px;background:none;border:none;color:rgba(255,255,255,.55);font-size:.9rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.cust-tab-btn.active,.job-tab-btn.active{color:#e8871a;border-bottom-color:#e8871a;}
+.cust-tab-pane,.job-tab-pane{display:none;}
+.cust-tab-pane.active,.job-tab-pane.active{display:block;}
+.price-sheet-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.price-sheet-table,.ps-select-table,.job-items-table{width:100%;border-collapse:collapse;font-size:.88rem;}
+.price-sheet-table th,.ps-select-table th,.job-items-table th{background:rgba(255,255,255,.07);padding:8px 10px;text-align:left;color:rgba(255,255,255,.7);font-weight:600;border-bottom:1px solid rgba(255,255,255,.1);}
+.price-sheet-table td,.ps-select-table td,.job-items-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.06);color:#fff;vertical-align:middle;}
+.price-sheet-table td input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 8px;width:100%;font-size:.85rem;}
+.price-sheet-table td input:focus{outline:none;border-color:#e8871a;}
+.ps-uploaded-files{margin-top:10px;}
+.ps-file-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.06);border-radius:6px;margin-bottom:6px;}
+.ps-file-item span{flex:1;color:#fff;font-size:.88rem;}
+.crew-member-card{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:8px;margin-bottom:8px;}
+.crew-avatar{width:36px;height:36px;border-radius:50%;background:#e8871a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0;}
+.crew-type-badge{font-size:.75rem;padding:2px 8px;border-radius:12px;font-weight:600;background:rgba(232,135,26,.2);color:#e8871a;}
 </style>
 </head>
 <body>
@@ -494,6 +517,92 @@ tr:hover td{background:rgba(74,184,232,.04);}
 <div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('modal-customer')">Cancel</button><button class="btn btn-primary" onclick="saveCustomer()">Save Customer</button></div>
 </div></div>
 
+
+<!-- CUSTOMER DETAIL OVERLAY -->
+<div id="customer-detail-overlay" class="customer-detail-overlay" onclick="if(event.target===this)closeCustomerDetail()">
+<div class="customer-detail-panel">
+  <h3 id="cust-detail-name"></h3>
+  <div id="cust-detail-sub" style="color:rgba(255,255,255,.5);font-size:.88rem;margin-bottom:4px;"></div>
+  <div class="cust-tabs">
+    <button class="cust-tab-btn active" onclick="showCustTab('info')">Info</button>
+    <button class="cust-tab-btn" onclick="showCustTab('pricesheet')">Price Sheet</button>
+  </div>
+  <div class="cust-tab-pane active" id="cust-tab-info">
+    <div id="cust-detail-info-body"></div>
+    <div class="modal-actions" style="margin-top:20px;"><button class="btn btn-outline" onclick="closeCustomerDetail()">Close</button></div>
+  </div>
+  <div class="cust-tab-pane" id="cust-tab-pricesheet">
+    <div class="price-sheet-toolbar">
+      <button class="btn btn-primary btn-sm" onclick="addPriceSheetRow()">+ Add Item</button>
+      <button class="btn btn-outline btn-sm" onclick="savePriceSheet()">Save Price Sheet</button>
+      <label class="btn btn-outline btn-sm" style="cursor:pointer;margin:0;">Upload PDF/Excel<input type="file" accept=".pdf,.xls,.xlsx,.csv" style="display:none" onchange="handlePriceSheetUpload(event)"></label>
+    </div>
+    <div id="ps-uploaded-files" class="ps-uploaded-files"></div>
+    <table class="price-sheet-table"><thead><tr><th>Item / Service</th><th>Category</th><th>Unit</th><th>Rate ($)</th><th>Notes</th><th></th></tr></thead><tbody id="price-sheet-body"></tbody></table>
+  </div>
+</div>
+</div>
+
+<!-- JOB DETAIL OVERLAY -->
+<div id="job-detail-overlay" class="job-detail-overlay" onclick="if(event.target===this)closeJobDetail()">
+<div class="job-detail-panel">
+  <h3 id="job-detail-title"></h3>
+  <div id="job-detail-sub" style="color:rgba(255,255,255,.5);font-size:.88rem;margin-bottom:4px;"></div>
+  <div class="job-tabs">
+    <button class="job-tab-btn active" onclick="showJobTab('info')">Job Info</button>
+    <button class="job-tab-btn" onclick="showJobTab('pricesheet')">Price Sheet Items</button>
+    <button class="job-tab-btn" onclick="showJobTab('crew')">Crew / Operators</button>
+  </div>
+  <div class="job-tab-pane active" id="job-tab-info">
+    <div id="job-detail-info-body"></div>
+    <div class="modal-actions" style="margin-top:20px;"><button class="btn btn-outline" onclick="closeJobDetail()">Close</button></div>
+  </div>
+  <div class="job-tab-pane" id="job-tab-pricesheet">
+    <p style="color:rgba(255,255,255,.5);font-size:.85rem;margin-bottom:12px;">Select items from the customer price sheet to add to this job. Adjust quantity and add notes.</p>
+    <div id="ps-selector-notice" style="color:rgba(255,255,255,.4);font-size:.85rem;padding:6px 0;"></div>
+    <table class="ps-select-table" id="ps-select-table" style="display:none"><thead><tr><th></th><th>Item</th><th>Category</th><th>Unit</th><th>Rate</th><th>Qty</th><th>Notes</th></tr></thead><tbody id="ps-select-body"></tbody></table>
+    <div style="margin:12px 0;display:flex;gap:10px;">
+      <button class="btn btn-primary btn-sm" onclick="addSelectedPsItems()">Add Selected to Job</button>
+      <button class="btn btn-outline btn-sm" onclick="addCustomJobItem()">+ Custom Item</button>
+    </div>
+    <div style="font-weight:700;color:#fff;margin-bottom:8px;font-size:.95rem;">Job Items</div>
+    <table class="job-items-table"><thead><tr><th>Item</th><th>Cat</th><th>Unit</th><th>Rate</th><th>Qty</th><th>Total</th><th>Notes</th><th></th></tr></thead><tbody id="job-items-body"></tbody></table>
+    <div class="modal-actions" style="margin-top:16px;">
+      <button class="btn btn-outline" onclick="closeJobDetail()">Close</button>
+      <button class="btn btn-primary" onclick="saveJobItems()">Save Items</button>
+    </div>
+  </div>
+  <div class="job-tab-pane" id="job-tab-crew">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <div style="font-weight:700;color:#fff;font-size:1rem;">Flowback Operators / Field Hands</div>
+      <button class="btn btn-primary btn-sm" onclick="showCrewSelector()">+ Add Operator</button>
+    </div>
+    <div id="crew-list"></div>
+    <div id="crew-selector-panel" style="display:none;margin-top:16px;padding:14px;background:rgba(255,255,255,.04);border-radius:8px;">
+      <div style="font-weight:600;color:#fff;margin-bottom:10px;font-size:.9rem;">Select from Personnel</div>
+      <input id="crew-search" placeholder="Search by name or role..." class="search-input" style="width:100%;max-width:360px;margin-bottom:10px;" oninput="renderCrewCandidates()">
+      <div style="margin-bottom:8px;font-size:.82rem;color:rgba(255,255,255,.45);">Role on Job:</div>
+      <select id="crew-role-select" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:6px 10px;font-size:.85rem;margin-bottom:10px;">
+        <option value="Flowback Operator">Flowback Operator</option>
+        <option value="Day Hand">Day Hand</option>
+        <option value="Night Hand">Night Hand</option>
+        <option value="Field Supervisor">Field Supervisor</option>
+        <option value="Floater">Floater</option>
+        <option value="Rig Up">Rig Up</option>
+        <option value="Rig Down">Rig Down</option>
+        <option value="Other">Other</option>
+      </select>
+      <div id="crew-candidates" style="max-height:260px;overflow-y:auto;"></div>
+      <div class="modal-actions" style="margin-top:10px;"><button class="btn btn-outline btn-sm" onclick="hideCrewSelector()">Cancel</button></div>
+    </div>
+    <div class="modal-actions" style="margin-top:20px;">
+      <button class="btn btn-outline" onclick="closeJobDetail()">Close</button>
+      <button class="btn btn-primary" onclick="saveJobCrew()">Save Crew</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <div id="modal-person" class="modal-overlay">
 <div class="modal"><h3>Add Personnel</h3>
 <div class="form-row">
@@ -552,7 +661,8 @@ function save(k,v){localStorage.setItem('ghs_'+k,JSON.stringify(v));}
 
 let jobs=load('jobs'),activities=load('activities'),invoices=load('invoices'),
     vendors=load('vendors'),vendorCosts=load('vendorCosts'),customers=load('customers'),
-    personnel=load('personnel');
+    personnel=load('personnel'),customerPriceSheets=load('customerPriceSheets'),
+    customerPsFiles=load('customerPsFiles'),jobItems=load('jobItems'),jobCrew=load('jobCrew');
 
 // Ã¢ÂÂÃ¢ÂÂ CLOCK Ã¢ÂÂÃ¢ÂÂ
 function updateClock(){
@@ -662,10 +772,20 @@ function renderJobs(){
     (!sf||j.status===sf)&&(!cf||j.customer===cf));
   const b=document.getElementById('jobs-body');
   if(!b)return;
-  b.innerHTML=list.length?list.map(j=>`<tr><td>${j.num}</td><td>${j.name}</td><td>${j.customer}</td><td>${j.location||''}</td><td>${statusBadge(j.status)}</td><td>${j.start||''}</td><td>$${fmt(j.rate)}/${j.rateType}</td><td><button class="btn btn-danger btn-sm" onclick="deleteJob(${j.id})">Del</button></td></tr>`).join(''):emptyRow(8,'No jobs found. Add your first job!');
+  b.innerHTML=list.length?list.map(j=>
+    '<tr style="cursor:pointer">' +
+    '<td onclick="openJobDetail('+j.id+')">'+j.num+'</td>' +
+    '<td onclick="openJobDetail('+j.id+')">'+j.name+'</td>' +
+    '<td onclick="openJobDetail('+j.id+')">'+j.customer+'</td>' +
+    '<td onclick="openJobDetail('+j.id+')">'+(j.location||'')+'</td>' +
+    '<td onclick="openJobDetail('+j.id+')">'+statusBadge(j.status)+'</td>' +
+    '<td onclick="openJobDetail('+j.id+')">'+(j.start||'')+'</td>' +
+    '<td onclick="openJobDetail('+j.id+')">$'+fmt(j.rate)+'/'+j.rateType+'</td>' +
+    '<td><button class="btn btn-primary btn-sm" onclick="openJobDetail('+j.id+')" style="margin-right:4px">View</button>' +
+    '<button class="btn btn-danger btn-sm" onclick="deleteJob('+j.id+')">Del</button></td></tr>'
+  ).join(''):emptyRow(8,'No jobs found. Add your first job with + New Job.');
 }
 
-// Ã¢ÂÂÃ¢ÂÂ WEEKLY ACTIVITY Ã¢ÂÂÃ¢ÂÂ
 function autoFillActivityCust(){
   const jobNum=document.getElementById('a-job').value;
   const job=jobs.find(j=>j.num===jobNum);
@@ -776,16 +896,17 @@ function renderCustomers(){
   b.innerHTML=list.length?list.map(c=>{
     const custInv=invoices.filter(i=>i.customer===c.name&&i.status!=='Paid');
     const totalAR=custInv.reduce((s,i)=>s+parseFloat(i.amount||0),0);
-    return `<tr><td style="font-weight:700;color:var(--white)">${c.name}</td><td>${c.contact||''}</td><td>${c.email||''}</td><td>${c.phone||''}</td><td>${custInv.length}</td><td>$${fmt(totalAR)}</td><td><button class="btn btn-danger btn-sm" onclick="deleteCustomer(${c.id})">Del</button></td></tr>`;
+    return '<tr style="cursor:pointer">' +
+      '<td style="font-weight:700;color:var(--white)" onclick="openCustomerDetail('+c.id+')">'+c.name+'</td>' +
+      '<td onclick="openCustomerDetail('+c.id+')">'+(c.contact||'')+'</td>' +
+      '<td onclick="openCustomerDetail('+c.id+')">'+(c.email||'')+'</td>' +
+      '<td onclick="openCustomerDetail('+c.id+')">'+(c.phone||'')+'</td>' +
+      '<td onclick="openCustomerDetail('+c.id+')">'+custInv.length+'</td>' +
+      '<td onclick="openCustomerDetail('+c.id+')">$'+fmt(totalAR)+'</td>' +
+      '<td><button class="btn btn-primary btn-sm" onclick="openCustomerDetail('+c.id+')" style="margin-right:4px">View</button>' +
+      '<button class="btn btn-danger btn-sm" onclick="deleteCustomer('+c.id+')">Del</button></td></tr>';
   }).join(''):emptyRow(7,'No customers yet. Click + Add Customer.');
 }
-
-// Ã¢ÂÂÃ¢ÂÂ PERSONNEL Ã¢ÂÂÃ¢ÂÂ
-
-
-// ═══ PERSONNEL SPLIT-SCREEN UI ═══
-let _personnelSort = 'name';
-let _selectedPersonId = null;
 
 function setSortPersonnel(field, btn) {
   _personnelSort = field;
@@ -1478,6 +1599,362 @@ function renderPersonnelReport(){
 
 // Ã¢ÂÂÃ¢ÂÂ INIT Ã¢ÂÂÃ¢ÂÂ
 renderDashboard();
+
+// ── CUSTOMER DETAIL & PRICE SHEET ──
+let _currentCustomerId = null;
+
+function openCustomerDetail(custId) {
+  _currentCustomerId = String(custId);
+  const c = customers.find(x => String(x.id) === _currentCustomerId);
+  if (!c) return;
+  document.getElementById('cust-detail-name').textContent = c.name;
+  document.getElementById('cust-detail-sub').textContent = (c.contact ? c.contact + ' · ' : '') + (c.phone||'') + (c.email ? ' · ' + c.email : '');
+  var infoHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">';
+  infoHTML += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">COMPANY</div><div style="color:#fff;font-weight:600;">' + c.name + '</div></div>';
+  infoHTML += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">CONTACT</div><div style="color:#fff;">' + (c.contact||'—') + '</div></div>';
+  infoHTML += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">EMAIL</div><div style="color:#fff;">' + (c.email||'—') + '</div></div>';
+  infoHTML += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">PHONE</div><div style="color:#fff;">' + (c.phone||'—') + '</div></div>';
+  infoHTML += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">ADDRESS</div><div style="color:#fff;">' + (c.address||c.addr||'—') + '</div></div>';
+  infoHTML += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">NET TERMS</div><div style="color:#fff;">' + (c.terms||30) + ' days</div></div>';
+  infoHTML += '</div>';
+  if (c.notes) infoHTML += '<div style="margin-top:14px;"><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">NOTES</div><div style="color:#fff;">' + c.notes + '</div></div>';
+  document.getElementById('cust-detail-info-body').innerHTML = infoHTML;
+  showCustTab('info');
+  document.getElementById('customer-detail-overlay').classList.add('open');
+}
+
+function closeCustomerDetail() {
+  document.getElementById('customer-detail-overlay').classList.remove('open');
+  _currentCustomerId = null;
+}
+
+function showCustTab(tab) {
+  document.querySelectorAll('.cust-tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('onclick').indexOf("'"+tab+"'") !== -1); });
+  document.querySelectorAll('.cust-tab-pane').forEach(function(p){ p.classList.remove('active'); });
+  var pane = document.getElementById('cust-tab-' + tab);
+  if (pane) pane.classList.add('active');
+  if (tab === 'pricesheet') renderPriceSheet();
+}
+
+function renderPriceSheet() {
+  if (!_currentCustomerId) return;
+  var sheets = customerPriceSheets.filter(function(ps){ return String(ps.custId) === _currentCustomerId; });
+  var tbody = document.getElementById('price-sheet-body');
+  if (!tbody) return;
+  if (sheets.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:rgba(255,255,255,.4);padding:16px;">No price sheet items yet. Click + Add Item to begin.</td></tr>';
+  } else {
+    tbody.innerHTML = sheets.map(function(ps){
+      return '<tr>' +
+        '<td><input value="' + (ps.item||'').replace(/"/g,'&quot;') + '" onchange="updatePsRow(' + ps.id + ',\'item\',this.value)" placeholder="Item name"></td>' +
+        '<td><input value="' + (ps.cat||'').replace(/"/g,'&quot;') + '" onchange="updatePsRow(' + ps.id + ',\'cat\',this.value)" placeholder="Category"></td>' +
+        '<td><input value="' + (ps.unit||'').replace(/"/g,'&quot;') + '" onchange="updatePsRow(' + ps.id + ',\'unit\',this.value)" placeholder="Unit"></td>' +
+        '<td><input type="number" value="' + (ps.rate||'') + '" onchange="updatePsRow(' + ps.id + ',\'rate\',this.value)" placeholder="0.00" style="width:90px"></td>' +
+        '<td><input value="' + (ps.notes||'').replace(/"/g,'&quot;') + '" onchange="updatePsRow(' + ps.id + ',\'notes\',this.value)" placeholder="Notes"></td>' +
+        '<td><button class="btn btn-danger btn-sm" onclick="deletePsRow(' + ps.id + ')">X</button></td>' +
+        '</tr>';
+    }).join('');
+  }
+  renderPsFiles();
+}
+
+function renderPsFiles() {
+  if (!_currentCustomerId) return;
+  var files = customerPsFiles.filter(function(f){ return String(f.custId) === _currentCustomerId; });
+  var container = document.getElementById('ps-uploaded-files');
+  if (!container) return;
+  container.innerHTML = files.map(function(f){
+    return '<div class="ps-file-item"><span>&#128196; ' + f.name + '</span><span style="color:rgba(255,255,255,.4);font-size:.78rem;">' + (f.uploadDate||'') + '</span><button class="btn btn-danger btn-sm" onclick="deletePsFile(' + f.id + ')">Remove</button></div>';
+  }).join('');
+}
+
+function addPriceSheetRow() {
+  if (!_currentCustomerId) return;
+  customerPriceSheets.push({id: Date.now(), custId: _currentCustomerId, item: '', cat: '', unit: '', rate: '', notes: ''});
+  save('customerPriceSheets', customerPriceSheets);
+  renderPriceSheet();
+}
+
+function updatePsRow(rowId, field, value) {
+  var row = customerPriceSheets.find(function(r){ return String(r.id) === String(rowId); });
+  if (row) { row[field] = value; }
+}
+
+function deletePsRow(rowId) {
+  if (!confirm('Remove this item?')) return;
+  customerPriceSheets = customerPriceSheets.filter(function(r){ return String(r.id) !== String(rowId); });
+  save('customerPriceSheets', customerPriceSheets);
+  renderPriceSheet();
+}
+
+function savePriceSheet() {
+  save('customerPriceSheets', customerPriceSheets);
+  var btn = event.target; var orig = btn.textContent;
+  btn.textContent = 'Saved!';
+  setTimeout(function(){ btn.textContent = orig; }, 1500);
+}
+
+function handlePriceSheetUpload(evt) {
+  if (!_currentCustomerId) return;
+  var file = evt.target.files[0]; if (!file) return;
+  var fileRecord = {id: Date.now(), custId: _currentCustomerId, name: file.name, uploadDate: new Date().toLocaleDateString(), type: file.type, size: file.size};
+  var reader = new FileReader(); var cid = _currentCustomerId;
+  reader.onload = function(e) {
+    fileRecord.data = e.target.result;
+    customerPsFiles.push(fileRecord);
+    save('customerPsFiles', customerPsFiles);
+    renderPsFiles();
+    if (file.name.toLowerCase().endsWith('.csv')) importCsvToPriceSheet(e.target.result, cid);
+  };
+  reader.readAsDataURL(file);
+  evt.target.value = '';
+}
+
+function deletePsFile(fileId) {
+  if (confirm('Remove this file?')) {
+    customerPsFiles = customerPsFiles.filter(function(f){ return String(f.id) !== String(fileId); });
+    save('customerPsFiles', customerPsFiles);
+    renderPsFiles();
+  }
+}
+
+function importCsvToPriceSheet(dataUrl, custId) {
+  try {
+    var base64 = dataUrl.split(',')[1];
+    var text = atob(base64);
+    var lines = text.split('\n').filter(function(l){ return l.trim(); });
+    if (lines.length < 2) return;
+    for (var i = 1; i < lines.length; i++) {
+      var cols = lines[i].split(',').map(function(c){ return c.trim().replace(/^"|"$/g, ''); });
+      if (cols[0]) customerPriceSheets.push({id: Date.now()+i, custId: String(custId), item: cols[0]||''   , cat: cols[1]||''   , unit: cols[2]||''   , rate: parseFloat(cols[3])||0, notes: cols[4]||''   });
+    }
+    save('customerPriceSheets', customerPriceSheets);
+    renderPriceSheet();
+  } catch(e) { console.error(e); }
+}
+
+// ── JOB DETAIL ──
+var _currentJobId = null;
+var _pendingJobItems = [];
+var _pendingJobCrew = [];
+
+function openJobDetail(jobId) {
+  _currentJobId = String(jobId);
+  var j = jobs.find(function(x){ return String(x.id) === _currentJobId; });
+  if (!j) return;
+  document.getElementById('job-detail-title').textContent = j.num + ' — ' + j.name;
+  document.getElementById('job-detail-sub').textContent = j.customer + (j.location ? ' · ' + j.location : '') + ' · ' + (j.status||'Active');
+  _pendingJobItems = jobItems.filter(function(it){ return String(it.jobId) === _currentJobId; }).map(function(it){ return Object.assign({},it); });
+  _pendingJobCrew = jobCrew.filter(function(c){ return String(c.jobId) === _currentJobId; }).map(function(c){ return Object.assign({},c); });
+  renderJobDetailInfo(j);
+  showJobTab('info');
+  document.getElementById('job-detail-overlay').classList.add('open');
+}
+
+function closeJobDetail() {
+  document.getElementById('job-detail-overlay').classList.remove('open');
+  _currentJobId = null; _pendingJobItems = []; _pendingJobCrew = [];
+}
+
+function showJobTab(tab) {
+  document.querySelectorAll('.job-tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('onclick').indexOf("'"+tab+"'") !== -1); });
+  document.querySelectorAll('.job-tab-pane').forEach(function(p){ p.classList.remove('active'); });
+  var pane = document.getElementById('job-tab-' + tab);
+  if (pane) pane.classList.add('active');
+  if (tab === 'pricesheet') renderJobPsTab();
+  if (tab === 'crew') renderJobCrewTab();
+}
+
+function renderJobDetailInfo(j) {
+  var c = document.getElementById('job-detail-info-body'); if (!c) return;
+  var h = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">JOB #</div><div style="color:#fff;font-weight:600;">' + j.num + '</div></div>';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">JOB NAME</div><div style="color:#fff;">' + j.name + '</div></div>';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">CUSTOMER</div><div style="color:#fff;">' + (j.customer||'—') + '</div></div>';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">LOCATION</div><div style="color:#fff;">' + (j.location||'—') + '</div></div>';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">START DATE</div><div style="color:#fff;">' + (j.start||'—') + '</div></div>';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">STATUS</div><div style="color:#fff;">' + (j.status||'Active') + '</div></div>';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">BILL RATE</div><div style="color:#fff;">$' + fmt(j.rate) + '/' + (j.rateType||'Day') + '</div></div>';
+  h += '<div><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">TYPE</div><div style="color:#fff;">' + (j.type||'—') + '</div></div>';
+  h += '</div>';
+  if (j.notes) h += '<div style="margin-top:14px;"><div style="color:rgba(255,255,255,.45);font-size:.78rem;margin-bottom:3px;">NOTES</div><div style="color:#fff;">' + j.notes + '</div></div>';
+  c.innerHTML = h;
+}
+
+function renderJobPsTab() {
+  if (!_currentJobId) return;
+  var j = jobs.find(function(x){ return String(x.id) === _currentJobId; }); if (!j) return;
+  var cust = customers.find(function(c){ return c.name === j.customer; });
+  var notice = document.getElementById('ps-selector-notice');
+  var table = document.getElementById('ps-select-table');
+  var tbody = document.getElementById('ps-select-body');
+  var custItems = cust ? customerPriceSheets.filter(function(ps){ return String(ps.custId) === String(cust.id); }) : [];
+  if (custItems.length === 0) {
+    notice.textContent = cust ? 'No price sheet found for ' + cust.name + '. Add items in Customers section.' : 'Customer not found. Set up a price sheet in Customers.';
+    table.style.display = 'none';
+  } else {
+    notice.textContent = '';
+    table.style.display = '';
+    tbody.innerHTML = custItems.map(function(ps){
+      return '<tr>' +
+        '<td><input type="checkbox" class="ps-item-chk" data-psid="' + ps.id + '" style="width:16px;height:16px;"></td>' +
+        '<td>' + (ps.item||'') + '</td>' +
+        '<td>' + (ps.cat||'') + '</td>' +
+        '<td>' + (ps.unit||'') + '</td>' +
+        '<td>$' + fmt(ps.rate) + '</td>' +
+        '<td><input type="number" class="ps-item-qty" data-psid="' + ps.id + '" value="1" min="1" style="width:65px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 8px;"></td>' +
+        '<td><input type="text" class="ps-item-note" data-psid="' + ps.id + '" placeholder="Notes..." style="width:130px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 8px;"></td>' +
+        '</tr>';
+    }).join('');
+  }
+  renderJobItemsList();
+}
+
+function addSelectedPsItems() {
+  var checkboxes = document.querySelectorAll('.ps-item-chk:checked');
+  if (checkboxes.length === 0) { alert('Select at least one item.'); return; }
+  var j = jobs.find(function(x){ return String(x.id) === _currentJobId; });
+  var cust = j ? customers.find(function(c){ return c.name === j.customer; }) : null;
+  var custItems = cust ? customerPriceSheets.filter(function(ps){ return String(ps.custId) === String(cust.id); }) : [];
+  checkboxes.forEach(function(chk) {
+    var psId = chk.dataset.psid;
+    var ps = custItems.find(function(x){ return String(x.id) === psId; });
+    if (!ps) return;
+    var qtyEl = document.querySelector('.ps-item-qty[data-psid="' + psId + '"]');
+    var noteEl = document.querySelector('.ps-item-note[data-psid="' + psId + '"]');
+    var qty = parseFloat(qtyEl ? qtyEl.value : 1)||1;
+    var note = noteEl ? noteEl.value : '';
+    _pendingJobItems.push({id: Date.now()+Math.random(), jobId: _currentJobId, item: ps.item, cat: ps.cat, unit: ps.unit, rate: parseFloat(ps.rate)||0, qty: qty, total: (parseFloat(ps.rate)||0)*qty, notes: note});
+    chk.checked = false;
+  });
+  renderJobItemsList();
+}
+
+function addCustomJobItem() {
+  _pendingJobItems.push({id: Date.now()+Math.random(), jobId: _currentJobId, item: '', cat: '', unit: '', rate: 0, qty: 1, total: 0, notes: ''});
+  renderJobItemsList();
+}
+
+function renderJobItemsList() {
+  var tbody = document.getElementById('job-items-body'); if (!tbody) return;
+  if (_pendingJobItems.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:rgba(255,255,255,.4);padding:14px;">No items yet. Use the selector above or add a custom item.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = _pendingJobItems.map(function(it, idx){
+    var st = 'background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 7px;font-size:.83rem;';
+    return '<tr>' +
+      '<td><input value="' + (it.item||'').replace(/"/g,'&quot;') + '" onchange="_pendingJobItems[' + idx + '].item=this.value" placeholder="Item" style="width:100px;' + st + '"></td>' +
+      '<td><input value="' + (it.cat||'').replace(/"/g,'&quot;') + '" onchange="_pendingJobItems[' + idx + '].cat=this.value" placeholder="Cat" style="width:80px;' + st + '"></td>' +
+      '<td><input value="' + (it.unit||'').replace(/"/g,'&quot;') + '" onchange="_pendingJobItems[' + idx + '].unit=this.value" placeholder="Unit" style="width:60px;' + st + '"></td>' +
+      '<td>$<input type="number" value="' + (it.rate||0) + '" onchange="_pendingJobItems[' + idx + '].rate=parseFloat(this.value)||0;_pendingJobItems[' + idx + '].total=_pendingJobItems[' + idx + '].rate*(_pendingJobItems[' + idx + '].qty||1);renderJobItemsList()" style="width:70px;' + st + '"></td>' +
+      '<td><input type="number" value="' + (it.qty||1) + '" min="1" onchange="_pendingJobItems[' + idx + '].qty=parseFloat(this.value)||1;_pendingJobItems[' + idx + '].total=(_pendingJobItems[' + idx + '].rate||0)*_pendingJobItems[' + idx + '].qty;renderJobItemsList()" style="width:55px;' + st + '"></td>' +
+      '<td>$' + fmt(it.total||0) + '</td>' +
+      '<td><input value="' + (it.notes||'').replace(/"/g,'&quot;') + '" onchange="_pendingJobItems[' + idx + '].notes=this.value" placeholder="Notes..." style="width:100px;' + st + '"></td>' +
+      '<td><button class="btn btn-danger btn-sm" onclick="_pendingJobItems.splice(' + idx + ',1);renderJobItemsList()">X</button></td>' +
+      '</tr>';
+  }).join('');
+}
+
+function saveJobItems() {
+  if (!_currentJobId) return;
+  jobItems = jobItems.filter(function(it){ return String(it.jobId) !== _currentJobId; });
+  jobItems = jobItems.concat(_pendingJobItems.map(function(it){ return Object.assign({},it,{jobId: _currentJobId}); }));
+  save('jobItems', jobItems);
+  var btn = event.target; var orig = btn.textContent;
+  btn.textContent = 'Saved!'; setTimeout(function(){ btn.textContent = orig; }, 1500);
+}
+
+// ── JOB CREW / FLOWBACK OPERATORS ──
+function renderJobCrewTab() {
+  if (!_currentJobId) return;
+  renderCrewList(); renderCrewCandidates();
+  document.getElementById('crew-selector-panel').style.display = 'none';
+}
+
+function renderCrewList() {
+  var container = document.getElementById('crew-list'); if (!container) return;
+  if (_pendingJobCrew.length === 0) {
+    container.innerHTML = '<div style="color:rgba(255,255,255,.4);font-size:.88rem;padding:12px 0;">No crew assigned yet. Click + Add Operator.</div>';
+    return;
+  }
+  container.innerHTML = _pendingJobCrew.map(function(cm, idx) {
+    var p = personnel.find(function(x){ return String(x.id) === String(cm.personnelId); });
+    var name = p ? p.name : (cm.name||'Unknown');
+    var role = p ? (p.role||p.position||'') : '';
+    var agency = p && p.agency ? ' · ' + p.agency : '';
+    var initials = name.split(' ').map(function(n){ return n[0]; }).join('').substring(0,2).toUpperCase();
+    return '<div class="crew-member-card">' +
+      '<div class="crew-avatar">' + initials + '</div>' +
+      '<div style="flex:1;"><div style="font-weight:600;color:#fff;font-size:.9rem;">' + name + '</div><div style="font-size:.8rem;color:rgba(255,255,255,.55);">' + role + agency + '</div></div>' +
+      '<span class="crew-type-badge">' + (cm.jobRole||'Flowback Operator') + '</span>' +
+      '<button class="btn btn-danger btn-sm" onclick="_pendingJobCrew.splice(' + idx + ',1);renderCrewList()">Remove</button>' +
+      '</div>';
+  }).join('');
+}
+
+function showCrewSelector() {
+  document.getElementById('crew-selector-panel').style.display = 'block';
+  renderCrewCandidates();
+}
+
+function hideCrewSelector() {
+  document.getElementById('crew-selector-panel').style.display = 'none';
+}
+
+function renderCrewCandidates() {
+  var search = (document.getElementById('crew-search')||{}).value||'';
+  var container = document.getElementById('crew-candidates'); if (!container) return;
+  var alreadyAdded = {};
+  _pendingJobCrew.forEach(function(c){ alreadyAdded[String(c.personnelId)] = true; });
+  var flowbackKeys = ['flowback','operator','hand','representative','supervisor','floater'];
+  var candidates = personnel.filter(function(p){
+    var roleStr = (p.role||p.position||'').toLowerCase();
+    var roleMatch = flowbackKeys.some(function(r){ return roleStr.indexOf(r) !== -1; });
+    var searchMatch = !search || p.name.toLowerCase().indexOf(search.toLowerCase()) !== -1 || roleStr.indexOf(search.toLowerCase()) !== -1;
+    return searchMatch && p.active !== false;
+  });
+  if (candidates.length === 0 && search) {
+    candidates = personnel.filter(function(p){
+      return p.name.toLowerCase().indexOf(search.toLowerCase()) !== -1 && p.active !== false;
+    });
+  }
+  if (candidates.length === 0) {
+    container.innerHTML = '<div style="color:rgba(255,255,255,.4);font-size:.85rem;padding:10px 0;">No personnel found.</div>';
+    return;
+  }
+  container.innerHTML = candidates.slice(0,30).map(function(p) {
+    var initials = p.name.split(' ').map(function(n){ return n[0]; }).join('').substring(0,2).toUpperCase();
+    var isAdded = !!alreadyAdded[String(p.id)];
+    var roleStr = (p.role||p.position||'') + (p.agency ? ' · ' + p.agency : '');
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;margin-bottom:4px;background:rgba(255,255,255,.05);">' +
+      '<div style="width:32px;height:32px;border-radius:50%;background:#e8871a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#fff;flex-shrink:0;">' + initials + '</div>' +
+      '<div style="flex:1;"><div style="color:#fff;font-size:.88rem;font-weight:600;">' + p.name + '</div><div style="color:rgba(255,255,255,.45);font-size:.78rem;">' + roleStr + '</div></div>' +
+      (isAdded ? '<span style="color:rgba(255,255,255,.35);font-size:.78rem;">Added</span>' : '<button class="btn btn-primary btn-sm" onclick="addCrewMember(\'' + p.id + '\')">+ Add</button>') +
+      '</div>';
+  }).join('');
+}
+
+function addCrewMember(personnelId) {
+  var p = personnel.find(function(x){ return String(x.id) === String(personnelId); });
+  if (!p) return;
+  var roleEl = document.getElementById('crew-role-select');
+  var role = roleEl ? roleEl.value : 'Flowback Operator';
+  if (_pendingJobCrew.some(function(c){ return String(c.personnelId) === String(personnelId); })) {
+    alert(p.name + ' is already on this job.'); return;
+  }
+  _pendingJobCrew.push({id: Date.now(), jobId: _currentJobId, personnelId: String(personnelId), name: p.name, jobRole: role});
+  renderCrewList(); renderCrewCandidates();
+}
+
+function saveJobCrew() {
+  if (!_currentJobId) return;
+  jobCrew = jobCrew.filter(function(c){ return String(c.jobId) !== _currentJobId; });
+  jobCrew = jobCrew.concat(_pendingJobCrew.map(function(c){ return Object.assign({},c,{jobId: _currentJobId}); }));
+  save('jobCrew', jobCrew);
+  var btn = event.target; var orig = btn.textContent;
+  btn.textContent = 'Saved!'; setTimeout(function(){ btn.textContent = orig; }, 1500);
+}
 </script>
 <div class="page-watermark" id="watermark"></div>
 </body>
