@@ -662,7 +662,7 @@ function save(k,v){localStorage.setItem('ghs_'+k,JSON.stringify(v));}
 let jobs=load('jobs'),activities=load('activities'),invoices=load('invoices'),
     vendors=load('vendors'),vendorCosts=load('vendorCosts'),customers=load('customers'),
     personnel=load('personnel'),customerPriceSheets=load('customerPriceSheets'),
-    customerPsFiles=load('customerPsFiles'),jobItems=load('jobItems'),jobCrew=load('jobCrew');
+    customerPsFiles=load('customerPsFiles'),jobItems=Array.isArray(load('jobItems'))?load('jobItems'):[],jobCrew=Array.isArray(load('jobCrewList'))?load('jobCrewList'):[];
 
 // Ã¢ÂÂÃ¢ÂÂ CLOCK Ã¢ÂÂÃ¢ÂÂ
 function updateClock(){
@@ -1953,7 +1953,7 @@ function saveJobCrew() {
   if (!_currentJobId) return;
   jobCrew = jobCrew.filter(function(c){ return String(c.jobId) !== _currentJobId; });
   jobCrew = jobCrew.concat(_pendingJobCrew.map(function(c){ return Object.assign({},c,{jobId: _currentJobId}); }));
-  save('jobCrew', jobCrew);
+  save('jobCrewList', jobCrew);
   var btn = event.target; var orig = btn.textContent;
   btn.textContent = 'Saved!'; setTimeout(function(){ btn.textContent = orig; }, 1500);
 }
