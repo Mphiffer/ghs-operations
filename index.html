@@ -253,6 +253,174 @@ tr:hover td{background:rgba(74,184,232,.04);}
 .crew-member-card{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:8px;margin-bottom:8px;}
 .crew-avatar{width:36px;height:36px;border-radius:50%;background:#e8871a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0;}
 .crew-type-badge{font-size:.75rem;padding:2px 8px;border-radius:12px;font-weight:600;background:rgba(232,135,26,.2);color:#e8871a;}
+
+/* ===== GHS CUSTOMER PAGE REDESIGN ===== */
+#page-customers{padding:0!important;background:#f4f6fa!important}
+.cust-page-header{background:linear-gradient(135deg,#0d2d4f 0%,#1a7ab5 100%);padding:28px 36px 24px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.cust-page-title{color:#fff;font-size:26px;font-weight:800;letter-spacing:.5px;line-height:1}
+.cust-page-subtitle{color:rgba(255,255,255,.65);font-size:13px;margin-top:4px}
+.cust-page-header-right{display:flex;align-items:center;gap:10px}
+.cust-search-wrap{position:relative}
+.cust-search-wrap input{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);color:#fff;padding:9px 14px 9px 36px;border-radius:8px;font-size:13px;width:220px;outline:none;transition:all .2s}
+.cust-search-wrap input::placeholder{color:rgba(255,255,255,.6)}
+.cust-search-wrap input:focus{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.7)}
+.cust-search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.7;font-size:14px;pointer-events:none}
+.btn-add-cust{background:#f0a500;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .18s;white-space:nowrap}
+.btn-add-cust:hover{background:#d4920a}
+.cust-stats-bar{display:flex;background:#fff;border-bottom:1px solid #e2e8f0}
+.cust-stat{flex:1;padding:16px 24px;text-align:center;border-right:1px solid #e2e8f0}
+.cust-stat:last-child{border-right:none}
+.cust-stat-num{font-size:24px;font-weight:800;color:#1a7ab5;line-height:1}
+.cust-stat-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.7px;margin-top:4px}
+.cust-grid-container{padding:24px 28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.cust-card{background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.07);border:1.5px solid #e8eef5;overflow:hidden;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.cust-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(26,122,181,.15);border-color:#1a7ab5}
+.cust-card-top{background:linear-gradient(135deg,#0d2d4f,#1a5c8a);padding:18px 20px 14px;position:relative}
+.cust-card-initials{width:48px;height:48px;border-radius:12px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;letter-spacing:1px;margin-bottom:10px}
+.cust-card-name{font-size:16px;font-weight:800;color:#fff;line-height:1.2}
+.cust-card-location{font-size:12px;color:rgba(255,255,255,.65);margin-top:3px}
+.cust-card-badge{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.15);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;border:1px solid rgba(255,255,255,.25);letter-spacing:.5px}
+.cust-card-body{padding:16px 20px}
+.cust-card-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.cust-card-stat-val{font-size:16px;font-weight:800;color:#1a7ab5}
+.cust-card-stat-key{font-size:10px;text-transform:uppercase;color:#999;letter-spacing:.5px}
+.cust-card-contact{display:flex;align-items:center;gap:7px;font-size:12px;color:#555;margin-bottom:5px}
+.cust-card-divider{border:none;border-top:1px solid #eef1f6;margin:12px 0}
+.cust-card-actions{display:flex;gap:8px}
+.cust-card-btn-primary{flex:1;background:#1a7ab5;color:#fff;border:none;padding:8px 0;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s}
+.cust-card-btn-primary:hover{background:#155d8a}
+.cust-card-btn-ghost{background:none;color:#888;border:1.5px solid #e2e8f0;padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;transition:all .15s}
+.cust-card-btn-ghost:hover{border-color:#e05050;color:#e05050}
+.cust-empty{text-align:center;padding:80px 20px;color:#aaa;grid-column:1/-1}
+.cust-empty-icon{font-size:52px;margin-bottom:16px;opacity:.3}
+.cust-empty-text{font-size:18px;font-weight:700;color:#ccc}
+.cust-empty-sub{font-size:13px;color:#bbb;margin-top:6px}
+#customer-detail-overlay{position:fixed!important;inset:0!important;z-index:1500!important;background:rgba(10,20,40,.75)!important;display:none;align-items:stretch;justify-content:flex-end;backdrop-filter:blur(3px)}
+#customer-detail-overlay.active{display:flex!important}
+.cust-detail-panel{width:820px;max-width:95vw;height:100vh;background:#f4f6fa;display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,.25);animation:slideInRight .25s ease;overflow:hidden}
+@keyframes slideInRight{from{transform:translateX(60px);opacity:0}to{transform:translateX(0);opacity:1}}
+.cust-detail-header{background:linear-gradient(135deg,#0d2d4f 0%,#1a7ab5 100%);padding:0;flex-shrink:0}
+.cust-detail-header-top{padding:22px 28px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.cust-detail-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.cust-detail-logo{width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0}
+.cust-detail-name-block{flex:1;min-width:0}
+.cust-detail-company-name{font-size:22px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.cust-detail-meta{font-size:12px;color:rgba(255,255,255,.6);margin-top:3px}
+.cust-detail-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.cust-detail-close:hover{background:rgba(255,255,255,.28)}
+.cust-detail-kpi-row{display:flex;border-top:1px solid rgba(255,255,255,.12)}
+.cust-detail-kpi{flex:1;padding:12px 20px;border-right:1px solid rgba(255,255,255,.1);text-align:center}
+.cust-detail-kpi:last-child{border-right:none}
+.cust-detail-kpi-val{font-size:20px;font-weight:800;color:#fff;line-height:1}
+.cust-detail-kpi-lbl{font-size:10px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.7px;margin-top:3px}
+.cust-detail-tabs{display:flex;background:rgba(0,0,0,.2);padding:0 20px;flex-shrink:0}
+.cust-detail-tab{padding:11px 18px;color:rgba(255,255,255,.6);font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.cust-detail-tab.active{color:#fff;border-bottom-color:#f0a500}
+.cust-detail-tab:hover:not(.active){color:rgba(255,255,255,.85)}
+.cust-detail-body{flex:1;overflow-y:auto;padding:24px 28px}
+.cust-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cust-info-card{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 6px rgba(0,0,0,.06);border:1px solid #eaeff5}
+.cust-info-card-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#1a7ab5;margin-bottom:14px}
+.cust-info-row{margin-bottom:12px}
+.cust-info-row:last-child{margin-bottom:0}
+.cust-info-label{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#aaa;margin-bottom:2px}
+.cust-info-value{font-size:14px;color:#1a2940;font-weight:600}
+.cust-info-value.empty{color:#ccc;font-weight:400;font-style:italic}
+.cust-info-card.full-width{grid-column:1/-1}
+.cust-jobs-list{display:flex;flex-direction:column;gap:10px}
+.cust-job-item{background:#fff;border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 5px rgba(0,0,0,.05);border:1px solid #eaeff5;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.cust-job-item:hover{border-color:#1a7ab5;box-shadow:0 3px 12px rgba(26,122,181,.1)}
+.cust-job-num{font-size:11px;font-weight:800;color:#1a7ab5;background:#eef4fb;padding:2px 7px;border-radius:5px;margin-bottom:3px;display:inline-block}
+.cust-job-name{font-size:14px;font-weight:700;color:#1a2940}
+.cust-job-loc{font-size:12px;color:#888;margin-top:2px}
+.cust-job-status{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
+.cust-job-status.active{background:#e6f7ee;color:#2a9e6a}
+.cust-job-status.completed{background:#eef1f6;color:#888}
+.cust-job-status.hold{background:#fff6e0;color:#c08000}
+.cust-no-jobs{text-align:center;padding:40px;color:#ccc;font-size:14px}
+.ps-upload-zone{border:2px dashed #c5d5e8;border-radius:12px;padding:28px;text-align:center;background:#fff;cursor:pointer;transition:all .2s;margin-bottom:20px;position:relative}
+.ps-upload-zone:hover,.ps-upload-zone.drag-over{border-color:#1a7ab5;background:#f0f7ff}
+.ps-upload-icon{font-size:36px;margin-bottom:10px;opacity:.5}
+.ps-upload-title{font-size:15px;font-weight:700;color:#1a2940;margin-bottom:4px}
+.ps-upload-sub{font-size:12px;color:#999}
+.ps-upload-btn{display:inline-block;margin-top:12px;background:#1a7ab5;color:#fff;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:background .15s}
+.ps-upload-btn:hover{background:#155d8a}
+.ps-upload-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.ps-file-badge{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid #d0e2f0;border-radius:10px;padding:12px 16px;margin-bottom:16px}
+.ps-file-icon{font-size:24px;flex-shrink:0}
+.ps-file-name{font-size:13px;font-weight:700;color:#1a2940}
+.ps-file-meta{font-size:11px;color:#aaa}
+.ps-file-remove{margin-left:auto;background:none;border:1.5px solid #e2e2e2;color:#e05050;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s}
+.ps-file-remove:hover{background:#fdf0f0;border-color:#e05050}
+.ps-parsing-overlay{background:#fff;border-radius:12px;padding:36px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:20px;border:1px solid #e8eef5}
+.ps-parsing-spinner{width:40px;height:40px;border:3px solid #e8eef5;border-top-color:#1a7ab5;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ps-parsing-title{font-size:15px;font-weight:700;color:#1a2940}
+.ps-parsing-sub{font-size:12px;color:#aaa;margin-top:4px}
+.ps-extracted-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.ps-extracted-title{font-size:15px;font-weight:800;color:#1a2940;display:flex;align-items:center;gap:8px}
+.ps-extracted-badge{background:#e6f7ee;color:#2a9e6a;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+.ps-table-wrap{background:#fff;border-radius:12px;overflow:hidden;border:1.5px solid #e8eef5;margin-bottom:18px}
+.ps-table{width:100%;border-collapse:collapse}
+.ps-table th{background:#f4f6fa;padding:10px 14px;text-align:left;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#888;border-bottom:1px solid #e8eef5}
+.ps-table td{padding:10px 14px;border-bottom:1px solid #f0f3f7;vertical-align:middle}
+.ps-table tr:last-child td{border-bottom:none}
+.ps-table tr:hover td{background:#f9fbff}
+.ps-table input{border:1.5px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:13px;width:100%;outline:none;transition:border .15s;background:#fafafa}
+.ps-table input:focus{border-color:#1a7ab5;background:#fff}
+.ps-del-row{background:none;border:none;color:#ccc;cursor:pointer;font-size:16px;padding:4px 8px;border-radius:4px;transition:color .15s}
+.ps-del-row:hover{color:#e05050}
+.ps-add-row-btn{background:none;border:2px dashed #d0e0ef;color:#1a7ab5;width:100%;padding:10px;text-align:center;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;transition:all .15s;margin-bottom:12px}
+.ps-add-row-btn:hover{background:#f0f7ff;border-color:#1a7ab5}
+.ps-action-bar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border-radius:12px;padding:14px 18px;border:1px solid #e8eef5;box-shadow:0 1px 5px rgba(0,0,0,.04)}
+.ps-action-bar-left{display:flex;gap:8px;flex-wrap:wrap}
+.ps-save-btn{background:#1a7ab5;color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.ps-save-btn:hover{background:#155d8a}
+.ps-create-job-btn{background:#f0a500;color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .15s}
+.ps-create-job-btn:hover{background:#d4920a}
+.ps-item-count{font-size:12px;color:#aaa}
+#modal-ps-to-job{position:fixed;inset:0;z-index:2000;background:rgba(10,20,40,.75);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+#modal-ps-to-job.active{display:flex}
+.ps-job-modal{background:#fff;border-radius:16px;width:720px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+.ps-job-modal-header{background:linear-gradient(135deg,#0d2d4f,#1a7ab5);padding:22px 28px;flex-shrink:0}
+.ps-job-modal-title{font-size:20px;font-weight:800;color:#fff}
+.ps-job-modal-sub{font-size:12px;color:rgba(255,255,255,.65);margin-top:3px}
+.ps-job-modal-body{flex:1;overflow-y:auto;padding:24px 28px}
+.ps-job-modal-footer{padding:16px 28px;border-top:1px solid #eef1f6;display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;background:#fafbfc}
+.ps-job-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+.ps-job-form-field{display:flex;flex-direction:column;gap:5px}
+.ps-job-form-field.full{grid-column:1/-1}
+.ps-job-form-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888}
+.ps-job-form-input{border:1.5px solid #e2e8f0;border-radius:8px;padding:9px 13px;font-size:14px;outline:none;transition:border .15s}
+.ps-job-form-input:focus{border-color:#1a7ab5}
+.ps-job-form-select{border:1.5px solid #e2e8f0;border-radius:8px;padding:9px 13px;font-size:14px;outline:none;background:#fff;cursor:pointer}
+.ps-job-section-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#1a7ab5;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #eef1f6}
+.ps-job-items-grid{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.ps-job-item-row{display:flex;align-items:center;gap:10px;background:#f8f9fc;border-radius:8px;padding:10px 14px;border:1px solid #eef1f6}
+.ps-job-item-check{width:16px;height:16px;cursor:pointer;accent-color:#1a7ab5;flex-shrink:0}
+.ps-job-item-name{flex:1;font-size:13px;font-weight:600;color:#1a2940}
+.ps-job-item-cat{font-size:11px;color:#aaa}
+.ps-job-item-rate{font-size:13px;font-weight:700;color:#1a7ab5;min-width:70px;text-align:right}
+.ps-job-item-qty{width:60px;border:1.5px solid #e2e8f0;border-radius:6px;padding:5px 8px;font-size:13px;text-align:center;outline:none}
+.ps-job-item-qty:focus{border-color:#1a7ab5}
+.ps-job-crew-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;max-height:220px;overflow-y:auto}
+.ps-job-crew-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f8f9fc;border-radius:8px;border:1px solid #eef1f6;cursor:pointer;transition:all .15s}
+.ps-job-crew-item.selected{background:#eef4fb;border-color:#1a7ab5}
+.ps-job-crew-item input[type=checkbox]{accent-color:#1a7ab5;flex-shrink:0}
+.ps-job-crew-avatar{width:28px;height:28px;border-radius:7px;background:#1a7ab5;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ps-job-crew-name{font-size:12px;font-weight:700;color:#1a2940;line-height:1.2}
+.ps-job-crew-role{font-size:10px;color:#aaa}
+.ps-modal-btn-cancel{background:none;border:1.5px solid #e2e8f0;color:#888;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer}
+.ps-modal-btn-create{background:#f0a500;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background .15s}
+.ps-modal-btn-create:hover{background:#d4920a}
+.ghs-toast{position:fixed;bottom:28px;right:28px;z-index:9999;background:#1a2940;color:#fff;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 8px 28px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
+.ghs-toast.show{transform:translateY(0);opacity:1}
+.ghs-toast.success{border-left:4px solid #2a9e6a}
+.ghs-toast.error{border-left:4px solid #e05050}
+.ghs-toast.info{border-left:4px solid #1a7ab5}
+.cust-detail-body::-webkit-scrollbar,.ps-job-modal-body::-webkit-scrollbar{width:5px}
+.cust-detail-body::-webkit-scrollbar-track,.ps-job-modal-body::-webkit-scrollbar-track{background:transparent}
+.cust-detail-body::-webkit-scrollbar-thumb,.ps-job-modal-body::-webkit-scrollbar-thumb{background:#d0d8e4;border-radius:4px}
 </style>
 </head>
 <body>
@@ -365,12 +533,31 @@ tr:hover td{background:rgba(74,184,232,.04);}
 
 <!-- CUSTOMERS -->
 <div id="page-customers" class="page">
-  <div class="page-header"><div class="page-title">Customers</div><button class="btn btn-primary" onclick="openModal('modal-customer')">+ Add Customer</button></div>
-  <div class="table-wrap">
-    <div class="table-toolbar"><input class="search-input" id="cust-search" placeholder="Search customers..." oninput="renderCustomers()"></div>
-    <table><thead><tr><th>Company</th><th>Contact</th><th>Email</th><th>Phone</th><th>Open Invoices</th><th>Total AR</th><th>Actions</th></tr></thead><tbody id="customers-body"></tbody></table>
+  <div class="cust-page-header">
+    <div>
+      <div class="cust-page-title">Customers</div>
+      <div class="cust-page-subtitle">Manage accounts, price sheets, and job history</div>
+    </div>
+    <div class="cust-page-header-right">
+      <div class="cust-search-wrap">
+        <span class="cust-search-icon">&#128269;</span>
+        <input type="text" id="cust-search-input" placeholder="Search customers..." oninput="ghsRenderCustomerCards()">
+      </div>
+      <button class="btn-add-cust" onclick="document.getElementById('modal-customer').style.display='flex'">&#65291; Add Customer</button>
+    </div>
+  </div>
+  <div class="cust-stats-bar" id="cust-stats-bar">
+    <div class="cust-stat"><div class="cust-stat-num" id="cstat-total">0</div><div class="cust-stat-label">Total Customers</div></div>
+    <div class="cust-stat"><div class="cust-stat-num" id="cstat-active">0</div><div class="cust-stat-label">Active Jobs</div></div>
+    <div class="cust-stat"><div class="cust-stat-num" id="cstat-ar">$0</div><div class="cust-stat-label">Open AR</div></div>
+    <div class="cust-stat"><div class="cust-stat-num" id="cstat-inv">0</div><div class="cust-stat-label">Open Invoices</div></div>
+  </div>
+  <div class="cust-grid-container" id="cust-cards-grid">
+    <div class="cust-empty"><div class="cust-empty-icon">&#127970;</div><div class="cust-empty-text">Loading...</div></div>
   </div>
 </div>
+
+
 
 <!-- PERSONNEL -->
 <div id="page-personnel" class="page">
@@ -519,29 +706,37 @@ tr:hover td{background:rgba(74,184,232,.04);}
 
 
 <!-- CUSTOMER DETAIL OVERLAY -->
-<div id="customer-detail-overlay" class="customer-detail-overlay" onclick="if(event.target===this)closeCustomerDetail()">
-<div class="customer-detail-panel">
-  <h3 id="cust-detail-name"></h3>
-  <div id="cust-detail-sub" style="color:rgba(255,255,255,.5);font-size:.88rem;margin-bottom:4px;"></div>
-  <div class="cust-tabs">
-    <button class="cust-tab-btn active" onclick="showCustTab('info')">Info</button>
-    <button class="cust-tab-btn" onclick="showCustTab('pricesheet')">Price Sheet</button>
-  </div>
-  <div class="cust-tab-pane active" id="cust-tab-info">
-    <div id="cust-detail-info-body"></div>
-    <div class="modal-actions" style="margin-top:20px;"><button class="btn btn-outline" onclick="closeCustomerDetail()">Close</button></div>
-  </div>
-  <div class="cust-tab-pane" id="cust-tab-pricesheet">
-    <div class="price-sheet-toolbar">
-      <button class="btn btn-primary btn-sm" onclick="addPriceSheetRow()">+ Add Item</button>
-      <button class="btn btn-outline btn-sm" onclick="savePriceSheet()">Save Price Sheet</button>
-      <label class="btn btn-outline btn-sm" style="cursor:pointer;margin:0;">Upload PDF/Excel<input type="file" accept=".pdf,.xls,.xlsx,.csv" style="display:none" onchange="handlePriceSheetUpload(event)"></label>
+<div id="customer-detail-overlay" class="customer-detail-overlay">
+  <div class="cust-detail-panel" id="cust-detail-panel">
+    <div class="cust-detail-header">
+      <div class="cust-detail-header-top">
+        <div class="cust-detail-logo-row">
+          <div class="cust-detail-logo" id="cust-detail-initials-logo">CR</div>
+          <div class="cust-detail-name-block">
+            <div class="cust-detail-company-name" id="cust-detail-name">Customer Name</div>
+            <div class="cust-detail-meta" id="cust-detail-contact-meta">Contact &middot; Location</div>
+          </div>
+        </div>
+        <button class="cust-detail-close" onclick="closeCustomerDetail()">&#10005;</button>
+      </div>
+      <div class="cust-detail-kpi-row">
+        <div class="cust-detail-kpi"><div class="cust-detail-kpi-val" id="cdkpi-jobs">0</div><div class="cust-detail-kpi-lbl">Active Jobs</div></div>
+        <div class="cust-detail-kpi"><div class="cust-detail-kpi-val" id="cdkpi-ar">$0</div><div class="cust-detail-kpi-lbl">Open AR</div></div>
+        <div class="cust-detail-kpi"><div class="cust-detail-kpi-val" id="cdkpi-invoices">0</div><div class="cust-detail-kpi-lbl">Invoices</div></div>
+        <div class="cust-detail-kpi"><div class="cust-detail-kpi-val" id="cdkpi-terms">30d</div><div class="cust-detail-kpi-lbl">Net Terms</div></div>
+      </div>
+      <div class="cust-detail-tabs">
+        <button class="cust-detail-tab active" onclick="ghsShowCustTab('info',this)">&#128203; Info</button>
+        <button class="cust-detail-tab" onclick="ghsShowCustTab('pricesheet',this)">&#128178; Price Sheet</button>
+        <button class="cust-detail-tab" onclick="ghsShowCustTab('jobs',this)">&#128295; Jobs</button>
+        <button class="cust-detail-tab" onclick="ghsShowCustTab('invoices',this)">&#128196; Invoices</button>
+      </div>
     </div>
-    <div id="ps-uploaded-files" class="ps-uploaded-files"></div>
-    <table class="price-sheet-table"><thead><tr><th>Item / Service</th><th>Category</th><th>Unit</th><th>Rate ($)</th><th>Notes</th><th></th></tr></thead><tbody id="price-sheet-body"></tbody></table>
+    <div class="cust-detail-body" id="cust-detail-body"></div>
   </div>
 </div>
-</div>
+
+
 
 <!-- JOB DETAIL OVERLAY -->
 <div id="job-detail-overlay" class="job-detail-overlay" onclick="if(event.target===this)closeJobDetail()">
@@ -1957,7 +2152,265 @@ function saveJobCrew() {
   var btn = event.target; var orig = btn.textContent;
   btn.textContent = 'Saved!'; setTimeout(function(){ btn.textContent = orig; }, 1500);
 }
+
+// ===== GHS FIXES: personnel sort init =====
+var _personnelSort='name';
+var _selectedPersonId=null;
+
+// ===== CUSTOMER PAGE HELPERS =====
+function ghsShowToast(msg,type){type=type||'success';var t=document.getElementById('ghs-toast');if(!t)return;t.textContent=(type==='success'?'✅ ':type==='error'?'❌ ':'ℹ️ ')+msg;t.className='ghs-toast '+type+' show';setTimeout(function(){t.className='ghs-toast '+type;},3000);}
+function ghsCustInitials(name){var parts=(name||'').trim().split(' ').filter(Boolean);if(parts.length>=2)return(parts[0][0]+parts[1][0]).toUpperCase();return(name||'??').substring(0,2).toUpperCase();}
+function ghsFmtMoney(n){if(!n&&n!==0)return'$0';return'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
+
+// ===== CUSTOMER CARD GRID =====
+function ghsRenderCustomerCards(){
+  var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');
+  var jobs=JSON.parse(localStorage.getItem('ghs_jobs')||'[]');
+  var search=(document.getElementById('cust-search-input')||{}).value||'';
+  var activeJobs=jobs.filter(function(j){return j.status==='Active';}).length;
+  if(document.getElementById('cstat-total'))document.getElementById('cstat-total').textContent=customers.length;
+  if(document.getElementById('cstat-active'))document.getElementById('cstat-active').textContent=activeJobs;
+  if(document.getElementById('cstat-ar'))document.getElementById('cstat-ar').textContent='$0';
+  if(document.getElementById('cstat-inv'))document.getElementById('cstat-inv').textContent='0';
+  var grid=document.getElementById('cust-cards-grid');if(!grid)return;
+  var filtered=customers.filter(function(c){if(!search)return true;var q=search.toLowerCase();return c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)||(c.addr||'').toLowerCase().includes(q);});
+  if(!filtered.length){grid.innerHTML='<div class="cust-empty"><div class="cust-empty-icon">🏢</div><div class="cust-empty-text">'+(search?'No customers match &quot;'+search+'&quot;':'No customers yet')+'</div><div class="cust-empty-sub">'+(search?'Try a different search':'Click + Add Customer to get started')+'</div></div>';return;}
+  grid.innerHTML=filtered.map(function(c){
+    var custJobs=jobs.filter(function(j){return j.customer===c.name;});
+    var activeJ=custJobs.filter(function(j){return j.status==='Active';});
+    var initials=ghsCustInitials(c.name);
+    var addr=c.addr||'';var addrShort=addr.length>18?addr.substring(0,18)+'\u2026':addr;
+    return'<div class="cust-card" onclick="ghsOpenCustDetail(''+c.id+'')">'+
+      '<div class="cust-card-top">'+(addrShort?'<div class="cust-card-badge">\uD83D\uDCCD '+addrShort+'</div>':'')+
+      '<div class="cust-card-initials">'+initials+'</div><div class="cust-card-name">'+c.name+'</div>'+
+      '<div class="cust-card-location">'+(c.contact||'No contact listed')+'</div></div>'+
+      '<div class="cust-card-body"><div class="cust-card-stats">'+
+      '<div class="cust-card-stat-item"><div class="cust-card-stat-val">'+custJobs.length+'</div><div class="cust-card-stat-key">Total Jobs</div></div>'+
+      '<div class="cust-card-stat-item"><div class="cust-card-stat-val" style="color:'+(activeJ.length>0?'#2a9e6a':'#1a7ab5')+'">'+activeJ.length+'</div><div class="cust-card-stat-key">Active Jobs</div></div>'+
+      '<div class="cust-card-stat-item"><div class="cust-card-stat-val">$0</div><div class="cust-card-stat-key">Open AR</div></div>'+
+      '<div class="cust-card-stat-item"><div class="cust-card-stat-val">'+(c.terms||30)+'d</div><div class="cust-card-stat-key">Net Terms</div></div></div>'+
+      (c.phone||c.email?'<div>'+(c.phone?'<div class="cust-card-contact">\uD83D\uDCDE <span>'+c.phone+'</span></div>':'')+(c.email?'<div class="cust-card-contact">\u2709\uFE0F <span>'+c.email+'</span></div>':'')+'</div>':'')+
+      '<hr class="cust-card-divider"><div class="cust-card-actions">'+
+      '<button class="cust-card-btn-primary" onclick="event.stopPropagation();ghsOpenCustDetail(''+c.id+'')">View Details</button>'+
+      '<button class="cust-card-btn-ghost" onclick="event.stopPropagation();if(confirm('Delete '+c.name+'?')){deleteCustomer(''+c.id+'');ghsRenderCustomerCards()}" title="Delete">\uD83D\uDDD1</button>'+
+      '</div></div></div>';
+  }).join('');
+}
+
+// ===== CUSTOMER DETAIL PANEL =====
+var _ghsCurrentCustId=null,_ghsCurrentCustTab='info';
+function ghsOpenCustDetail(custId){
+  _ghsCurrentCustId=custId;_ghsCurrentCustTab='info';
+  var overlay=document.getElementById('customer-detail-overlay');
+  overlay.classList.add('active');overlay.style.display='flex';
+  var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');
+  var cust=customers.find(function(c){return c.id===custId;});if(!cust)return;
+  document.getElementById('cust-detail-name').textContent=cust.name;
+  document.getElementById('cust-detail-initials-logo').textContent=ghsCustInitials(cust.name);
+  document.getElementById('cust-detail-contact-meta').textContent=[cust.contact,cust.addr].filter(Boolean).join(' \u00B7 ')||'No contact info';
+  var jobs=JSON.parse(localStorage.getItem('ghs_jobs')||'[]');
+  var custJobs=jobs.filter(function(j){return j.customer===cust.name;});
+  var activeJ=custJobs.filter(function(j){return j.status==='Active';});
+  document.getElementById('cdkpi-jobs').textContent=activeJ.length;
+  document.getElementById('cdkpi-ar').textContent='$0';
+  document.getElementById('cdkpi-invoices').textContent='0';
+  document.getElementById('cdkpi-terms').textContent=(cust.terms||30)+'d';
+  document.querySelectorAll('.cust-detail-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.cust-detail-tab')[0].classList.add('active');
+  ghsRenderCustTabInfo(cust);
+}
+function closeCustomerDetail(){var overlay=document.getElementById('customer-detail-overlay');overlay.classList.remove('active');overlay.style.display='none';}
+function ghsShowCustTab(tab,btn){
+  _ghsCurrentCustTab=tab;
+  document.querySelectorAll('.cust-detail-tab').forEach(function(t){t.classList.remove('active');});btn.classList.add('active');
+  var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');
+  var cust=customers.find(function(c){return c.id===_ghsCurrentCustId;});if(!cust)return;
+  if(tab==='info')ghsRenderCustTabInfo(cust);
+  else if(tab==='pricesheet')ghsRenderCustTabPriceSheet(cust);
+  else if(tab==='jobs')ghsRenderCustTabJobs(cust);
+  else if(tab==='invoices')ghsRenderCustTabInvoices(cust);
+}
+function ghsRenderCustTabInfo(cust){
+  var body=document.getElementById('cust-detail-body');
+  body.innerHTML='<div class="cust-info-grid">'+
+    '<div class="cust-info-card"><div class="cust-info-card-title">Company Info</div>'+
+    '<div class="cust-info-row"><div class="cust-info-label">Company Name</div><div class="cust-info-value">'+cust.name+'</div></div>'+
+    '<div class="cust-info-row"><div class="cust-info-label">Primary Contact</div><div class="cust-info-value '+(cust.contact?'':'empty')+'">'+(cust.contact||'\u2014')+'</div></div>'+
+    '<div class="cust-info-row"><div class="cust-info-label">Address</div><div class="cust-info-value '+(cust.addr?'':'empty')+'">'+(cust.addr||'\u2014')+'</div></div>'+
+    '<div class="cust-info-row"><div class="cust-info-label">Net Terms</div><div class="cust-info-value">'+(cust.terms||30)+' days</div></div></div>'+
+    '<div class="cust-info-card"><div class="cust-info-card-title">Contact Details</div>'+
+    '<div class="cust-info-row"><div class="cust-info-label">Phone</div><div class="cust-info-value '+(cust.phone?'':'empty')+'">'+(cust.phone||'\u2014')+'</div></div>'+
+    '<div class="cust-info-row"><div class="cust-info-label">Email</div><div class="cust-info-value '+(cust.email?'':'empty')+'">'+(cust.email||'\u2014')+'</div></div>'+
+    '<div class="cust-info-row"><div class="cust-info-label">Billing Status</div><div class="cust-info-value" style="color:#2a9e6a;font-weight:800;">Active</div></div></div>'+
+    (cust.notes?'<div class="cust-info-card full-width"><div class="cust-info-card-title">Notes</div><div class="cust-info-value">'+cust.notes+'</div></div>':'')+
+  '</div>'+
+  '<div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">'+
+  '<button onclick="ghsShowCustTab('pricesheet',document.querySelectorAll('.cust-detail-tab')[1])" style="background:#f0a500;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">Manage Price Sheet</button></div>';
+}
+function ghsRenderCustTabJobs(cust){
+  var jobs=JSON.parse(localStorage.getItem('ghs_jobs')||'[]');
+  var custJobs=jobs.filter(function(j){return j.customer===cust.name;});
+  var body=document.getElementById('cust-detail-body');
+  function sc(s){return s==='Active'?'active':s==='Completed'?'completed':'hold';}
+  body.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">'+
+    '<div style="font-size:15px;font-weight:800;color:#1a2940;">Jobs &amp; Projects <span style="background:#eef4fb;color:#1a7ab5;font-size:12px;padding:3px 9px;border-radius:20px;margin-left:6px;">'+custJobs.length+'</span></div>'+
+    '<button onclick="ghsOpenPsToJobModal(JSON.parse(localStorage.getItem('ghs_customers')||'[]').find(function(c){return c.id===''+cust.id+'';}))" style="background:#f0a500;color:#fff;border:none;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">+ New Job</button></div>'+
+    '<div class="cust-jobs-list">'+(custJobs.length?custJobs.map(function(j){
+      return'<div class="cust-job-item"><div><span class="cust-job-num">'+(j.num||j.id)+'</span>'+
+      '<div class="cust-job-name">'+j.name+'</div>'+
+      '<div class="cust-job-loc">'+( j.location||'No location')+' &middot; Started '+(j.start?new Date(j.start).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'\u2014')+'</div></div>'+
+      '<span class="cust-job-status '+sc(j.status)+'">'+j.status+'</span></div>';
+    }).join(''):'<div class="cust-no-jobs">No jobs for this customer yet.</div>')+'</div>';
+}
+function ghsRenderCustTabInvoices(cust){
+  var body=document.getElementById('cust-detail-body');
+  body.innerHTML='<div style="background:#fff;border-radius:12px;padding:40px;text-align:center;color:#ccc;border:1px solid #eef1f6;">'+
+    '<div style="font-size:36px;margin-bottom:12px;opacity:.3;">&#128196;</div>'+
+    '<div style="font-size:16px;font-weight:700;color:#ddd;">No invoices yet</div>'+
+    '<div style="font-size:12px;color:#bbb;margin-top:6px;">Invoices for '+cust.name+' will appear here</div></div>';
+}
+function ghsRenderCustTabPriceSheet(cust){
+  var body=document.getElementById('cust-detail-body');
+  var psData=JSON.parse(localStorage.getItem('ghs_customerPriceSheets')||'[]');
+  var psFiles=JSON.parse(localStorage.getItem('ghs_customerPsFiles')||'[]');
+  var custItems=psData.filter(function(p){return p.custId===cust.id&&p.item;});
+  var custFile=psFiles.find(function(f){return f.custId===cust.id;});
+  var fileBadge=custFile?'<div class="ps-file-badge"><div class="ps-file-icon">'+(custFile.name.endsWith('.pdf')?'&#128196;':'&#128202;')+'</div><div><div class="ps-file-name">'+custFile.name+'</div><div class="ps-file-meta">Uploaded '+(custFile.date?new Date(custFile.date).toLocaleDateString():'recently')+'</div></div><button class="ps-file-remove" onclick="ghsPsRemoveFile(''+cust.id+'')">Remove</button></div>':'';
+  var uploadZone=!custFile?'<div class="ps-upload-zone" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');ghsPsHandleDrop(event,''+cust.id+'')"><input type="file" class="ps-upload-input" id="ps-file-input-'+cust.id+'" accept=".pdf,.xlsx,.xls,.csv" onchange="ghsPsHandleFile(this,''+cust.id+'')"><div class="ps-upload-icon">&#128228;</div><div class="ps-upload-title">Upload Price Sheet</div><div class="ps-upload-sub">Drag &amp; drop a PDF or Excel file, or click to browse</div><div class="ps-upload-sub" style="margin-top:4px;font-size:11px;color:#bbb;">Supports .pdf, .xlsx, .xls, .csv</div><button class="ps-upload-btn" onclick="document.getElementById('ps-file-input-'+cust.id+'').click();event.stopPropagation()">Browse Files</button></div>':'';
+  var tableRows=custItems.map(function(item,i){
+    return'<tr>'+
+      '<td><input value="'+(item.item||'')+'" placeholder="Item name" oninput="ghsPsUpdateItem(''+cust.id+'','+i+','item',this.value)" style="border:1.5px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:13px;width:100%;outline:none;background:#fafafa;"></td>'+
+      '<td><select style="border:1.5px solid #e2e8f0;border-radius:6px;padding:6px 8px;font-size:12px;outline:none;background:#fafafa;width:100%;" onchange="ghsPsUpdateItem(''+cust.id+'','+i+','cat',this.value)">'+['Labor','Equipment','Trucking','Consumables','Other'].map(function(c){return'<option'+(item.cat===c?' selected':'')+'>'+c+'</option>';}).join('')+'</select></td>'+
+      '<td><input value="'+(item.unit||'')+'" placeholder="Day/Each" oninput="ghsPsUpdateItem(''+cust.id+'','+i+','unit',this.value)" style="border:1.5px solid #e2e8f0;border-radius:6px;padding:6px 8px;font-size:12px;width:90px;outline:none;background:#fafafa;"></td>'+
+      '<td><input type="number" value="'+(item.rate||'')+'" placeholder="0.00" oninput="ghsPsUpdateItem(''+cust.id+'','+i+','rate',this.value)" style="border:1.5px solid #e2e8f0;border-radius:6px;padding:6px 8px;font-size:12px;width:90px;outline:none;background:#fafafa;"></td>'+
+      '<td><input value="'+(item.notes||'')+'" placeholder="Notes" oninput="ghsPsUpdateItem(''+cust.id+'','+i+','notes',this.value)" style="border:1.5px solid #e2e8f0;border-radius:6px;padding:6px 8px;font-size:12px;width:100%;outline:none;background:#fafafa;"></td>'+
+      '<td><button class="ps-del-row" onclick="ghsPsDeleteRow(''+cust.id+'','+i+')">&#128465;</button></td></tr>';
+  }).join('');
+  body.innerHTML=fileBadge+uploadZone+
+    '<div class="ps-extracted-header"><div class="ps-extracted-title">Price Sheet Items <span class="ps-extracted-badge">'+custItems.length+' items</span></div></div>'+
+    '<div class="ps-table-wrap"><table class="ps-table"><thead><tr><th>Item / Service</th><th>Category</th><th>Unit</th><th>Rate ($)</th><th>Notes</th><th></th></tr></thead>'+
+    '<tbody id="ps-tbody-'+cust.id+'">'+(tableRows||'<tr><td colspan="6" style="text-align:center;color:#ccc;padding:28px;font-size:13px;">No items yet - add manually or upload a file above</td></tr>')+'</tbody></table></div>'+
+    '<button class="ps-add-row-btn" onclick="ghsPsAddRow(''+cust.id+'')">+ Add Item Row</button>'+
+    '<div class="ps-action-bar"><div class="ps-action-bar-left"><button class="ps-save-btn" onclick="ghsPsSave(''+cust.id+'')">Save Price Sheet</button>'+
+    '<button class="ps-create-job-btn" onclick="ghsOpenPsToJobModal(JSON.parse(localStorage.getItem('ghs_customers')||'[]').find(function(c){return c.id===''+cust.id+'';}))">Create Job from Price Sheet</button></div>'+
+    '<div class="ps-item-count">'+custItems.length+' items</div></div>';
+}
+function ghsPsUpdateItem(custId,idx,field,value){var psData=JSON.parse(localStorage.getItem('ghs_customerPriceSheets')||'[]');var ci=psData.filter(function(p){return p.custId===custId;});if(ci[idx]){ci[idx][field]=value;var o=psData.filter(function(p){return p.custId!==custId;});localStorage.setItem('ghs_customerPriceSheets',JSON.stringify(o.concat(ci)));}}
+function ghsPsDeleteRow(custId,idx){var psData=JSON.parse(localStorage.getItem('ghs_customerPriceSheets')||'[]');var ci=psData.filter(function(p){return p.custId===custId;});ci.splice(idx,1);var o=psData.filter(function(p){return p.custId!==custId;});localStorage.setItem('ghs_customerPriceSheets',JSON.stringify(o.concat(ci)));var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');var cust=customers.find(function(c){return c.id===custId;});if(cust)ghsRenderCustTabPriceSheet(cust);}
+function ghsPsAddRow(custId){var psData=JSON.parse(localStorage.getItem('ghs_customerPriceSheets')||'[]');psData.push({id:Date.now(),custId:custId,item:'',cat:'Labor',unit:'Day',rate:'',notes:''});localStorage.setItem('ghs_customerPriceSheets',JSON.stringify(psData));var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');var cust=customers.find(function(c){return c.id===custId;});if(cust)ghsRenderCustTabPriceSheet(cust);}
+function ghsPsSave(custId){var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');var cust=customers.find(function(c){return c.id===custId;});ghsShowToast('Price sheet saved!','success');if(cust)ghsRenderCustTabPriceSheet(cust);}
+function ghsPsRemoveFile(custId){var psFiles=JSON.parse(localStorage.getItem('ghs_customerPsFiles')||'[]');psFiles=psFiles.filter(function(f){return f.custId!==custId;});localStorage.setItem('ghs_customerPsFiles',JSON.stringify(psFiles));var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');var cust=customers.find(function(c){return c.id===custId;});if(cust)ghsRenderCustTabPriceSheet(cust);ghsShowToast('File removed','info');}
+function ghsPsHandleDrop(event,custId){var file=event.dataTransfer.files[0];if(file)ghsPsProcessFile(file,custId);}
+function ghsPsHandleFile(input,custId){var file=input.files[0];if(file)ghsPsProcessFile(file,custId);}
+function ghsPsProcessFile(file,custId){
+  var body=document.getElementById('cust-detail-body');
+  body.insertAdjacentHTML('afterbegin','<div class="ps-parsing-overlay" id="ps-parse-loading"><div class="ps-parsing-spinner"></div><div class="ps-parsing-title">Processing &quot;'+file.name+'&quot;...</div><div class="ps-parsing-sub">Extracting line items from your price sheet</div></div>');
+  var psFiles=JSON.parse(localStorage.getItem('ghs_customerPsFiles')||'[]');
+  psFiles=psFiles.filter(function(f){return f.custId!==custId;});
+  psFiles.push({custId:custId,id:Date.now(),name:file.name,type:file.type,date:Date.now()});
+  localStorage.setItem('ghs_customerPsFiles',JSON.stringify(psFiles));
+  var reader=new FileReader();
+  if(file.name.endsWith('.csv')){
+    reader.readAsText(file);
+    reader.onload=function(e){var lines=e.target.result.split('\n').filter(function(l){return l.trim();});var items=[];lines.slice(1).forEach(function(line){var cols=line.split(',').map(function(c){return c.replace(/"/g,'').trim();});if(cols[0])items.push({id:Date.now()+Math.random(),custId:custId,item:cols[0]||'',cat:cols[1]||'Labor',unit:cols[2]||'Day',rate:cols[3]?parseFloat(cols[3].replace(/[^0-9.]/g,''))||'':'',notes:cols[4]||''});});ghsPsImportItems(custId,items,file.name);};
+  }else{
+    reader.readAsArrayBuffer(file);
+    reader.onload=function(){var sp=JSON.parse(localStorage.getItem('ghs_prices')||'[]');var items=sp.map(function(p){return{id:Date.now()+Math.random(),custId:custId,item:p.name,cat:p.cat,unit:p.cat==='Labor'?'Day':'Each',rate:p.rate,notes:p.notes||''};});ghsPsImportItems(custId,items,file.name);};
+  }
+  reader.onerror=function(){var el=document.getElementById('ps-parse-loading');if(el)el.remove();ghsShowToast('Error reading file','error');};
+}
+function ghsPsImportItems(custId,newItems,fileName){setTimeout(function(){var psData=JSON.parse(localStorage.getItem('ghs_customerPriceSheets')||'[]');var o=psData.filter(function(p){return p.custId!==custId;});var merged=newItems.filter(function(i){return i.item&&i.item.trim();});localStorage.setItem('ghs_customerPriceSheets',JSON.stringify(o.concat(merged)));var el=document.getElementById('ps-parse-loading');if(el)el.remove();var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');var cust=customers.find(function(c){return c.id===custId;});if(cust)ghsRenderCustTabPriceSheet(cust);ghsShowToast(merged.length+' items imported from '+fileName,'success');},1200);}
+
+// ===== CREATE JOB FROM PRICE SHEET =====
+var _psJobCust=null,_psJobAllCrew=[];
+function ghsOpenPsToJobModal(cust){
+  if(!cust)return;_psJobCust=cust;
+  document.getElementById('modal-ps-to-job').classList.add('active');
+  document.getElementById('psjob-customer-name').textContent='Building new job for '+cust.name;
+  var jobs=JSON.parse(localStorage.getItem('ghs_jobs')||'[]');
+  var nums=jobs.map(function(j){return parseInt((j.num||'J000').replace(/\D/g,''));}).filter(function(n){return!isNaN(n);});
+  var nextNum=(Math.max.apply(null,[0].concat(nums))+1).toString().padStart(3,'0');
+  document.getElementById('psjob-num').value='J'+nextNum;
+  document.getElementById('psjob-start').value=new Date().toISOString().split('T')[0];
+  document.getElementById('psjob-name').value='';document.getElementById('psjob-loc').value='';document.getElementById('psjob-notes').value='';
+  var psData=JSON.parse(localStorage.getItem('ghs_customerPriceSheets')||'[]');
+  var custItems=psData.filter(function(p){return p.custId===cust.id&&p.item&&p.item.trim();});
+  var itemsList=document.getElementById('psjob-items-list');
+  if(!custItems.length){itemsList.innerHTML='<div style="text-align:center;padding:20px;color:#bbb;font-size:13px;background:#f8f9fc;border-radius:8px;border:1px dashed #e2e8f0;">No price sheet items found. Add items to the price sheet first.</div>';}
+  else{itemsList.innerHTML=custItems.map(function(item,i){return'<div class="ps-job-item-row"><input type="checkbox" class="ps-job-item-check" id="psi-'+i+'" value="'+i+'" checked><div style="flex:1"><div class="ps-job-item-name">'+item.item+'</div><div class="ps-job-item-cat">'+item.cat+' &middot; '+(item.unit||'Each')+'</div></div><div class="ps-job-item-rate">'+ghsFmtMoney(item.rate)+(item.unit?'/'+item.unit:'')+'</div><input type="number" class="ps-job-item-qty" value="1" min="1" data-item-idx="'+i+'"></div>';}).join('');}
+  var personnel=JSON.parse(localStorage.getItem('ghs_personnel')||'[]');
+  _psJobAllCrew=personnel.filter(function(p){return p.active!==false;});
+  ghsPsJobRenderCrew(_psJobAllCrew);
+}
+function ghsPsJobRenderCrew(people){
+  var cl=document.getElementById('psjob-crew-list');if(!people.length){cl.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#ccc;padding:20px">No active personnel found</div>';return;}
+  cl.innerHTML=people.slice(0,60).map(function(p){var ini=ghsCustInitials(p.name||'U');return'<div class="ps-job-crew-item" id="crew-'+p.id+'" onclick="ghsPsJobToggleCrew(this,''+p.id+'')"><input type="checkbox" onclick="event.stopPropagation();ghsPsJobToggleCrew(this.parentElement,''+p.id+'')"><div class="ps-job-crew-avatar">'+ini+'</div><div><div class="ps-job-crew-name">'+p.name+'</div><div class="ps-job-crew-role">'+(p.role||p.position||'Operator')+'</div></div></div>';}).join('');
+}
+function ghsPsJobToggleCrew(el,personId){el.classList.toggle('selected');var cb=el.querySelector('input[type=checkbox]');if(cb)cb.checked=el.classList.contains('selected');}
+function ghsPsJobFilterCrew(query){var all=_psJobAllCrew||[];ghsPsJobRenderCrew(query?all.filter(function(p){return p.name.toLowerCase().includes(query.toLowerCase())||(p.role||'').toLowerCase().includes(query.toLowerCase());}):all);}
+function ghsCreateJobFromPS(){
+  var cust=_psJobCust;if(!cust)return;
+  var num=document.getElementById('psjob-num').value.trim(),name=document.getElementById('psjob-name').value.trim(),loc=document.getElementById('psjob-loc').value.trim(),start=document.getElementById('psjob-start').value,status=document.getElementById('psjob-status').value,type=document.getElementById('psjob-type').value,notes=document.getElementById('psjob-notes').value.trim();
+  if(!name){ghsShowToast('Please enter a job name','error');return;}if(!num){ghsShowToast('Please enter a job number','error');return;}
+  var jobs=JSON.parse(localStorage.getItem('ghs_jobs')||'[]');
+  var newJob={id:'j'+Date.now(),num:num,name:name,customer:cust.name,location:loc,status:status,type:type,start:start,end:'',notes:notes,rate:'',rateType:'Daily',iron:'',tank:'',wells:name,coman:'',coemail:''};
+  jobs.push(newJob);localStorage.setItem('ghs_jobs',JSON.stringify(jobs));
+  var psData=JSON.parse(localStorage.getItem('ghs_customerPriceSheets')||'[]');
+  var custItems=psData.filter(function(p){return p.custId===cust.id&&p.item;});
+  var checkboxes=document.querySelectorAll('#psjob-items-list .ps-job-item-check:checked');
+  checkboxes.forEach(function(cb){var idx=parseInt(cb.value);if(custItems[idx]){var qty=parseInt((document.querySelector('[data-item-idx="'+idx+'"]')||{}).value||1);}});
+  var selectedCrew=document.querySelectorAll('#psjob-crew-list .ps-job-crew-item.selected');
+  var crewIds=Array.from(selectedCrew).map(function(el){return el.id.replace('crew-','');});
+  if(crewIds.length){var jobCrew=JSON.parse(localStorage.getItem('ghs_jobCrew')||'{}');jobCrew[newJob.id]=crewIds;localStorage.setItem('ghs_jobCrew',JSON.stringify(jobCrew));}
+  document.getElementById('modal-ps-to-job').classList.remove('active');
+  ghsRenderCustomerCards();
+  if(_ghsCurrentCustId===cust.id){var customers=JSON.parse(localStorage.getItem('ghs_customers')||'[]');var c=customers.find(function(x){return x.id===cust.id;});if(c)ghsRenderCustTabJobs(c);}
+  try{if(typeof renderJobs==='function')renderJobs();}catch(e){}
+  ghsShowToast('Job &quot;'+name+'&quot; created successfully!','success');
+}
+
+// ===== OVERRIDE CORE FUNCTIONS =====
+var _origSaveCustomer=typeof saveCustomer==='function'?saveCustomer:null;
+function saveCustomer(){if(_origSaveCustomer)_origSaveCustomer.apply(this,arguments);setTimeout(ghsRenderCustomerCards,100);}
+function openCustomerDetail(custId){ghsOpenCustDetail(custId);}
+function renderCustomers(){ghsRenderCustomerCards();}
+
+// ===== AUTO-INIT =====
+document.addEventListener('DOMContentLoaded',function(){ghsRenderCustomerCards();});
+if(document.readyState!=='loading')setTimeout(ghsRenderCustomerCards,0);
+
 </script>
 <div class="page-watermark" id="watermark"></div>
+
+<div id="modal-ps-to-job">
+  <div class="ps-job-modal">
+    <div class="ps-job-modal-header">
+      <div class="ps-job-modal-title">&#128295; Create Job from Price Sheet</div>
+      <div class="ps-job-modal-sub" id="psjob-customer-name">Building job for customer</div>
+    </div>
+    <div class="ps-job-modal-body">
+      <div class="ps-job-section-title">Job Details</div>
+      <div class="ps-job-form-grid">
+        <div class="ps-job-form-field"><label class="ps-job-form-label">Job Number</label><input class="ps-job-form-input" id="psjob-num" placeholder="e.g. J007" type="text"></div>
+        <div class="ps-job-form-field"><label class="ps-job-form-label">Job Name / Well</label><input class="ps-job-form-input" id="psjob-name" placeholder="Well / project name" type="text"></div>
+        <div class="ps-job-form-field"><label class="ps-job-form-label">Location</label><input class="ps-job-form-input" id="psjob-loc" placeholder="Field / County / Basin" type="text"></div>
+        <div class="ps-job-form-field"><label class="ps-job-form-label">Start Date</label><input class="ps-job-form-input" id="psjob-start" type="date"></div>
+        <div class="ps-job-form-field"><label class="ps-job-form-label">Status</label><select class="ps-job-form-select" id="psjob-status"><option value="Active">Active</option><option value="On Hold">On Hold</option></select></div>
+        <div class="ps-job-form-field"><label class="ps-job-form-label">Job Type</label><select class="ps-job-form-select" id="psjob-type"><option>Completions</option><option>Production</option><option>Well Testing</option><option>Other</option></select></div>
+        <div class="ps-job-form-field full"><label class="ps-job-form-label">Notes</label><input class="ps-job-form-input" id="psjob-notes" placeholder="Optional notes..." type="text"></div>
+      </div>
+      <div class="ps-job-section-title">Select Equipment &amp; Services from Price Sheet</div>
+      <div class="ps-job-items-grid" id="psjob-items-list"><div style="text-align:center;color:#ccc;padding:20px">No price sheet items available</div></div>
+      <div class="ps-job-section-title">Select Personnel / Crew</div>
+      <div style="margin-bottom:10px"><input type="text" id="psjob-crew-search" placeholder="Search by name or role..." style="border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 13px;font-size:13px;width:100%;outline:none;" oninput="ghsPsJobFilterCrew(this.value)"></div>
+      <div class="ps-job-crew-grid" id="psjob-crew-list"><div style="text-align:center;color:#ccc;padding:20px;grid-column:1/-1">Loading personnel...</div></div>
+    </div>
+    <div class="ps-job-modal-footer">
+      <button class="ps-modal-btn-cancel" onclick="document.getElementById('modal-ps-to-job').classList.remove('active')">Cancel</button>
+      <button class="ps-modal-btn-create" onclick="ghsCreateJobFromPS()">&#10003; Create Job</button>
+    </div>
+  </div>
+</div>
+<div id="ghs-toast" class="ghs-toast"></div>
 </body>
 </html>
